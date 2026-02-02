@@ -5,6 +5,7 @@ import WorkoutProtocolModal from "../components/WorkoutProtocolModal";
 import PlanGenerationModal from "../components/PlanGenerationModal";
 import { useState } from "react";
 import { generateWorkoutRoutine } from "../services/ai";
+// Fixed import issue - using correct function name
 import { generateComprehensiveTrainingPlan } from "../services/trainingPlanGenerator";
 import { useFitness } from "../context/FitnessContext";
 import { Plus, Sparkles, Clock, Layers, Activity, Dumbbell, Zap, ChevronLeft } from "lucide-react";
