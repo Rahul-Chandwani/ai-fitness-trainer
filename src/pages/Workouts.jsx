@@ -5,7 +5,7 @@ import WorkoutProtocolModal from "../components/WorkoutProtocolModal";
 import PlanGenerationModal from "../components/PlanGenerationModal";
 import { useState } from "react";
 import { generateWorkoutRoutine } from "../services/ai";
-import { generateComprehensivePlan } from "../services/trainingPlanGenerator";
+import { generateComprehensiveTrainingPlan } from "../services/trainingPlanGenerator";
 import { useFitness } from "../context/FitnessContext";
 import { Plus, Sparkles, Clock, Layers, Activity, Dumbbell, Zap, ChevronLeft } from "lucide-react";
 import { Link, useNavigate } from "react-router-dom";
@@ -64,7 +64,7 @@ export default function Workouts() {
       setGeneratingPlan(true);
       addToast("Generating your personalized training plan...", "info");
 
-      const plan = await generateComprehensivePlan(userProfile, preferences);
+      const plan = await generateComprehensiveTrainingPlan(userProfile, preferences);
 
       if (plan) {
         await updateTrainingPlan(plan);
@@ -241,6 +241,14 @@ export default function Workouts() {
             <WorkoutProtocolModal
               workout={selectedWorkout}
               onClose={() => setSelectedWorkout(null)}
+            />
+          )}
+          {showPlanModal && (
+            <PlanGenerationModal
+              isOpen={showPlanModal}
+              onClose={() => setShowPlanModal(false)}
+              onGenerate={handleGenerateTrainingPlan}
+              userProfile={userProfile}
             />
           )}
         </div>
