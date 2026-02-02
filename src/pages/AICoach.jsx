@@ -14,7 +14,7 @@ export default function AICoach() {
   const [messages, setMessages] = useState([
     {
       role: "ai",
-      text: "AI Sync established. I am your AI Personal Randi. How can I help you with your fitness goals today?",
+      text: "AI Sync established. I am your AI Personal Trainer. How can I help you with your fitness goals today?",
     },
   ]);
   const [input, setInput] = useState("");
