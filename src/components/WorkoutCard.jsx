@@ -5,7 +5,7 @@ export default function WorkoutCard({ workout, onView }) {
   return (
     <motion.div
       whileHover={{ y: -5 }}
-      className="card-premium p-6 md:p-8 rounded-[2rem] md:rounded-[2.5rem] border border-white/5 relative overflow-hidden group h-full flex flex-col"
+      className="card-premium p-5 md:p-8 rounded-[2rem] md:rounded-[2.5rem] border border-white/5 relative overflow-hidden group h-full flex flex-col"
     >
       <div className="absolute top-0 right-0 p-8 opacity-5 -rotate-12 group-hover:rotate-0 transition-transform duration-700">
         <Activity className="w-24 h-24 text-accent" />

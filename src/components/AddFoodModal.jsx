@@ -5,7 +5,7 @@ import { motion } from "framer-motion";
 import { useToast } from "./Toast";
 
 export default function AddFoodModal({ onClose }) {
-  const { addMealEntry } = useFitness();
+  const { addMealEntry, dietPlan } = useFitness();
   const { addToast } = useToast();
   const [formData, setFormData] = useState({
     name: "",
@@ -15,7 +15,24 @@ export default function AddFoodModal({ onClose }) {
     fats: "",
     type: "Breakfast"
   });
+  const [searchTerm, setSearchTerm] = useState("");
   const [loading, setLoading] = useState(false);
+
+  const libraryMeals = (dietPlan || []).filter(m =>
+    m.name.toLowerCase().includes(searchTerm.toLowerCase())
+  );
+
+  const selectFromLibrary = (meal) => {
+    setFormData({
+      name: meal.name,
+      calories: meal.calories,
+      protein: meal.protein,
+      carbs: meal.carbs,
+      fats: meal.fats,
+      type: meal.type || "Breakfast"
+    });
+    setSearchTerm(""); // Clear search after selection
+  };
 
   const handleSave = async () => {
     if (!formData.name || !formData.calories) return;
@@ -60,6 +77,45 @@ export default function AddFoodModal({ onClose }) {
         </div>
 
         <div className="space-y-10 relative z-10">
+          {/* Library Search (The "Hidden" Library) */}
+          <div className="space-y-4">
+            <label className="text-[10px] uppercase font-black text-muted tracking-[0.3em] px-2 flex items-center gap-2">
+              <div className="w-1 h-3 bg-accent rounded-full"></div>
+              Search library
+            </label>
+            <div className="relative group">
+              <input
+                value={searchTerm}
+                onChange={(e) => setSearchTerm(e.target.value)}
+                className="w-full p-6 rounded-3xl bg-white/5 border border-white/10 focus:border-accent/40 outline-none transition-all text-white font-black uppercase tracking-tight text-sm"
+                placeholder="SEARCH PREVIOUS MEALS..."
+              />
+              {searchTerm && libraryMeals.length > 0 && (
+                <div className="absolute top-full left-0 right-0 mt-2 bg-card border border-white/10 rounded-3xl p-4 shadow-2xl z-50 max-h-64 overflow-y-auto scrollbar-none">
+                  {libraryMeals.map((meal, idx) => (
+                    <button
+                      key={idx}
+                      onClick={() => selectFromLibrary(meal)}
+                      className="w-full p-4 hover:bg-white/5 rounded-2xl flex items-center justify-between transition-all group/item"
+                    >
+                      <div className="text-left">
+                        <p className="text-sm font-black text-white uppercase tracking-tight">{meal.name}</p>
+                        <p className="text-xs text-muted font-bold uppercase">{meal.calories} KCAL</p>
+                      </div>
+                      <ChevronRight className="w-4 h-4 text-muted group-hover/item:text-accent group-hover/item:translate-x-1 transition-all" />
+                    </button>
+                  ))}
+                </div>
+              )}
+            </div>
+          </div>
+
+          <div className="flex items-center gap-4 my-4">
+            <div className="h-[1px] flex-1 bg-white/10"></div>
+            <span className="text-[8px] font-black text-muted uppercase tracking-[0.4em]">OR AUTO-COMPLETE BELOW</span>
+            <div className="h-[1px] flex-1 bg-white/10"></div>
+          </div>
+
           {/* Main Input */}
           <div className="space-y-4">
             <label className="text-[10px] uppercase font-black text-muted tracking-[0.3em] px-2 flex items-center gap-2">

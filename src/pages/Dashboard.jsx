@@ -59,9 +59,9 @@ export default function Dashboard() {
             </Link>
             <div className="flex flex-col md:flex-row justify-between items-start md:items-center gap-10">
               <div className="flex items-center gap-4">
-                <div className="w-1.5 h-16 bg-accent rounded-full"></div>
+                <div className="w-1.5 h-12 md:h-16 bg-accent rounded-full"></div>
                 <div>
-                  <h1 className="text-5xl font-extrabold tracking-tight text-white">Dashboard</h1>
+                  <h1 className="text-3xl md:text-5xl font-extrabold tracking-tight text-white">Dashboard</h1>
                   <p className="text-[10px] text-muted font-bold uppercase tracking-widest mt-1">AI Health & Progress Insights</p>
                 </div>
               </div>
@@ -130,7 +130,7 @@ export default function Dashboard() {
                       <p className="text-[9px] font-black text-emerald-400/80 uppercase tracking-widest">Intake</p>
                     </div>
                     <div className="flex items-baseline gap-2">
-                      <h2 className="text-7xl font-black text-white italic tracking-tighter leading-none">{todayStats.intake}</h2>
+                      <h2 className="text-5xl md:text-7xl font-black text-white italic tracking-tighter leading-none">{todayStats.intake}</h2>
                       <span className="text-xs font-black text-muted uppercase tracking-tighter">KCAL IN</span>
                     </div>
                   </div>
@@ -143,7 +143,7 @@ export default function Dashboard() {
                       <p className="text-[9px] font-black text-orange-400/80 uppercase tracking-widest">Burned</p>
                     </div>
                     <div className="flex items-baseline gap-2">
-                      <h2 className="text-7xl font-black text-white italic tracking-tighter leading-none">{todayStats.burned || 0}</h2>
+                      <h2 className="text-5xl md:text-7xl font-black text-white italic tracking-tighter leading-none">{todayStats.burned || 0}</h2>
                       <span className="text-xs font-black text-muted uppercase tracking-tighter">KCAL OUT</span>
                     </div>
                   </div>

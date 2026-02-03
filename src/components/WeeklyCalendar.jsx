@@ -7,7 +7,7 @@ export default function WeeklyCalendar({ weekData, onDayClick, currentDay }) {
     const daysOfWeek = ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"];
 
     return (
-        <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-7 gap-4">
+        <div className="grid grid-cols-1 md:grid-cols-4 lg:grid-cols-7 gap-4">
             {daysOfWeek.map((dayName, index) => {
                 const dayData = weekData.days.find(d => d.dayOfWeek === dayName) || {};
                 const isToday = currentDay === dayName;
@@ -32,10 +32,10 @@ export default function WeeklyCalendar({ weekData, onDayClick, currentDay }) {
                         transition={{ delay: index * 0.05 }}
                         onClick={() => onDayClick(dayData)}
                         className={`p-6 rounded-[2rem] border transition-all group relative overflow-hidden ${isToday
-                                ? 'bg-accent/10 border-accent/40 shadow-lg shadow-accent/10'
-                                : isCompleted
-                                    ? 'bg-emerald-500/10 border-emerald-500/30'
-                                    : 'bg-white/5 border-white/5 hover:border-accent/20'
+                            ? 'bg-accent/10 border-accent/40 shadow-lg shadow-accent/10'
+                            : isCompleted
+                                ? 'bg-emerald-500/10 border-emerald-500/30'
+                                : 'bg-white/5 border-white/5 hover:border-accent/20'
                             }`}
                     >
                         {/* Background icon */}
@@ -83,8 +83,8 @@ export default function WeeklyCalendar({ weekData, onDayClick, currentDay }) {
                                     initial={{ width: 0 }}
                                     animate={{ width: `${completionPercentage}%` }}
                                     className={`h-full ${isCompleted
-                                            ? 'bg-emerald-500'
-                                            : 'bg-gradient-to-r from-accent to-emerald-400'
+                                        ? 'bg-emerald-500'
+                                        : 'bg-gradient-to-r from-accent to-emerald-400'
                                         }`}
                                     transition={{ duration: 0.5, delay: index * 0.05 }}
                                 />

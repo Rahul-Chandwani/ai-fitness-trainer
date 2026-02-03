@@ -1,7 +1,7 @@
 import { motion } from "framer-motion";
 import { Check, Circle, Dumbbell, Utensils, Droplets, Moon } from "lucide-react";
 
-export default function DailyTaskCard({ day, onTaskComplete, isToday = false }) {
+export default function DailyTaskCard({ day, onTaskComplete, onViewWorkout, isToday = false }) {
     if (!day) return null;
 
     const { dayOfWeek, type, workout, meals = [], hydration, sleepTarget, workoutCompleted, hydrationCompleted, sleepCompleted } = day;
@@ -22,7 +22,7 @@ export default function DailyTaskCard({ day, onTaskComplete, isToday = false }) 
         <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
-            className={`card-premium p-8 rounded-[2.5rem] border ${isToday ? 'border-accent/40 shadow-accent/10' : 'border-white/5'
+            className={`card-premium p-5 md:p-8 rounded-[2rem] md:rounded-[2.5rem] border ${isToday ? 'border-accent/40 shadow-accent/10' : 'border-white/5'
                 } relative overflow-hidden group`}
         >
             {/* Background decoration */}
@@ -64,14 +64,54 @@ export default function DailyTaskCard({ day, onTaskComplete, isToday = false }) 
             <div className="space-y-4 relative z-10">
                 {/* Workout */}
                 {!isRestDay && workout && (
-                    <TaskItem
-                        icon={<Dumbbell className="w-5 h-5" />}
-                        title={workout.name}
-                        subtitle={`${workout.exercises?.length || 0} exercises • ${workout.duration}`}
-                        completed={workoutCompleted}
-                        onToggle={() => onTaskComplete(dayOfWeek, 'workout')}
-                        accentColor="accent"
-                    />
+                    <div className="space-y-3">
+                        {/* Workout Header / Action Button */}
+                        <div className="flex gap-2">
+                            <button
+                                onClick={() => onViewWorkout && onViewWorkout(workout)}
+                                className="flex-1 p-4 bg-accent/10 hover:bg-accent/20 rounded-2xl border border-accent/20 hover:border-accent/40 transition-all flex items-center gap-4 group/btn text-left"
+                            >
+                                <div className="w-12 h-12 rounded-xl bg-accent flex items-center justify-center text-black shadow-lg shadow-accent/20 group-hover/btn:scale-110 transition-transform">
+                                    <Dumbbell className="w-6 h-6" />
+                                </div>
+                                <div className="flex-1 min-w-0">
+                                    <p className="text-sm font-black text-white uppercase italic tracking-tight group-hover/btn:text-accent transition-colors">
+                                        {workout.name}
+                                    </p>
+                                    <p className="text-[10px] text-muted font-bold uppercase tracking-widest mt-0.5">
+                                        {workout.duration} • {workout.exercises?.length || 0} Exercises
+                                    </p>
+                                </div>
+                                <div className="px-4 py-2 bg-black/20 rounded-lg text-[10px] font-black text-accent uppercase tracking-widest group-hover/btn:bg-accent group-hover/btn:text-black transition-all">
+                                    Start
+                                </div>
+                            </button>
+                        </div>
+
+                        {/* Detailed Exercise List (Checkable) */}
+                        {workout.exercises && workout.exercises.length > 0 && (
+                            <div className="pl-4 space-y-2">
+                                <p className="text-[10px] text-muted font-black uppercase tracking-widest ml-1 mb-2 opacity-50">Exercises</p>
+                                {workout.exercises.map((ex, exIdx) => (
+                                    <div key={exIdx} className="flex items-center gap-3 group/ex">
+                                        <button
+                                            onClick={() => onTaskComplete(dayOfWeek, 'exercise', exIdx)}
+                                            className={`flex-shrink-0 w-6 h-6 rounded-lg border flex items-center justify-center transition-all ${ex.completed
+                                                ? 'bg-accent border-accent text-black'
+                                                : 'bg-white/5 border-white/10 hover:border-accent/50 text-transparent'
+                                                }`}
+                                        >
+                                            <Check className="w-3.5 h-3.5" />
+                                        </button>
+                                        <div className={`flex-1 p-3 bg-white/5 rounded-xl border border-white/5 flex justify-between items-center ${ex.completed ? 'opacity-50' : ''}`}>
+                                            <span className={`text-xs font-bold text-white ${ex.completed ? 'line-through' : ''}`}>{ex.name}</span>
+                                            <span className="font-mono text-[10px] text-accent/80 font-bold">{ex.sets}x{ex.reps}</span>
+                                        </div>
+                                    </div>
+                                ))}
+                            </div>
+                        )}
+                    </div>
                 )}
 
                 {isRestDay && (
@@ -93,6 +133,8 @@ export default function DailyTaskCard({ day, onTaskComplete, isToday = false }) 
                                 key={idx}
                                 icon={<Utensils className="w-4 h-4" />}
                                 title={meal.name}
+                                // Display Type (Breakfast/Lunch...) if available, otherwise just calories
+                                label={meal.type ? meal.type.toUpperCase() : null}
                                 subtitle={`${meal.calories} kcal • P:${meal.protein}g C:${meal.carbs}g F:${meal.fats}g`}
                                 completed={meal.completed}
                                 onToggle={() => onTaskComplete(dayOfWeek, 'meal', idx)}
@@ -129,7 +171,7 @@ export default function DailyTaskCard({ day, onTaskComplete, isToday = false }) 
     );
 }
 
-function TaskItem({ icon, title, subtitle, completed, onToggle, accentColor = "accent", compact = false }) {
+function TaskItem({ icon, title, subtitle, label, completed, onToggle, accentColor = "accent", compact = false }) {
     return (
         <button
             onClick={onToggle}
@@ -139,9 +181,16 @@ function TaskItem({ icon, title, subtitle, completed, onToggle, accentColor = "a
                 {completed ? <Check className={`w-${compact ? '4' : '5'} h-${compact ? '4' : '5'}`} /> : icon}
             </div>
             <div className="flex-1 min-w-0">
-                <p className={`${compact ? 'text-xs' : 'text-sm'} font-black text-white uppercase italic tracking-tight truncate ${completed ? 'line-through opacity-50' : ''}`}>
-                    {title}
-                </p>
+                <div className="flex items-center gap-2">
+                    {label && (
+                        <span className={`text-[8px] font-black text-${accentColor} uppercase tracking-widest border border-${accentColor}/20 px-1.5 rounded`}>
+                            {label}
+                        </span>
+                    )}
+                    <p className={`${compact ? 'text-xs' : 'text-sm'} font-black text-white uppercase italic tracking-tight truncate ${completed ? 'line-through opacity-50' : ''}`}>
+                        {title}
+                    </p>
+                </div>
                 <p className={`text-[${compact ? '8' : '9'}px] text-muted font-bold uppercase tracking-tight truncate`}>
                     {subtitle}
                 </p>

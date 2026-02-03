@@ -4,6 +4,7 @@ import DashboardLayout from "../layouts/DashboardLayout";
 import PageTransition from "../components/PageTransition";
 import WeeklyCalendar from "../components/WeeklyCalendar";
 import DailyTaskCard from "../components/DailyTaskCard";
+import WorkoutProtocolModal from "../components/WorkoutProtocolModal";
 import ProgressChart from "../components/ProgressChart";
 import AIInsightsWidget from "../components/AIInsightsWidget";
 import { useFitness } from "../context/FitnessContext";
@@ -26,6 +27,7 @@ export default function TrainingPlan() {
     const { trainingPlan, userProfile, updateDailyTask, workoutHistory, calorieHistory, weightHistory } = useFitness();
     const { addToast } = useToast();
     const [selectedDay, setSelectedDay] = useState(null);
+    const [selectedWorkout, setSelectedWorkout] = useState(null);
     const [aiInsights, setAiInsights] = useState(null);
     const [loadingInsights, setLoadingInsights] = useState(false);
     const [activeTab, setActiveTab] = useState("overview"); // overview, schedule, progress
@@ -177,25 +179,25 @@ export default function TrainingPlan() {
                             Back to Dashboard
                         </Link>
 
-                        <div className="flex flex-col lg:flex-row justify-between items-start lg:items-center gap-6">
-                            <div className="flex items-center gap-4">
-                                <div className="w-1.5 h-16 bg-accent rounded-full" />
-                                <div>
-                                    <h1 className="text-5xl font-extrabold tracking-tight text-white">AI Training Plan</h1>
-                                    <p className="text-[10px] text-muted font-bold uppercase tracking-widest mt-1">
+                        <div className="flex flex-col xl:flex-row justify-between items-start xl:items-center gap-6">
+                            <div className="flex items-center gap-4 min-w-0">
+                                <div className="w-1.5 h-12 md:h-16 bg-accent rounded-full flex-shrink-0" />
+                                <div className="min-w-0">
+                                    <h1 className="text-3xl md:text-5xl font-extrabold tracking-tight text-white truncate">AI Training Plan</h1>
+                                    <p className="text-[10px] text-muted font-bold uppercase tracking-widest mt-1 truncate">
                                         Week {trainingPlan.currentWeek} of {trainingPlan.duration} • {trainingPlan.goal}
                                     </p>
                                 </div>
                             </div>
 
-                            <div className="flex items-center gap-4">
-                                <div className="p-4 bg-white/5 rounded-2xl border border-white/5">
+                            <div className="flex items-center gap-4 w-full xl:w-auto">
+                                <div className="p-3 md:p-4 bg-white/5 rounded-2xl border border-white/5 flex-grow xl:flex-grow-0">
                                     <p className="text-[8px] text-muted font-black uppercase tracking-widest mb-1">Weekly Progress</p>
-                                    <p className="text-2xl font-black text-white italic tracking-tighter">{weeklyCompletion}%</p>
+                                    <p className="text-xl md:text-2xl font-black text-white italic tracking-tighter">{weeklyCompletion}%</p>
                                 </div>
                                 <button
                                     onClick={loadAIInsights}
-                                    className="p-4 bg-accent/10 hover:bg-accent/20 rounded-2xl border border-accent/20 transition-all"
+                                    className="p-3 md:p-4 bg-accent/10 hover:bg-accent/20 rounded-2xl border border-accent/20 transition-all flex-shrink-0"
                                 >
                                     <RefreshCw className="w-5 h-5 text-accent" />
                                 </button>
@@ -204,7 +206,7 @@ export default function TrainingPlan() {
                     </div>
 
                     {/* Tabs */}
-                    <div className="flex gap-2 p-2 bg-white/5 rounded-3xl border border-white/5">
+                    <div className="flex gap-2 p-1.5 md:p-2 bg-white/5 rounded-3xl border border-white/5 overflow-x-auto min-w-0">
                         <TabButton
                             active={activeTab === "overview"}
                             onClick={() => setActiveTab("overview")}
@@ -234,6 +236,7 @@ export default function TrainingPlan() {
                                     <DailyTaskCard
                                         day={todayData}
                                         onTaskComplete={handleTaskComplete}
+                                        onViewWorkout={(workout) => setSelectedWorkout(workout)}
                                         isToday={true}
                                     />
                                 ) : (
@@ -264,6 +267,7 @@ export default function TrainingPlan() {
                                 <DailyTaskCard
                                     day={selectedDay}
                                     onTaskComplete={handleTaskComplete}
+                                    onViewWorkout={(workout) => setSelectedWorkout(workout)}
                                     isToday={selectedDay.dayOfWeek === today}
                                 />
                             )}
@@ -306,9 +310,19 @@ export default function TrainingPlan() {
                             </div>
                         </div>
                     )}
+
                 </div>
             </PageTransition>
-        </DashboardLayout>
+
+            {
+                selectedWorkout && (
+                    <WorkoutProtocolModal
+                        workout={selectedWorkout}
+                        onClose={() => setSelectedWorkout(null)}
+                    />
+                )
+            }
+        </DashboardLayout >
     );
 }
 
@@ -317,8 +331,8 @@ function TabButton({ active, onClick, icon, label }) {
         <button
             onClick={onClick}
             className={`flex-1 flex items-center justify-center gap-2 px-6 py-3 rounded-2xl font-black uppercase tracking-tight text-sm transition-all ${active
-                    ? "bg-white text-black shadow-lg"
-                    : "text-muted hover:text-white hover:bg-white/5"
+                ? "bg-white text-black shadow-lg"
+                : "text-muted hover:text-white hover:bg-white/5"
                 }`}
         >
             {icon}

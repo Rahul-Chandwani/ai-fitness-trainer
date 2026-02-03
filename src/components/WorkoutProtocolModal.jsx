@@ -43,7 +43,7 @@ export default function WorkoutProtocolModal({ workout, onClose }) {
     };
 
     return (
-        <div className="fixed inset-0 z-[200] flex items-center justify-center p-6 lg:p-12">
+        <div className="fixed inset-0 z-[200] flex items-center justify-center md:p-12">
             <motion.div
                 initial={{ opacity: 0 }}
                 animate={{ opacity: 1 }}
@@ -54,10 +54,10 @@ export default function WorkoutProtocolModal({ workout, onClose }) {
             <motion.div
                 initial={{ opacity: 0, scale: 0.95, y: 30 }}
                 animate={{ opacity: 1, scale: 1, y: 0 }}
-                className="relative bg-card/90 border border-white/10 w-full max-w-6xl rounded-[3rem] md:rounded-[4rem] overflow-hidden shadow-[0_0_100px_rgba(0,0,0,0.5)] flex flex-col md:flex-row h-[95vh] md:h-auto md:min-h-[700px]"
+                className="relative bg-card/90 border-0 md:border border-white/10 w-full md:max-w-6xl rounded-none md:rounded-[4rem] overflow-hidden shadow-none md:shadow-[0_0_100px_rgba(0,0,0,0.5)] flex flex-col md:flex-row h-dvh md:h-[85vh]"
             >
                 {/* Visual / Control Panel */}
-                <div className="md:w-[55%] p-6 md:p-12 flex flex-col relative overflow-hidden h-1/2 md:h-auto">
+                <div className="md:w-[55%] p-5 md:p-12 flex flex-col relative overflow-hidden h-1/2 md:h-full">
                     <div className="absolute top-0 left-0 p-12 opacity-5 pointer-events-none -translate-x-12 -translate-y-12">
                         <Activity className="w-[500px] h-[500px] text-accent" />
                     </div>
@@ -68,41 +68,41 @@ export default function WorkoutProtocolModal({ workout, onClose }) {
                                 <div className="w-1.5 h-12 bg-accent rounded-full shadow-[0_0_15px_rgba(var(--accent-rgb),0.5)]"></div>
                                 <div>
                                     <p className="text-accent font-black uppercase tracking-[0.4em] text-[10px] leading-tight mb-1">Workout Plan</p>
-                                    <h2 className="text-5xl font-black text-white uppercase italic tracking-tighter leading-none">{workout.name}</h2>
+                                    <h2 className="text-3xl md:text-5xl font-black text-white uppercase italic tracking-tighter leading-none">{workout.name}</h2>
                                 </div>
                             </div>
 
-                            <p className="text-muted text-sm font-bold uppercase tracking-tight mb-12 max-w-md leading-relaxed opacity-60">
+                            <p className="text-muted text-sm font-bold uppercase tracking-tight mb-8 md:mb-12 max-w-md leading-relaxed opacity-60 line-clamp-3">
                                 START YOUR PERSONALIZED WORKOUT. FOLLOW THE EXERCISES FOR MAXIMUM RESULTS.
                             </p>
 
-                            <div className="grid grid-cols-2 gap-8 mb-12">
-                                <div className="p-6 bg-white/5 rounded-[2.5rem] border border-white/5 group hover:border-accent/20 transition-all">
+                            <div className="grid grid-cols-2 gap-4 md:gap-8 mb-8 md:mb-12">
+                                <div className="p-4 md:p-6 bg-white/5 rounded-[2.5rem] border border-white/5 group hover:border-accent/20 transition-all">
                                     <div className="flex items-center gap-3 mb-3">
                                         <Timer className="w-4 h-4 text-accent" />
                                         <p className="text-[10px] font-black text-muted uppercase tracking-[0.3em]">Estimated Time</p>
                                     </div>
-                                    <p className="text-3xl font-black text-white italic tracking-tighter">{workout.duration}</p>
+                                    <p className="text-2xl md:text-3xl font-black text-white italic tracking-tighter">{workout.duration}</p>
                                 </div>
-                                <div className="p-6 bg-white/5 rounded-[2.5rem] border border-white/5 group hover:border-accent/20 transition-all">
+                                <div className="p-4 md:p-6 bg-white/5 rounded-[2.5rem] border border-white/5 group hover:border-accent/20 transition-all">
                                     <div className="flex items-center gap-3 mb-3">
                                         <Zap className="w-4 h-4 text-orange-500" />
                                         <p className="text-[10px] font-black text-muted uppercase tracking-[0.3em]">Total Exercises</p>
                                     </div>
-                                    <p className="text-3xl font-black text-white italic tracking-tighter">{exercises.length} EXERCISES</p>
+                                    <p className="text-2xl md:text-3xl font-black text-white italic tracking-tighter">{exercises.length} EXERCISES</p>
                                 </div>
                             </div>
                         </div>
                     ) : (
                         <div className="flex-grow flex flex-col relative z-10">
-                            <div className="flex justify-between items-center mb-10">
+                            <div className="flex justify-between items-center mb-6 md:mb-10">
                                 <div className="flex flex-col">
                                     <p className="text-[10px] font-black text-accent uppercase tracking-[0.5em] mb-2 px-1">Current Exercise</p>
-                                    <h3 className="text-4xl font-black text-white uppercase tracking-tighter italic leading-none">{currentExerciseIdx + 1}<span className="text-xl text-muted mx-2">/</span>{exercises.length}</h3>
+                                    <h3 className="text-3xl md:text-4xl font-black text-white uppercase tracking-tighter italic leading-none">{currentExerciseIdx + 1}<span className="text-xl text-muted mx-2">/</span>{exercises.length}</h3>
                                 </div>
                                 <div className="flex gap-4">
-                                    <button onClick={prevExercise} disabled={currentExerciseIdx === 0} className="p-4 bg-white/5 rounded-2xl disabled:opacity-5 border border-white/10 hover:bg-white hover:text-black transition-all group/btn"><ChevronLeft className="w-6 h-6" /></button>
-                                    <button onClick={nextExercise} disabled={currentExerciseIdx === exercises.length - 1} className="p-4 bg-white/5 rounded-2xl disabled:opacity-5 border border-white/10 hover:bg-white hover:text-black transition-all group/btn"><ChevronRight className="w-6 h-6" /></button>
+                                    <button onClick={prevExercise} disabled={currentExerciseIdx === 0} className="p-3 md:p-4 bg-white/5 rounded-2xl disabled:opacity-5 border border-white/10 hover:bg-white hover:text-black transition-all group/btn"><ChevronLeft className="w-6 h-6" /></button>
+                                    <button onClick={nextExercise} disabled={currentExerciseIdx === exercises.length - 1} className="p-3 md:p-4 bg-white/5 rounded-2xl disabled:opacity-5 border border-white/10 hover:bg-white hover:text-black transition-all group/btn"><ChevronRight className="w-6 h-6" /></button>
                                 </div>
                             </div>
 
@@ -112,9 +112,9 @@ export default function WorkoutProtocolModal({ workout, onClose }) {
                                     initial={{ opacity: 0, x: 40 }}
                                     animate={{ opacity: 1, x: 0 }}
                                     exit={{ opacity: 0, x: -40 }}
-                                    className="flex-grow flex flex-col"
+                                    className="flex-grow flex flex-col min-h-0"
                                 >
-                                    <div className="flex-grow flex items-center justify-center p-8 bg-card-premium rounded-[3.5rem] border border-white/5 shadow-inner mb-10 relative overflow-hidden group">
+                                    <div className="flex-grow flex items-center justify-center p-8 bg-card-premium rounded-[3.5rem] border border-white/5 shadow-inner mb-6 md:mb-10 relative overflow-hidden group min-h-0">
                                         <div className="absolute inset-0 bg-accent/5 opacity-0 group-hover:opacity-100 transition-opacity blur-[80px]"></div>
                                         <ExerciseVisual exerciseName={currentExercise?.name} />
                                     </div>
@@ -122,17 +122,17 @@ export default function WorkoutProtocolModal({ workout, onClose }) {
                                     <div className="flex justify-between items-end">
                                         <div className="space-y-4">
                                             <div className="w-2 h-0.5 bg-accent"></div>
-                                            <h4 className="text-5xl font-black text-accent uppercase italic tracking-tighter leading-none">{currentExercise?.name}</h4>
+                                            <h4 className="text-3xl md:text-5xl font-black text-accent uppercase italic tracking-tighter leading-none line-clamp-2">{currentExercise?.name}</h4>
                                         </div>
-                                        <div className="flex gap-12 bg-white/5 p-8 rounded-[2.5rem] border border-white/10">
+                                        <div className="flex gap-4 md:gap-12 bg-white/5 p-4 md:p-8 rounded-[2.5rem] border border-white/10">
                                             <div>
                                                 <p className="text-[9px] font-black text-muted uppercase tracking-[0.4em] mb-2 leading-none">Sets</p>
-                                                <p className="text-3xl font-black text-white italic tracking-tighter leading-none">{currentExercise?.sets}</p>
+                                                <p className="text-2xl md:text-3xl font-black text-white italic tracking-tighter leading-none">{currentExercise?.sets}</p>
                                             </div>
                                             <div className="w-[1px] h-10 bg-white/10"></div>
                                             <div>
                                                 <p className="text-[9px] font-black text-muted uppercase tracking-[0.4em] mb-2 leading-none">{currentExercise?.duration !== "N/A" ? "Time" : "Reps"}</p>
-                                                <p className="text-3xl font-black text-white italic tracking-tighter leading-none">{currentExercise?.duration !== "N/A" ? currentExercise?.duration : currentExercise?.reps}</p>
+                                                <p className="text-2xl md:text-3xl font-black text-white italic tracking-tighter leading-none">{currentExercise?.duration !== "N/A" ? currentExercise?.duration : currentExercise?.reps}</p>
                                             </div>
                                         </div>
                                     </div>
@@ -143,12 +143,12 @@ export default function WorkoutProtocolModal({ workout, onClose }) {
                 </div>
 
                 {/* Vertical Registry / Sidebar */}
-                <div className="md:w-[45%] p-6 md:p-12 bg-black/40 flex flex-col border-t md:border-t-0 md:border-l border-white/10 relative overflow-hidden h-1/2 md:h-auto">
+                <div className="md:w-[45%] p-5 md:p-12 bg-black/40 flex flex-col border-t md:border-t-0 md:border-l border-white/10 relative overflow-hidden h-1/2 md:h-full">
                     <div className="absolute top-0 right-0 p-12 opacity-5 pointer-events-none translate-x-12 -translate-y-12">
                         <Cpu className="w-64 h-64 text-accent" />
                     </div>
 
-                    <div className="flex justify-between items-center mb-10 relative z-10">
+                    <div className="flex justify-between items-center mb-6 md:mb-10 relative z-10">
                         <h3 className="text-[10px] font-black text-muted uppercase tracking-[0.5em]">{isLive ? "EXERCISE LIST" : "WORKOUT DETAILS"}</h3>
                         {!isLive && (
                             <button onClick={onClose} className="p-3 bg-white/5 hover:bg-white hover:text-black rounded-2xl transition-all border border-white/5">
@@ -157,7 +157,8 @@ export default function WorkoutProtocolModal({ workout, onClose }) {
                         )}
                     </div>
 
-                    <div className="flex-grow overflow-y-auto pr-4 scrollbar-none space-y-4 mb-10 relative z-10 mask-gradient-b">
+                    {/* Scrollable List with visible scrollbar */}
+                    <div className="flex-grow overflow-y-auto pr-2 custom-scrollbar space-y-4 mb-6 md:mb-10 relative z-10 mask-gradient-b">
                         {exercises.map((ex, idx) => (
                             <motion.div
                                 initial={{ opacity: 0, x: 20 }}
