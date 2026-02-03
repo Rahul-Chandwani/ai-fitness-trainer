@@ -49,7 +49,7 @@ export default function Dashboard() {
       <PageTransition>
         <div className="max-w-7xl mx-auto space-y-12 pb-20 relative">
           {/* Background Decor */}
-          <div className="absolute top-0 right-0 w-[600px] h-[600px] bg-accent/5 rounded-full blur-[140px] -z-10 -translate-y-1/2 translate-x-1/2"></div>
+          <div className="absolute top-0 right-0 w-[300px] md:w-[600px] h-[300px] md:h-[600px] bg-accent/5 rounded-full blur-[80px] md:blur-[140px] -z-10 -translate-y-1/2 translate-x-1/2 pointer-events-none"></div>
 
           {/* Header with Gamification Meta */}
           <div className="flex flex-col gap-8">
