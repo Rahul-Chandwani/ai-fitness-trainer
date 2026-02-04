@@ -1,103 +1,91 @@
-import { GoogleGenerativeAI } from "@google/generative-ai";
 
-const API_KEY = import.meta.env.VITE_GEMINI_API_KEY;
+/**
+ * AI Service using Puter.js with Pollinations AI as a fallback.
+ * Puter.js provides stable, keyless AI access.
+ */
 
-let model;
+const PUTER_MODEL = 'openai'; // or 'gpt-4o', etc.
 
-if (API_KEY) {
-    const genAI = new GoogleGenerativeAI(API_KEY);
-    model = genAI.getGenerativeModel({ model: "gemini-flash-latest" });
-} else {
-    console.error("Missing VITE_GEMINI_API_KEY. AI features will not work.");
+async function callPuterAI(prompt, stream = false, onChunk = null) {
+    if (!window.puter) {
+        throw new Error("Puter.js not loaded");
+    }
+
+    if (stream) {
+        const response = await window.puter.ai.chat(prompt, { stream: true });
+        let fullText = "";
+        for await (const chunk of response) {
+            fullText += chunk?.text || "";
+            if (onChunk) onChunk(fullText);
+        }
+        return fullText;
+    } else {
+        const response = await window.puter.ai.chat(prompt);
+        return response.message.content;
+    }
+}
+
+/**
+ * Fallback to Pollinations AI if Puter fails
+ */
+async function callPollinationsAI(prompt, jsonMode = true) {
+    const url = `https://text.pollinations.ai/${encodeURIComponent(prompt)}?model=openai${jsonMode ? '&json=true' : ''}`;
+    const response = await fetch(url);
+    if (!response.ok) throw new Error(`Pollinations error: ${response.status}`);
+    const text = await response.text();
+    if (jsonMode) {
+        return JSON.parse(text.replace(/```json/g, "").replace(/```/g, "").trim());
+    }
+    return text.trim();
 }
 
 export async function getAIResponseStream(prompt, onChunk) {
-    if (!model) {
-        onChunk("AI is not configured. Please add your API Key.");
-        return;
-    }
-
     try {
-        const result = await model.generateContentStream(prompt);
-
-        let fullText = "";
-        for await (const chunk of result.stream) {
-            const chunkText = chunk.text();
-            fullText += chunkText;
-            onChunk(fullText);
+        if (window.puter) {
+            return await callPuterAI(prompt, true, onChunk);
         }
-
-        return fullText;
+        throw new Error("Puter unavailable");
     } catch (error) {
-        console.error("Gemini Error:", error);
-        const errorMessage = `I'm having trouble connecting to the AI. Error: ${error.message || "Unknown error"}`;
-        onChunk(errorMessage);
-        return errorMessage;
+        console.warn("Puter AI failed, falling back to Pollinations:", error);
+        // Basic fallback for streaming (not perfectly streaming but works)
+        try {
+            const response = await callPollinationsAI(prompt, false);
+            onChunk(response);
+            return response;
+        } catch (fallError) {
+            const msg = "AI services are currently unavailable. Please try again later.";
+            onChunk(msg);
+            return msg;
+        }
     }
 }
 
 export async function generateDietPlan(preferences = {}) {
-    if (!model) return null;
-
     const { dietType = "balanced", calories = "2000" } = preferences;
+    const prompt = `Generate a daily diet plan for ${dietType} diet, ~${calories} kcal. Return ONLY JSON array: [{"name": "Breakfast", "food": "...", "calories": 350}, ...]`;
 
-    const prompt = `
-        Generate a daily diet plan with 4 meals: Breakfast, Lunch, Dinner, Snacks.
-        Criteria:
-        - Diet Type: ${dietType}
-        - Total Calories: ~${calories} kcal
-
-        Return ONLY valid JSON in this format:
-        [
-            { "name": "Breakfast", "food": "Oatmeal with berries", "calories": 350 },
-            { "name": "Lunch", "food": "Grilled chicken salad", "calories": 500 },
-            { "name": "Dinner", "food": "Salmon with asparagus", "calories": 600 },
-            { "name": "Snacks", "food": "Greek yogurt", "calories": 150 }
-        ]
-        Do not include markdown formatting like \`\`\`json.
-    `;
     try {
-        const result = await model.generateContent(prompt);
-        const text = result.response.text();
-        // Clean up markdown code blocks if present
-        const jsonText = text.replace(/```json/g, "").replace(/```/g, "").trim();
-        return JSON.parse(jsonText);
-    } catch (error) {
-        console.error("AI Diet Error:", error);
-        return null; // Fallback handled in UI
+        if (window.puter) {
+            const res = await callPuterAI(prompt);
+            return JSON.parse(res.replace(/```json/g, "").replace(/```/g, "").trim());
+        }
+    } catch (e) {
+        console.warn("Puter diet generation failed:", e);
     }
+    return await callPollinationsAI(prompt).catch(() => null);
 }
 
 export async function generateWorkoutRoutine(preferences = {}) {
-    if (!model) return null;
-
     const { type = "Full Body", duration = "45 mins" } = preferences;
+    const prompt = `Generate a workout routine for ${type}, ${duration}. Return ONLY JSON: {"id": 1, "name": "...", "duration": "...", "exercises": [{"name": "...", "sets": 3, "reps": "10"}]}`;
 
-    const prompt = `
-        Generate a creative workout routine.
-        Criteria:
-        - Type: ${type}
-        - Duration: ${duration}
-
-        Return ONLY valid JSON in this format:
-        {
-            "id": ${Date.now()},
-            "name": "HIIT Blast",
-            "duration": "30 min",
-            "exercises": [
-              { "name": "Pushups", "sets": 3, "reps": "15" },
-              { "name": "Squats", "sets": 3, "reps": "20" }
-            ]
-        }
-        Do not include markdown formatting.
-    `;
     try {
-        const result = await model.generateContent(prompt);
-        const text = result.response.text();
-        const jsonText = text.replace(/```json/g, "").replace(/```/g, "").trim();
-        return JSON.parse(jsonText);
-    } catch (error) {
-        console.error("AI Workout Error:", error);
-        return null;
+        if (window.puter) {
+            const res = await callPuterAI(prompt);
+            return JSON.parse(res.replace(/```json/g, "").replace(/```/g, "").trim());
+        }
+    } catch (e) {
+        console.warn("Puter workout generation failed:", e);
     }
+    return await callPollinationsAI(prompt).catch(() => null);
 }
