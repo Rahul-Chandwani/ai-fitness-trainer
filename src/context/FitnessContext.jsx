@@ -58,7 +58,7 @@ export function FitnessProvider({ children }) {
         const unsubscribe = onSnapshot(userRef, (docSnap) => {
             if (docSnap.exists()) {
                 const data = docSnap.data();
-                setUserProfile(data.profile || defaultProfile);
+                setUserProfile({ ...(data.profile || defaultProfile), uid: user.uid });
 
                 // DATA MIGRATION & HYDRATION
                 // 1. Meals

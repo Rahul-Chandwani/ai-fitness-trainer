@@ -136,6 +136,7 @@ export default function DailyTaskCard({ day, onTaskComplete, onViewWorkout, isTo
                                 // Display Type (Breakfast/Lunch...) if available, otherwise just calories
                                 label={meal.type ? meal.type.toUpperCase() : null}
                                 subtitle={`${meal.calories} kcal • P:${meal.protein}g C:${meal.carbs}g F:${meal.fats}g`}
+                                info={meal.food}
                                 completed={meal.completed}
                                 onToggle={() => onTaskComplete(dayOfWeek, 'meal', idx)}
                                 accentColor="blue-400"
@@ -171,7 +172,7 @@ export default function DailyTaskCard({ day, onTaskComplete, onViewWorkout, isTo
     );
 }
 
-function TaskItem({ icon, title, subtitle, label, completed, onToggle, accentColor = "accent", compact = false }) {
+function TaskItem({ icon, title, subtitle, info, label, completed, onToggle, accentColor = "accent", compact = false }) {
     return (
         <button
             onClick={onToggle}
@@ -191,9 +192,16 @@ function TaskItem({ icon, title, subtitle, label, completed, onToggle, accentCol
                         {title}
                     </p>
                 </div>
-                <p className={`text-[${compact ? '8' : '9'}px] text-muted font-bold uppercase tracking-tight truncate`}>
-                    {subtitle}
-                </p>
+                {subtitle && (
+                    <p className={`text-[${compact ? '8' : '9'}px] text-muted font-bold uppercase tracking-tight truncate`}>
+                        {subtitle}
+                    </p>
+                )}
+                {info && (
+                    <p className={`text-[${compact ? '7' : '8'}px] text-accent/80 font-bold uppercase italic tracking-tight mt-0.5 line-clamp-1`}>
+                        {info}
+                    </p>
+                )}
             </div>
             {!completed && (
                 <Circle className={`w-5 h-5 text-muted group-hover/task:text-${accentColor} transition-colors`} />

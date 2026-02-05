@@ -13,10 +13,22 @@ export async function generateComprehensiveTrainingPlan(userProfile, preferences
     dietaryPreference = "balanced"
   } = preferences;
 
+  const foodSamples = {
+    "Balanced": "Grilled Chicken, Brown Rice, Broccoli, Oats, Greek Yogurt, Boiled Eggs, Salmon, Almonds, Apples, Bananas",
+    "Vegetarian": "Paneer, Moong Dal, Palak Paneer, Dal Makhani, Greek Yogurt, Oats, Brown Rice, Chapati, Milk, Almonds",
+    "Vegan": "Tofu, Idli, Dosa, Poha, Chickpeas, Rajma, Quinoa, Soy Milk, Spinach, Broccoli, Walnuts",
+    "Non-Vegetarian": "Chicken Breast, Boiled Egg, Salmon, Chicken Curry, Fish Curry, Mutton, Eggs, Paneer, Oats, Rice",
+    "High Protein": "Chicken Breast, Egg Whites, Greek Yogurt, Whey Protein, Paneer, Tofu, Salmon, Lean Beef"
+  };
+
+  const preferredFoods = foodSamples[dietaryPreference] || foodSamples["Balanced"];
+
   const prompt = `
 You are an expert fitness coach and nutritionist. Generate a comprehensive ${duration}-week training and nutrition plan.
 User: ${userProfile.name}, Goal: ${goal}, Experience: ${experience}.
 Dietary Preference: ${dietaryPreference}.
+
+REFERENCE INGREDIENTS (Use these or similar): ${preferredFoods}.
 
 CRITICAL: Return a COMPLETE plan for the full ${duration} weeks. Each week must have 7 days.
 For EACH day, provide:
@@ -69,6 +81,7 @@ Return ONLY valid JSON in this format:
     // Add metadata
     plan.createdAt = new Date().toISOString();
     plan.userId = userProfile.uid;
+    plan.goal = goal; // Explicitly save goal for UI
     plan.currentWeek = 1;
     plan.startDate = new Date().toISOString().split('T')[0];
 

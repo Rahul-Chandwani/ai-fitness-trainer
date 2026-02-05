@@ -30,16 +30,29 @@ export default function AddWorkoutModal({ onClose }) {
   }, [selectedCategory, searchQuery]);
 
   const totalCalories = selectedExercises.reduce((acc, ex) => {
+    if (ex.unit === 'reps') {
+      const caloriesPerRep = (ex.calories_per_min || 5) / 10; // Assume 1 min intensity = 10 reps
+      return acc + (ex.sets * ex.value * caloriesPerRep);
+    }
     return acc + (ex.value * (ex.calories_per_min || 7));
   }, 0);
 
   const totalDuration = selectedExercises.reduce((acc, ex) => {
+    if (ex.unit === 'reps') {
+      return acc + (ex.sets * 1.5); // Estimate 1.5 min per set (set + rest)
+    }
     return acc + parseInt(ex.value);
   }, 0);
 
   const addExercise = (exercise) => {
     if (selectedExercises.find(e => e.id === exercise.id)) return;
-    setSelectedExercises([...selectedExercises, { ...exercise, value: 10, unit: 'min' }]);
+    const unit = exercise.unit || 'min';
+    setSelectedExercises([...selectedExercises, {
+      ...exercise,
+      unit,
+      value: unit === 'min' ? 10 : 12, // duration or reps
+      sets: unit === 'reps' ? 3 : 1
+    }]);
   };
 
   const removeExercise = (id) => {
@@ -49,6 +62,12 @@ export default function AddWorkoutModal({ onClose }) {
   const updateValue = (id, newVal) => {
     setSelectedExercises(selectedExercises.map(e =>
       e.id === id ? { ...e, value: Math.max(1, parseInt(newVal) || 0) } : e
+    ));
+  };
+
+  const updateSets = (id, newSets) => {
+    setSelectedExercises(selectedExercises.map(e =>
+      e.id === id ? { ...e, sets: Math.max(1, parseInt(newSets) || 0) } : e
     ));
   };
 
@@ -63,7 +82,7 @@ export default function AddWorkoutModal({ onClose }) {
         totalCalories: Math.round(totalCalories),
         exercises: selectedExercises.map(ex => ({
           name: ex.name,
-          sets: 1,
+          sets: ex.unit === 'reps' ? ex.sets : 1,
           reps: ex.unit === 'reps' ? String(ex.value) : "1",
           duration: ex.unit === 'min' ? `${ex.value} min` : "N/A"
         }))
@@ -193,21 +212,50 @@ export default function AddWorkoutModal({ onClose }) {
                         <Trash2 className="w-4 h-4" />
                       </button>
                     </div>
-                    <div className="flex items-center gap-6">
-                      <div className="flex-grow">
-                        <input
-                          type="range"
-                          min="1"
-                          max="60"
-                          value={ex.value}
-                          onChange={(e) => updateValue(ex.id, e.target.value)}
-                          className="w-full h-1.5 bg-white/10 rounded-full appearance-none accent-accent cursor-pointer"
-                        />
-                      </div>
-                      <div className="w-20 text-right">
-                        <span className="text-xl font-black text-white">{ex.value}</span>
-                        <span className="text-[8px] text-muted ml-1 uppercase font-black tracking-widest">Min</span>
-                      </div>
+                    <div className="flex flex-col sm:flex-row items-center gap-6">
+                      {ex.unit === 'min' ? (
+                        <>
+                          <div className="flex-grow">
+                            <input
+                              type="range"
+                              min="1"
+                              max="60"
+                              value={ex.value}
+                              onChange={(e) => updateValue(ex.id, e.target.value)}
+                              className="w-full h-1.5 bg-white/10 rounded-full appearance-none accent-accent cursor-pointer"
+                            />
+                          </div>
+                          <div className="w-24 text-right">
+                            <span className="text-xl font-black text-white">{ex.value}</span>
+                            <span className="text-[8px] text-muted ml-1 uppercase font-black tracking-widest italic">Min</span>
+                          </div>
+                        </>
+                      ) : (
+                        <div className="flex items-center gap-4 w-full">
+                          <div className="flex-1 space-y-2">
+                            <p className="text-[7px] font-black text-muted uppercase tracking-widest px-1">Sets</p>
+                            <div className="flex items-center gap-2">
+                              <input
+                                type="number"
+                                value={ex.sets}
+                                onChange={(e) => updateSets(ex.id, e.target.value)}
+                                className="w-full bg-white/5 border border-white/10 rounded-xl py-2 px-3 text-white font-black text-sm outline-none focus:border-accent/40"
+                              />
+                            </div>
+                          </div>
+                          <div className="flex-1 space-y-2">
+                            <p className="text-[7px] font-black text-muted uppercase tracking-widest px-1">Reps</p>
+                            <div className="flex items-center gap-2">
+                              <input
+                                type="number"
+                                value={ex.value}
+                                onChange={(e) => updateValue(ex.id, e.target.value)}
+                                className="w-full bg-white/5 border border-white/10 rounded-xl py-2 px-3 text-white font-black text-sm outline-none focus:border-accent/40"
+                              />
+                            </div>
+                          </div>
+                        </div>
+                      )}
                     </div>
                   </div>
                 </motion.div>

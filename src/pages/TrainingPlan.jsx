@@ -208,7 +208,7 @@ export default function TrainingPlan() {
                             <div className="min-w-0">
                                 <h1 className="text-2xl md:text-4xl font-extrabold tracking-tight text-white truncate uppercase italic">AI Training Protocol</h1>
                                 <p className="text-[10px] text-muted font-bold uppercase tracking-widest mt-1 truncate">
-                                    Week {trainingPlan.currentWeek} of {trainingPlan.duration} • {trainingPlan.goal.replace('_', ' ')}
+                                    Week {trainingPlan.currentWeek} of {trainingPlan.duration} • {(trainingPlan.goal || 'General').replace('_', ' ')}
                                 </p>
                             </div>
                         </div>

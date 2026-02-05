@@ -76,14 +76,25 @@ export async function generateDietPlan(preferences = {}) {
         experienceLevel = "intermediate"
     } = preferences;
 
+    const foodSamples = {
+        "Vegetarian": "Paneer, Greek Yogurt, Moong Dal, Dal Makhani, Palak Paneer, Oats, Brown Rice, Chapati, Milk, Almonds",
+        "Vegan": "Tofu, Idli, Dosa, Poha, Chickpeas (Chole), Rajma, Quinoa, Soy Milk, Spinach, Broccoli, Walnuts",
+        "Non-Vegetarian": "Chicken Breast, Boiled Egg, Salmon, Chicken Curry, Fish Curry, Mutton, Eggs, Paneer, Oats, Rice",
+        "Eggitarian": "Boiled Egg, Egg Bhurji, Omelette, Greek Yogurt, Oats, Chapati, Lentils, Fruit Salad"
+    };
+
+    const preferredFoods = foodSamples[dietPreference] || foodSamples["Vegetarian"];
+
     const prompt = `Generate a comprehensive daily diet plan for a ${dietPreference} preference with a focus on ${dietAim}. Target: ~${calories} kcal. 
     Experience Level: ${experienceLevel}.
     
+    REFERENCE INGREDIENTS (Use these or similar): ${preferredFoods}.
+
     Return ONLY a JSON array of 4-5 objects, each representing a meal (Breakfast, Lunch, Dinner, Snack, etc.).
     Each object MUST have:
     - "name": The meal title (e.g. "Early Morning Fuel", "Muscle Recovery Lunch")
     - "type": The category (Breakfast, Lunch, Dinner, or Snack)
-    - "food": A detailed description of literal food items and portions (e.g. "3 Egg Whites, 1 Whole Egg, 100g Oats with Berries")
+    - "food": A detailed description of literal food items and portions (e.g. "200g Grilled Chicken with 100g Brown Rice")
     - "calories": Estimated total calories for this meal (number)
     - "protein": Protein in grams (number)
     - "carbs": Carbohydrates in grams (number)

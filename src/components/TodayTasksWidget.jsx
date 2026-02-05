@@ -82,6 +82,7 @@ export default function TodayTasksWidget({ todayTasks, onQuickComplete }) {
                             icon={<Utensils className="w-4 h-4" />}
                             title="Meal Plan"
                             subtitle={`${meals.filter(m => m.completed).length}/${meals.length} meals logged`}
+                            info={meals.slice(0, 2).map(m => m.name).join(", ") + (meals.length > 2 ? "..." : "")}
                             completed={meals.every(m => m.completed)}
                             onToggle={() => onQuickComplete('meals')}
                             color="blue-400"
@@ -114,7 +115,7 @@ export default function TodayTasksWidget({ todayTasks, onQuickComplete }) {
     );
 }
 
-function QuickTask({ icon, title, subtitle, completed, onToggle, color = "accent" }) {
+function QuickTask({ icon, title, subtitle, info, completed, onToggle, color = "accent" }) {
     return (
         <button
             onClick={onToggle}
@@ -130,6 +131,11 @@ function QuickTask({ icon, title, subtitle, completed, onToggle, color = "accent
                 <p className="text-[9px] text-muted font-bold uppercase tracking-tight truncate">
                     {subtitle}
                 </p>
+                {info && (
+                    <p className={`text-[8px] text-accent/80 font-bold uppercase italic tracking-tight mt-0.5 truncate`}>
+                        {info}
+                    </p>
+                )}
             </div>
             {!completed && (
                 <Circle className={`w-5 h-5 text-muted group-hover/task:text-${color} transition-colors`} />

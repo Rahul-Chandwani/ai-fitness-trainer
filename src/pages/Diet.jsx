@@ -172,6 +172,18 @@ export default function Diet() {
                   </div>
                 </div>
 
+                <div className="flex flex-col sm:flex-row items-center justify-between gap-4">
+                  <div className="relative w-full sm:w-64">
+                    <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-muted" />
+                    <input
+                      value={searchQuery}
+                      onChange={(e) => setSearchQuery(e.target.value)}
+                      placeholder="FILTER AI PROTOCOLS..."
+                      className="w-full bg-white/5 border border-white/10 rounded-xl py-2.5 pl-10 pr-4 text-[10px] font-black text-white outline-none focus:border-accent/40"
+                    />
+                  </div>
+                </div>
+
                 {/* Active Summary Callout */}
                 <div className="flex flex-col xl:flex-row items-center justify-between p-4 bg-blue-500/10 border border-blue-500/20 rounded-[1.5rem] gap-6">
                   <div className="flex flex-col sm:flex-row items-center gap-6 text-center sm:text-left">
@@ -222,28 +234,30 @@ export default function Diet() {
                     </button>
                   </div>
                 </div>
-
-                {/* Meals Display */}
-                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 pb-10">
-                  {meals.map((meal, i) => (
-                    <motion.div
-                      initial={{ opacity: 0, y: 10 }}
-                      animate={{ opacity: 1, y: 0 }}
-                      transition={{ delay: i * 0.05 }}
-                      key={i}
-                    >
-                      <MealCard meal={meal} onViewDetails={setSelectedFood} />
-                    </motion.div>
-                  ))}
-                  {meals.length === 0 && (
-                    <div className="col-span-full py-20 text-center border-2 border-dashed border-white/5 rounded-[2rem]">
-                      <p className="text-[10px] font-black text-muted uppercase tracking-[0.5em]">No Manual Meals Documented</p>
-                    </div>
-                  )}
-                </div>
               </motion.div>
             )}
           </AnimatePresence>
+
+          {/* Meals Display - Common for both tabs */}
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 pb-10">
+            {meals.map((meal, i) => (
+              <motion.div
+                initial={{ opacity: 0, y: 10 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: i * 0.05 }}
+                key={i}
+              >
+                <MealCard meal={meal} onViewDetails={setSelectedFood} />
+              </motion.div>
+            ))}
+            {meals.length === 0 && (
+              <div className="col-span-full py-20 text-center border-2 border-dashed border-white/5 rounded-[2rem]">
+                <p className="text-[10px] font-black text-muted uppercase tracking-[0.5em]">
+                  {activeTab === 'ai' ? 'No AI Protocols Active' : 'No Manual Meals Documented'}
+                </p>
+              </div>
+            )}
+          </div>
 
           {showAddModal && <AddFoodModal onClose={() => setShowAddModal(false)} />}
           <AnimatePresence>
@@ -256,7 +270,7 @@ export default function Diet() {
           </AnimatePresence>
         </div>
       </PageTransition>
-    </DashboardLayout>
+    </DashboardLayout >
   );
 }
 
