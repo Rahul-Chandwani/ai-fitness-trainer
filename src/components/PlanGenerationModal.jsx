@@ -94,8 +94,8 @@ export default function PlanGenerationModal({ isOpen, onClose, onGenerate, userP
                                             key={goal.value}
                                             onClick={() => setFormData({ ...formData, goal: goal.value })}
                                             className={`p-4 rounded-2xl border font-bold uppercase tracking-tight text-sm transition-all ${formData.goal === goal.value
-                                                    ? "bg-accent/20 border-accent/40 text-accent"
-                                                    : "bg-white/5 border-white/10 text-muted hover:border-accent/20"
+                                                ? "bg-accent/20 border-accent/40 text-accent"
+                                                : "bg-white/5 border-white/10 text-muted hover:border-accent/20"
                                                 }`}
                                         >
                                             {goal.label}
@@ -115,8 +115,8 @@ export default function PlanGenerationModal({ isOpen, onClose, onGenerate, userP
                                             key={weeks}
                                             onClick={() => setFormData({ ...formData, duration: weeks })}
                                             className={`p-4 rounded-2xl border font-bold uppercase tracking-tight text-sm transition-all ${formData.duration === weeks
-                                                    ? "bg-accent/20 border-accent/40 text-accent"
-                                                    : "bg-white/5 border-white/10 text-muted hover:border-accent/20"
+                                                ? "bg-accent/20 border-accent/40 text-accent"
+                                                : "bg-white/5 border-white/10 text-muted hover:border-accent/20"
                                                 }`}
                                         >
                                             {weeks} Weeks
@@ -145,8 +145,8 @@ export default function PlanGenerationModal({ isOpen, onClose, onGenerate, userP
                                             key={days}
                                             onClick={() => setFormData({ ...formData, daysPerWeek: days })}
                                             className={`p-4 rounded-2xl border font-bold uppercase tracking-tight text-sm transition-all ${formData.daysPerWeek === days
-                                                    ? "bg-accent/20 border-accent/40 text-accent"
-                                                    : "bg-white/5 border-white/10 text-muted hover:border-accent/20"
+                                                ? "bg-accent/20 border-accent/40 text-accent"
+                                                : "bg-white/5 border-white/10 text-muted hover:border-accent/20"
                                                 }`}
                                         >
                                             {days} Days
@@ -169,8 +169,8 @@ export default function PlanGenerationModal({ isOpen, onClose, onGenerate, userP
                                             key={level.value}
                                             onClick={() => setFormData({ ...formData, experience: level.value })}
                                             className={`p-4 rounded-2xl border font-bold uppercase tracking-tight text-sm transition-all ${formData.experience === level.value
-                                                    ? "bg-accent/20 border-accent/40 text-accent"
-                                                    : "bg-white/5 border-white/10 text-muted hover:border-accent/20"
+                                                ? "bg-accent/20 border-accent/40 text-accent"
+                                                : "bg-white/5 border-white/10 text-muted hover:border-accent/20"
                                                 }`}
                                         >
                                             {level.label}
@@ -194,8 +194,8 @@ export default function PlanGenerationModal({ isOpen, onClose, onGenerate, userP
                                             key={eq.value}
                                             onClick={() => setFormData({ ...formData, equipment: eq.value })}
                                             className={`p-4 rounded-2xl border font-bold uppercase tracking-tight text-sm transition-all ${formData.equipment === eq.value
-                                                    ? "bg-accent/20 border-accent/40 text-accent"
-                                                    : "bg-white/5 border-white/10 text-muted hover:border-accent/20"
+                                                ? "bg-accent/20 border-accent/40 text-accent"
+                                                : "bg-white/5 border-white/10 text-muted hover:border-accent/20"
                                                 }`}
                                         >
                                             {eq.label}
@@ -225,14 +225,16 @@ export default function PlanGenerationModal({ isOpen, onClose, onGenerate, userP
                                         { value: "low_carb", label: "Low Carb" },
                                         { value: "vegetarian", label: "Vegetarian" },
                                         { value: "vegan", label: "Vegan" },
-                                        { value: "keto", label: "Keto" }
+                                        { value: "keto", label: "Keto" },
+                                        { value: "non_vegetarian", label: "Non-Veg" },
+                                        { value: "eggetarian", label: "Eggitarian" }
                                     ].map((diet) => (
                                         <button
                                             key={diet.value}
                                             onClick={() => setFormData({ ...formData, dietaryPreference: diet.value })}
                                             className={`p-4 rounded-2xl border font-bold uppercase tracking-tight text-sm transition-all ${formData.dietaryPreference === diet.value
-                                                    ? "bg-accent/20 border-accent/40 text-accent"
-                                                    : "bg-white/5 border-white/10 text-muted hover:border-accent/20"
+                                                ? "bg-accent/20 border-accent/40 text-accent"
+                                                : "bg-white/5 border-white/10 text-muted hover:border-accent/20"
                                                 }`}
                                         >
                                             {diet.label}

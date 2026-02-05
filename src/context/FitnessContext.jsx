@@ -14,8 +14,10 @@ export function FitnessProvider({ children }) {
 
     // State
     const [userProfile, setUserProfile] = useState(null);
-    const [dietPlan, setDietPlan] = useState([]);
-    const [workoutRoutine, setWorkoutRoutine] = useState(null);
+    const [manualMeals, setManualMeals] = useState([]);
+    const [aiMeals, setAIMeals] = useState([]);
+    const [manualWorkouts, setManualWorkouts] = useState([]);
+    const [aiWorkouts, setAIWorkouts] = useState([]);
     const [weightHistory, setWeightHistory] = useState([]);
     const [calorieHistory, setCalorieHistory] = useState([]);
     const [workoutHistory, setWorkoutHistory] = useState([]);
@@ -40,8 +42,10 @@ export function FitnessProvider({ children }) {
     useEffect(() => {
         if (!user) {
             setUserProfile(null);
-            setDietPlan([]);
-            setWorkoutRoutine(null);
+            setManualMeals([]);
+            setAIMeals([]);
+            setManualWorkouts([]);
+            setAIWorkouts([]);
             setWeightHistory([]);
             setCalorieHistory([]);
             setLoadingData(false);
@@ -55,8 +59,37 @@ export function FitnessProvider({ children }) {
             if (docSnap.exists()) {
                 const data = docSnap.data();
                 setUserProfile(data.profile || defaultProfile);
-                setDietPlan(data.dietPlan || []);
-                setWorkoutRoutine(data.workoutRoutine || null);
+
+                // DATA MIGRATION & HYDRATION
+                // 1. Meals
+                if (data.manualMeals || data.aiMeals) {
+                    setManualMeals(data.manualMeals || []);
+                    setAIMeals(data.aiMeals || []);
+                } else if (data.dietPlan) {
+                    // Legacy migration
+                    const manual = data.dietPlan.filter(m => !m.isAI && !m.id?.toString().startsWith('ai_'));
+                    const ai = data.dietPlan.filter(m => m.isAI || m.id?.toString().startsWith('ai_'));
+                    setManualMeals(manual);
+                    setAIMeals(ai);
+                    // Persist to prevent loop
+                    updateDoc(userRef, { manualMeals: manual, aiMeals: ai });
+                }
+
+                // 2. Workouts
+                if (data.manualWorkouts || data.aiWorkouts) {
+                    setManualWorkouts(data.manualWorkouts || []);
+                    setAIWorkouts(data.aiWorkouts || []);
+                } else if (data.workoutRoutine) {
+                    // Legacy migration
+                    const routine = Array.isArray(data.workoutRoutine) ? data.workoutRoutine : [data.workoutRoutine];
+                    const manual = routine.filter(w => !w.isAI && !w.id?.toString().startsWith('ai_'));
+                    const ai = routine.filter(w => w.isAI || w.id?.toString().startsWith('ai_'));
+                    setManualWorkouts(manual);
+                    setAIWorkouts(ai);
+                    // Persist to prevent loop
+                    updateDoc(userRef, { manualWorkouts: manual, aiWorkouts: ai });
+                }
+
                 setWeightHistory(data.weightHistory || []);
                 setCalorieHistory(data.calorieHistory || []);
                 setWorkoutHistory(data.workoutHistory || []);
@@ -96,23 +129,43 @@ export function FitnessProvider({ children }) {
         }
     };
 
-    const updateDietPlan = async (newPlan) => {
+    const updateManualMeals = async (newMeals) => {
         if (!user) return;
         try {
             const userRef = doc(db, "users", user.uid);
-            await setDoc(userRef, { dietPlan: newPlan }, { merge: true });
+            await setDoc(userRef, { manualMeals: newMeals }, { merge: true });
         } catch (err) {
-            console.error("Error updating diet:", err);
+            console.error("Error updating manual meals:", err);
         }
     };
 
-    const updateWorkoutRoutine = async (newRoutine) => {
+    const updateAIMeals = async (newMeals) => {
         if (!user) return;
         try {
             const userRef = doc(db, "users", user.uid);
-            await setDoc(userRef, { workoutRoutine: newRoutine }, { merge: true });
+            await setDoc(userRef, { aiMeals: newMeals }, { merge: true });
         } catch (err) {
-            console.error("Error updating workout:", err);
+            console.error("Error updating AI meals:", err);
+        }
+    };
+
+    const updateManualWorkouts = async (newWorkouts) => {
+        if (!user) return;
+        try {
+            const userRef = doc(db, "users", user.uid);
+            await setDoc(userRef, { manualWorkouts: newWorkouts }, { merge: true });
+        } catch (err) {
+            console.error("Error updating manual workouts:", err);
+        }
+    };
+
+    const updateAIWorkouts = async (newWorkouts) => {
+        if (!user) return;
+        try {
+            const userRef = doc(db, "users", user.uid);
+            await setDoc(userRef, { aiWorkouts: newWorkouts }, { merge: true });
+        } catch (err) {
+            console.error("Error updating AI workouts:", err);
         }
     };
 
@@ -246,15 +299,36 @@ export function FitnessProvider({ children }) {
         if (!user) return;
         try {
             const userRef = doc(db, "users", user.uid);
+            const resetProfile = {
+                ...defaultProfile,
+                name: userProfile?.name || user.email?.split("@")[0] || "User",
+            };
+
             await setDoc(userRef, {
+                profile: resetProfile,
                 dietPlan: [],
                 workoutRoutine: null,
                 weightHistory: [],
                 calorieHistory: [],
-                workoutHistory: []
+                workoutHistory: [],
+                trainingPlan: null
             }, { merge: true });
+
+            // Local state updates (onSnapshot will handle most, but clearing these explicitly for instant UI feedback)
+            setUserProfile(resetProfile);
+            setDietPlan([]);
+            setWorkoutRoutine(null);
+            setWeightHistory([]);
+            setCalorieHistory([]);
+            setWorkoutHistory([]);
+            setTrainingPlan(null);
+            setNeuralXP(0);
+            setStreak(0);
+            setHydration(0);
+
         } catch (err) {
             console.error("Error resetting data:", err);
+            throw err;
         }
     };
 
@@ -264,63 +338,8 @@ export function FitnessProvider({ children }) {
         try {
             setTrainingPlan(newPlan); // Optimistic Update
 
-            // SYNC LOGIC: Also add these workouts/meals to the user's main library
-            // This ensures they appear in "My Workouts" and "My Diet"
-            let workoutUpdates = {};
-            let dietUpdates = {};
-
-            // 1. Extract unique workouts from the plan
-            if (newPlan && newPlan.weeks) {
-                const planWorkouts = [];
-                const planMeals = [];
-
-                newPlan.weeks.forEach(week => {
-                    week.days.forEach(day => {
-                        if (day.workout) {
-                            // Add an ID if missing to dedup
-                            if (!day.workout.id) day.workout.id = `plan_wk${week.weekNumber}_${day.dayOfWeek}_${Date.now()}`;
-                            planWorkouts.push(day.workout);
-                        }
-                        if (day.meals) {
-                            day.meals.forEach(meal => {
-                                if (!meal.id) meal.id = `plan_meal_${Date.now()}_${Math.random().toString(36).substr(2, 9)}`;
-                                planMeals.push(meal);
-                            });
-                        }
-                    });
-                });
-
-                // Merge into existing workoutRoutine if it's an array, or create new
-                // For simplicity in this context, we might just append distinct ones or replace if it's a "Routine"
-                // The user asked to "add to the workouts and diet pages".
-                // Assuming 'workoutRoutine' is a single routine or array of routines? 
-                // Looking at initial state: `workoutRoutine` = null or object. 
-                // Let's assume we want to APPEND to `workoutHistory` or a new `savedWorkouts` collection? 
-                // The context has `workoutRoutine` (singular). 
-                // *Correction*: The prompt says "My Workouts".
-                // If the app structure uses `workoutRoutine` as "The Current Routine", we might overwrite it OR 
-                // if we have a list of saved workouts, we add there. 
-                // Let's look at `Workouts.jsx`... it uses `workoutRoutine`. 
-                // Let's just update `workoutRoutine` to BE this new plan's schedule if it's compatible, 
-                // OR better, let's just save the plan and let Workouts.jsx read from TrainingPlan?
-                // NO, user said "track individually".
-                // Let's just create a Union of workouts in a new field if needed, but for now let's 
-                // assume `workoutRoutine` should track the *current* plan's structure.
-
-                // ACTUALLY, checking `FitnessContext` state: `workoutRoutine` seems to be *one* routine.
-                // But `dietPlan` is an array `[]`.
-
-                if (planMeals.length > 0) {
-                    // Filter duplicates based on name/cal? Or just append?
-                    // Let's append new ones to dietPlan
-                    const newDiet = [...dietPlan, ...planMeals];
-                    dietUpdates = { dietPlan: newDiet };
-                    setDietPlan(newDiet);
-                }
-            }
-
             const userRef = doc(db, "users", user.uid);
-            await setDoc(userRef, { trainingPlan: newPlan, ...dietUpdates }, { merge: true });
+            await setDoc(userRef, { trainingPlan: newPlan }, { merge: true });
 
         } catch (err) {
             console.error("Error updating training plan:", err);
@@ -395,8 +414,10 @@ export function FitnessProvider({ children }) {
 
     const value = {
         userProfile,
-        dietPlan,
-        workoutRoutine,
+        manualMeals,
+        aiMeals,
+        manualWorkouts,
+        aiWorkouts,
         weightHistory,
         calorieHistory,
         workoutHistory,
@@ -406,8 +427,10 @@ export function FitnessProvider({ children }) {
         trainingPlan,
         loadingData,
         updateUserProfile,
-        updateDietPlan,
-        updateWorkoutRoutine,
+        updateManualMeals,
+        updateAIMeals,
+        updateManualWorkouts,
+        updateAIWorkouts,
         addMealEntry,
         addWeightEntry,
         completeWorkout,

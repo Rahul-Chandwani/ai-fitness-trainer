@@ -49,10 +49,10 @@ export default function Settings() {
                     </Link>
 
                     <div className="flex items-center gap-4">
-                        <div className="w-1.5 h-12 bg-accent rounded-full"></div>
+                        <div className="w-1.5 h-10 bg-accent rounded-full"></div>
                         <div>
-                            <h1 className="text-5xl font-extrabold text-white tracking-tight">Settings</h1>
-                            <p className="text-[10px] text-muted font-bold uppercase tracking-widest mt-1">Configure your fitness profile</p>
+                            <h1 className="text-3xl font-extrabold text-white tracking-tight">Settings</h1>
+                            <p className="text-[8px] text-muted font-bold uppercase tracking-widest mt-1">Configure your fitness profile</p>
                         </div>
                     </div>
 
@@ -95,8 +95,11 @@ export default function Settings() {
                                     <div className="space-y-4">
                                         <label className="text-[10px] uppercase font-black text-muted tracking-widest px-2">Daily Metabolic Load (kcal)</label>
                                         <input
-                                            value={formData.targetCalories}
-                                            onChange={(e) => setFormData({ ...formData, targetCalories: parseInt(e.target.value) })}
+                                            value={formData.targetCalories || ""}
+                                            onChange={(e) => {
+                                                const val = e.target.value;
+                                                setFormData({ ...formData, targetCalories: val === "" ? "" : parseInt(val) });
+                                            }}
                                             type="number"
                                             className="w-full p-6 rounded-3xl bg-white/5 border border-white/10 focus:border-accent/40 focus:bg-white/[0.08] outline-none transition-all text-white font-black tabular-nums text-sm tracking-tight"
                                         />

@@ -1,10 +1,11 @@
-import { Plus, Utensils, Check, Beef, Waves, Cookie, Activity } from "lucide-react";
+import { Plus, Utensils, Check, Beef, Waves, Cookie, Activity, Info } from "lucide-react";
 import { useFitness } from "../context/FitnessContext";
 import { useState } from "react";
 import { motion } from "framer-motion";
 import { useToast } from "./Toast";
+import FOOD_DATABASE from "../data/foodItems.json";
 
-export default function MealCard({ meal }) {
+export default function MealCard({ meal, onViewDetails }) {
   const { addMealEntry } = useFitness();
   const { addToast } = useToast();
   const [logged, setLogged] = useState(false);
@@ -38,8 +39,22 @@ export default function MealCard({ meal }) {
             <div>
               <h3 className="text-xl font-black text-white uppercase italic tracking-tighter leading-tight">{meal.name}</h3>
               <p className="text-[10px] text-muted font-black uppercase tracking-[0.4em] mt-1">{meal.type || "Protocol"}</p>
+              {meal.food && (
+                <p className="text-[9px] text-accent/80 font-bold uppercase italic tracking-tight mt-2 line-clamp-2 leading-tight">
+                  {meal.food}
+                </p>
+              )}
             </div>
           </div>
+          <button
+            onClick={() => {
+              const fullFood = FOOD_DATABASE.find(f => f.name === meal.name);
+              onViewDetails(fullFood || meal);
+            }}
+            className="p-3 bg-white/5 hover:bg-white/10 rounded-2xl border border-white/5"
+          >
+            <Info className="w-5 h-5 text-muted" />
+          </button>
         </div>
 
         <div className="bg-white/5 rounded-3xl p-6 border border-white/5 mb-8 flex justify-between items-center group-hover:border-accent/10 transition-colors">
@@ -53,11 +68,11 @@ export default function MealCard({ meal }) {
         </div>
 
         {/* Macros Display */}
-        {(meal.protein || meal.carbs || meal.fats) && (
+        {(meal.protein || meal.protein_g || meal.carbs || meal.carbs_g || meal.fats || meal.fats_g) && (
           <div className="grid grid-cols-3 gap-3 mb-8">
-            <MacroStat icon={<Beef className="w-3 h-3 text-emerald-400" />} label="PRO" val={meal.protein} />
-            <MacroStat icon={<Waves className="w-3 h-3 text-blue-400" />} label="CHO" val={meal.carbs} />
-            <MacroStat icon={<Cookie className="w-3 h-3 text-amber-500" />} label="FAT" val={meal.fats} />
+            <MacroStat icon={<Beef className="w-3 h-3 text-emerald-400" />} label="PRO" val={meal.protein || meal.protein_g} />
+            <MacroStat icon={<Waves className="w-3 h-3 text-blue-400" />} label="CHO" val={meal.carbs || meal.carbs_g} />
+            <MacroStat icon={<Cookie className="w-3 h-3 text-amber-500" />} label="FAT" val={meal.fats || meal.fats_g} />
           </div>
         )}
       </div>

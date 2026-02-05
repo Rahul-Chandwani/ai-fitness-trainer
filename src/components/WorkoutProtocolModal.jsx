@@ -1,9 +1,11 @@
-import { X, Dumbbell, ListChecks, Timer, Flame, CheckCircle2, Play, ChevronLeft, ChevronRight, Activity, Zap, Cpu } from "lucide-react";
+import { X, Dumbbell, ListChecks, Timer, Flame, CheckCircle2, Play, ChevronLeft, ChevronRight, Activity, Zap, Cpu, Info } from "lucide-react";
 import { useState } from "react";
 import { useFitness } from "../context/FitnessContext";
 import ExerciseVisual from "./ExerciseVisual";
+import ExerciseDetailModal from "./ExerciseDetailModal";
 import { motion, AnimatePresence } from "framer-motion";
 import { useToast } from "./Toast";
+import EXERCISE_DATABASE from "../data/exercises.json";
 
 export default function WorkoutProtocolModal({ workout, onClose }) {
     const { completeWorkout } = useFitness();
@@ -11,6 +13,7 @@ export default function WorkoutProtocolModal({ workout, onClose }) {
     const [isLive, setIsLive] = useState(false);
     const [currentExerciseIdx, setCurrentExerciseIdx] = useState(0);
     const [completing, setCompleting] = useState(false);
+    const [detailExercise, setDetailExercise] = useState(null);
 
     if (!workout) return null;
 
@@ -122,7 +125,18 @@ export default function WorkoutProtocolModal({ workout, onClose }) {
                                     <div className="flex justify-between items-end">
                                         <div className="space-y-4">
                                             <div className="w-2 h-0.5 bg-accent"></div>
-                                            <h4 className="text-3xl md:text-5xl font-black text-accent uppercase italic tracking-tighter leading-none line-clamp-2">{currentExercise?.name}</h4>
+                                            <div className="flex items-center gap-4">
+                                                <h4 className="text-3xl md:text-5xl font-black text-accent uppercase italic tracking-tighter leading-none line-clamp-2">{currentExercise?.name}</h4>
+                                                <button
+                                                    onClick={() => {
+                                                        const fullEx = EXERCISE_DATABASE.find(e => e.name === currentExercise.name);
+                                                        setDetailExercise(fullEx || currentExercise);
+                                                    }}
+                                                    className="p-3 bg-white/5 hover:bg-white/20 rounded-2xl border border-white/10"
+                                                >
+                                                    <Info className="w-6 h-6 text-accent" />
+                                                </button>
+                                            </div>
                                         </div>
                                         <div className="flex gap-4 md:gap-12 bg-white/5 p-4 md:p-8 rounded-[2.5rem] border border-white/10">
                                             <div>
@@ -181,7 +195,19 @@ export default function WorkoutProtocolModal({ workout, onClose }) {
                                         )}
                                     </div>
                                     <div className="flex-grow">
-                                        <p className={`font-black text-lg uppercase italic tracking-tighter ${isLive && idx === currentExerciseIdx ? 'text-white' : 'text-white/80'}`}>{ex.name}</p>
+                                        <div className="flex justify-between items-center">
+                                            <p className={`font-black text-lg uppercase italic tracking-tighter ${isLive && idx === currentExerciseIdx ? 'text-white' : 'text-white/80'}`}>{ex.name}</p>
+                                            <button
+                                                onClick={(e) => {
+                                                    e.stopPropagation();
+                                                    const fullEx = EXERCISE_DATABASE.find(item => item.name === ex.name);
+                                                    setDetailExercise(fullEx || ex);
+                                                }}
+                                                className="p-2 bg-white/5 hover:bg-white/10 rounded-xl"
+                                            >
+                                                <Info className="w-3 h-3 text-muted" />
+                                            </button>
+                                        </div>
                                         <div className="flex items-center gap-2 mt-1">
                                             <span className="text-[8px] font-black text-muted uppercase tracking-widest leading-none">
                                                 {ex.duration !== "N/A" ? `Time: ${ex.duration}` : `Reps: ${ex.sets}x${ex.reps}`}
@@ -227,6 +253,14 @@ export default function WorkoutProtocolModal({ workout, onClose }) {
                     </div>
                 </div>
             </motion.div>
+            <AnimatePresence>
+                {detailExercise && (
+                    <ExerciseDetailModal
+                        exercise={detailExercise}
+                        onClose={() => setDetailExercise(null)}
+                    />
+                )}
+            </AnimatePresence>
         </div>
     );
 }

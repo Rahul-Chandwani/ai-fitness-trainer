@@ -50,8 +50,13 @@
    BASE STYLES
 ================================ */
 
+html {
+  font-size: 14px;
+  /* Global zoom-out effect */
+}
+
 body {
-  @apply bg-bg text-text font-sans antialiased;
+  @apply bg-bg text-text font-sans antialiased overflow-x-hidden;
 }
 
 /* ===============================
@@ -71,7 +76,7 @@ body {
 
   /* CARDS */
   .card {
-    @apply bg-card border border-white/5 rounded-3xl p-8 shadow-xl transition-all duration-300;
+    @apply bg-card border border-white/5 rounded-2xl p-4 shadow-xl transition-all duration-300;
   }
 
   .card-premium {
@@ -80,7 +85,7 @@ body {
 
   /* BUTTONS */
   .btn {
-    @apply inline-flex items-center justify-center gap-2 px-8 py-4 rounded-xl font-bold uppercase tracking-tight transition-all duration-300;
+    @apply inline-flex items-center justify-center gap-2 px-5 py-2.5 rounded-xl font-bold uppercase tracking-tight transition-all duration-300 min-w-0;
   }
 
   .btn-primary {
@@ -110,14 +115,17 @@ body {
   .custom-scrollbar::-webkit-scrollbar {
     width: 6px;
   }
+
   .custom-scrollbar::-webkit-scrollbar-track {
     background: rgba(255, 255, 255, 0.05);
     border-radius: 10px;
   }
+
   .custom-scrollbar::-webkit-scrollbar-thumb {
     background: rgba(255, 255, 255, 0.2);
     border-radius: 10px;
   }
+
   .custom-scrollbar::-webkit-scrollbar-thumb:hover {
     background: rgba(255, 255, 255, 0.3);
   }
@@ -131,7 +139,7 @@ body {
   }
 
   .orbital-glow {
-    @apply absolute w-[600px] h-[600px] bg-accent/5 rounded-full blur-[150px] -z-10 pointer-events-none;
+    @apply absolute w-[400px] h-[400px] bg-accent/5 rounded-full blur-[100px] -z-10 pointer-events-none;
   }
 
   .mask-gradient-b {

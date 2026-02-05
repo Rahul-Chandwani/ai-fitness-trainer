@@ -14,7 +14,7 @@ import { useState, useEffect } from "react";
 import { getProgressSummary } from "../services/progressAnalyzer";
 
 export default function Dashboard() {
-  const { calorieHistory, workoutRoutine, workoutHistory, neuralXP, streak, userProfile, trainingPlan, getTodayTasks, updateDailyTask, weightHistory } = useFitness();
+  const { calorieHistory, workoutHistory, neuralXP, streak, userProfile, trainingPlan, getTodayTasks, updateDailyTask, weightHistory } = useFitness();
   const [aiInsights, setAiInsights] = useState(null);
 
   const isAdvanced = userProfile?.subscriptionTier === "advanced";
@@ -47,7 +47,7 @@ export default function Dashboard() {
   return (
     <DashboardLayout>
       <PageTransition>
-        <div className="max-w-7xl mx-auto space-y-12 pb-20 relative">
+        <div className="max-w-7xl mx-auto space-y-8 pb-20 relative">
           {/* Background Decor */}
           <div className="absolute top-0 right-0 w-[300px] md:w-[600px] h-[300px] md:h-[600px] bg-accent/5 rounded-full blur-[80px] md:blur-[140px] -z-10 -translate-y-1/2 translate-x-1/2 pointer-events-none"></div>
 
@@ -61,8 +61,8 @@ export default function Dashboard() {
               <div className="flex items-center gap-4">
                 <div className="w-1.5 h-12 md:h-16 bg-accent rounded-full"></div>
                 <div>
-                  <h1 className="text-3xl md:text-5xl font-extrabold tracking-tight text-white">Dashboard</h1>
-                  <p className="text-[10px] text-muted font-bold uppercase tracking-widest mt-1">AI Health & Progress Insights</p>
+                  <h1 className="text-2xl md:text-4xl font-extrabold tracking-tight text-white">Dashboard</h1>
+                  <p className="text-[8px] text-muted font-bold uppercase tracking-widest mt-1">AI Health & Progress Insights</p>
                 </div>
               </div>
 
@@ -110,8 +110,8 @@ export default function Dashboard() {
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
             {/* Primary Metabolic Controller */}
             <motion.div
-              whileHover={{ scale: 1.02 }}
-              className="md:col-span-2 card-premium p-10 rounded-[3.5rem] border border-white/5 relative overflow-hidden group shadow-2xl shadow-accent/5"
+              whileHover={{ scale: 1.01 }}
+              className="md:col-span-2 card-premium p-6 md:p-8 rounded-3xl border border-white/5 relative overflow-hidden group shadow-2xl shadow-accent/5"
             >
               <div className="absolute top-0 right-0 p-12 opacity-5 -translate-y-6 translate-x-6 pointer-events-none group-hover:rotate-12 transition-transform duration-1000">
                 <Activity className="w-48 h-48 text-accent" />
@@ -123,14 +123,14 @@ export default function Dashboard() {
                   <p className="text-muted text-[10px] font-black uppercase tracking-[0.4em]">Nutrition Hub</p>
                 </div>
 
-                <div className="flex flex-col sm:flex-row items-end gap-12">
+                <div className="flex flex-col sm:flex-row items-end gap-6 md:gap-8">
                   <div>
                     <div className="flex items-center gap-2 mb-2">
                       <div className="w-2 h-2 bg-emerald-500 rounded-full animate-pulse"></div>
                       <p className="text-[9px] font-black text-emerald-400/80 uppercase tracking-widest">Intake</p>
                     </div>
                     <div className="flex items-baseline gap-2">
-                      <h2 className="text-5xl md:text-7xl font-black text-white italic tracking-tighter leading-none">{todayStats.intake}</h2>
+                      <h2 className="text-4xl md:text-5xl font-black text-white italic tracking-tighter leading-none">{todayStats.intake}</h2>
                       <span className="text-xs font-black text-muted uppercase tracking-tighter">KCAL IN</span>
                     </div>
                   </div>
@@ -143,7 +143,7 @@ export default function Dashboard() {
                       <p className="text-[9px] font-black text-orange-400/80 uppercase tracking-widest">Burned</p>
                     </div>
                     <div className="flex items-baseline gap-2">
-                      <h2 className="text-5xl md:text-7xl font-black text-white italic tracking-tighter leading-none">{todayStats.burned || 0}</h2>
+                      <h2 className="text-4xl md:text-5xl font-black text-white italic tracking-tighter leading-none">{todayStats.burned || 0}</h2>
                       <span className="text-xs font-black text-muted uppercase tracking-tighter">KCAL OUT</span>
                     </div>
                   </div>
@@ -152,7 +152,7 @@ export default function Dashboard() {
             </motion.div>
 
             {/* Reliability Widget */}
-            <div className="card-premium p-10 rounded-[3.5rem] border border-white/5 hover:border-accent/30 transition-all flex flex-col justify-between group">
+            <div className="card-premium p-6 md:p-8 rounded-3xl border border-white/5 hover:border-accent/30 transition-all flex flex-col justify-between group">
               <div className="flex items-center justify-between mb-8">
                 <p className="text-muted text-[10px] font-black uppercase tracking-[0.3em]">Consistency</p>
                 <div className="p-2 bg-emerald-500/10 rounded-xl border border-emerald-500/20">
@@ -191,7 +191,7 @@ export default function Dashboard() {
 
           {/* Strategic Hubs Navigation */}
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-            <Link to="/workouts" className="card-premium p-10 rounded-[3.5rem] border border-white/5 hover:border-accent/30 transition-all flex items-center gap-8 group relative overflow-hidden">
+            <Link to="/workouts" className="card-premium p-6 md:p-8 rounded-3xl border border-white/5 hover:border-accent/30 transition-all flex items-center gap-6 group relative overflow-hidden">
               <div className="absolute inset-0 bg-accent/5 opacity-0 group-hover:opacity-100 transition-opacity blur-3xl"></div>
               <div className="w-16 h-16 bg-accent/10 rounded-2xl flex items-center justify-center border border-accent/20 group-hover:scale-110 transition-transform relative z-10">
                 <Dumbbell className="w-8 h-8 text-accent" />
@@ -203,7 +203,7 @@ export default function Dashboard() {
               <ChevronRight className="ml-auto w-5 h-5 text-muted group-hover:text-accent group-hover:translate-x-1 transition-all" />
             </Link>
 
-            <Link to="/diet" className="card-premium p-10 rounded-[3.5rem] border border-white/5 hover:border-blue-400/30 transition-all flex items-center gap-8 group relative overflow-hidden">
+            <Link to="/diet" className="card-premium p-6 md:p-8 rounded-3xl border border-white/5 hover:border-blue-400/30 transition-all flex items-center gap-6 group relative overflow-hidden">
               <div className="absolute inset-0 bg-blue-500/5 opacity-0 group-hover:opacity-100 transition-opacity blur-3xl"></div>
               <div className="w-16 h-16 bg-blue-500/10 rounded-2xl flex items-center justify-center border border-blue-500/20 group-hover:scale-110 transition-transform relative z-10">
                 <Utensils className="w-8 h-8 text-blue-400" />
@@ -215,7 +215,7 @@ export default function Dashboard() {
               <ChevronRight className="ml-auto w-5 h-5 text-muted group-hover:text-blue-400 group-hover:translate-x-1 transition-all" />
             </Link>
 
-            <Link to="/ai-coach" className="card-premium p-10 rounded-[3.5rem] border border-white/5 hover:border-purple-400/30 transition-all flex items-center gap-8 group relative overflow-hidden">
+            <Link to="/ai-coach" className="card-premium p-6 md:p-8 rounded-3xl border border-white/5 hover:border-purple-400/30 transition-all flex items-center gap-6 group relative overflow-hidden">
               <div className="absolute inset-0 bg-purple-500/5 opacity-0 group-hover:opacity-100 transition-opacity blur-3xl"></div>
               <div className="w-16 h-16 bg-purple-500/10 rounded-2xl flex items-center justify-center border border-purple-500/20 group-hover:scale-110 transition-transform relative z-10">
                 <Bot className="w-8 h-8 text-purple-400" />
@@ -229,8 +229,8 @@ export default function Dashboard() {
           </div>
 
           {/* Secondary Data Matrix */}
-          <div className="grid grid-cols-1 lg:grid-cols-3 gap-10">
-            <div className="card-premium p-10 rounded-[3.5rem] border border-white/5 relative overflow-hidden group">
+          <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 md:gap-8">
+            <div className="card-premium p-6 md:p-8 rounded-3xl border border-white/5 relative overflow-hidden group">
               <div className="flex justify-between items-center mb-10 relative z-10">
                 <div>
                   <h3 className="text-sm font-black uppercase tracking-[0.3em] text-white italic">Macro Split</h3>
@@ -253,8 +253,8 @@ export default function Dashboard() {
           </div>
 
           {/* Longitudinal Trajectory Matrix */}
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-10">
-            <div className="card-premium p-10 rounded-[3.5rem] border border-white/5 group relative overflow-hidden">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 md:gap-8">
+            <div className="card-premium p-6 md:p-8 rounded-3xl border border-white/5 group relative overflow-hidden">
               <div className="absolute top-0 right-0 p-10 opacity-5 pointer-events-none group-hover:opacity-10 transition-opacity">
                 <Target className="w-32 h-32 text-accent" />
               </div>
@@ -267,7 +267,7 @@ export default function Dashboard() {
               </div>
             </div>
 
-            <div className="card-premium p-10 rounded-[3.5rem] border border-white/5 group relative overflow-hidden">
+            <div className="card-premium p-6 md:p-8 rounded-3xl border border-white/5 group relative overflow-hidden">
               <div className="absolute top-0 right-0 p-10 opacity-5 pointer-events-none group-hover:opacity-10 transition-opacity">
                 <Flame className="w-32 h-32 text-accent" />
               </div>

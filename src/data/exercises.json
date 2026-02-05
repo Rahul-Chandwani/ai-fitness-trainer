@@ -1,0 +1,191 @@
+[
+    {
+        "id": "ex_01",
+        "name": "Barbell Bench Press",
+        "muscles": [
+            "chest",
+            "triceps",
+            "shoulders"
+        ],
+        "level": "intermediate",
+        "location": "gym",
+        "tutorial": "Lie on a flat bench. Grip the barbell slightly wider than shoulder-width. Lower the bar to mid-chest, then press up until arms are straight.",
+        "form_tips": [
+            "Keep feet flat on floor",
+            "Don't arch lower back excessively",
+            "Control the descent"
+        ],
+        "calories_per_min": 8.5,
+        "effective_parts": "Primary: Pectoralis Major; Secondary: Anterior Deltoid, Triceps"
+    },
+    {
+        "id": "ex_02",
+        "name": "Push-Ups",
+        "muscles": [
+            "chest",
+            "shoulders",
+            "triceps",
+            "abs"
+        ],
+        "level": "beginner",
+        "location": "home",
+        "tutorial": "Start in a plank position. Lower your body until chest nearly touches the floor. Push back up to the start.",
+        "form_tips": [
+            "Keep core tight",
+            "Neck in neutral position",
+            "Elbows at 45 degree angle"
+        ],
+        "calories_per_min": 7.0,
+        "effective_parts": "Primary: Chest; Secondary: Triceps, Core"
+    },
+    {
+        "id": "ex_03",
+        "name": "Squats (Barbell)",
+        "muscles": [
+            "legs",
+            "glutes",
+            "lower back"
+        ],
+        "level": "intermediate",
+        "location": "gym",
+        "tutorial": "Barbell across upper back. Descent by bending hips and knees. Keep chest up. Rise back to standing.",
+        "form_tips": [
+            "Keep weight on heels",
+            "Knees shouldn't cave in",
+            "Back straight"
+        ],
+        "calories_per_min": 10.0,
+        "effective_parts": "Primary: Quadriceps, Gluteus Maximus; Secondary: Hamstrings"
+    },
+    {
+        "id": "ex_04",
+        "name": "Deadlift",
+        "muscles": [
+            "back",
+            "legs",
+            "glutes",
+            "forearms"
+        ],
+        "level": "advanced",
+        "location": "gym",
+        "tutorial": "Stand with feet hip-width apart. Grip the bar outside legs. Lift bar while keeping it close to shins until standing tall.",
+        "form_tips": [
+            "Never round your back",
+            "Engage lats",
+            "Drive through legs"
+        ],
+        "calories_per_min": 12.0,
+        "effective_parts": "Primary: Erector Spinae, Hamstrings, Glutes; Secondary: Upper Back, Grip"
+    },
+    {
+        "id": "ex_05",
+        "name": "Pull-Ups",
+        "muscles": [
+            "back",
+            "biceps",
+            "shoulders"
+        ],
+        "level": "intermediate",
+        "location": "gym",
+        "tutorial": "Grip the overhead bar. Pull yourself up until your chin is over the bar. Lower under control.",
+        "form_tips": [
+            "Full range of motion",
+            "Engage lats first",
+            "No swinging"
+        ],
+        "calories_per_min": 9.0,
+        "effective_parts": "Primary: Latissimus Dorsi; Secondary: Biceps, Brachialis"
+    },
+    {
+        "id": "ex_06",
+        "name": "Overhead Press",
+        "muscles": [
+            "shoulders",
+            "triceps",
+            "upper chest"
+        ],
+        "level": "intermediate",
+        "location": "gym",
+        "tutorial": "Hold barbell at shoulder level. Press the bar straight up overhead until arms lock. Lower back down.",
+        "form_tips": [
+            "Squeeze glutes to protect back",
+            "Keep elbows under the bar",
+            "Exhale on the way up"
+        ],
+        "calories_per_min": 7.5,
+        "effective_parts": "Primary: Deltoids; Secondary: Triceps"
+    },
+    {
+        "id": "ex_07",
+        "name": "Hammer Curls",
+        "muscles": [
+            "biceps",
+            "forearms"
+        ],
+        "level": "beginner",
+        "location": "home",
+        "tutorial": "Hold dumbbells by your side with palms facing in. Curl the weights while keeping palms facing each other.",
+        "form_tips": [
+            "No swinging",
+            "Keep elbows tucked",
+            "Squeeze at the top"
+        ],
+        "calories_per_min": 5.0,
+        "effective_parts": "Primary: Brachialis, Brachioradialis"
+    },
+    {
+        "id": "ex_08",
+        "name": "Bulgarian Split Squats",
+        "muscles": [
+            "legs",
+            "glutes"
+        ],
+        "level": "intermediate",
+        "location": "home",
+        "tutorial": "Place one foot behind you on a bench or chair. Lower your hips until your front thigh is parallel to the ground.",
+        "form_tips": [
+            "Keep front knee in line with toe",
+            "Upright torso",
+            "Control the balance"
+        ],
+        "calories_per_min": 9.5,
+        "effective_parts": "Primary: Quadriceps, Gluteus Maximus"
+    },
+    {
+        "id": "ex_09",
+        "name": "Lat Pulldown",
+        "muscles": [
+            "back",
+            "biceps"
+        ],
+        "level": "beginner",
+        "location": "gym",
+        "tutorial": "Grip the bar wider than shoulders. Pull the bar down to your upper chest while leaning slightly back.",
+        "form_tips": [
+            "Focus on pulling with elbows",
+            "Control the weight up",
+            "Don't use momentum"
+        ],
+        "calories_per_min": 6.5,
+        "effective_parts": "Primary: Latissimus Dorsi; Secondary: Teres Major"
+    },
+    {
+        "id": "ex_10",
+        "name": "Plank",
+        "muscles": [
+            "abs",
+            "shoulders",
+            "back"
+        ],
+        "level": "beginner",
+        "location": "home",
+        "tutorial": "Hold a push-up position but on your forearms. Keep your body in a straight line from head to heels.",
+        "form_tips": [
+            "Don't let hips sag",
+            "Engage core and glutes",
+            "Look slightly ahead of hands"
+        ],
+        "calories_per_min": 4.5,
+        "effective_parts": "Primary: Rectus Abdominis, Transverse Abdominis"
+    }
+]

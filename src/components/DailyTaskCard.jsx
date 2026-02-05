@@ -22,8 +22,8 @@ export default function DailyTaskCard({ day, onTaskComplete, onViewWorkout, isTo
         <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
-            className={`card-premium p-5 md:p-8 rounded-[2rem] md:rounded-[2.5rem] border ${isToday ? 'border-accent/40 shadow-accent/10' : 'border-white/5'
-                } relative overflow-hidden group`}
+            className={`card-premium p-4 md:p-6 rounded-2xl md:rounded-3xl border ${isToday ? 'border-accent/40 shadow-accent/10' : 'border-white/5'
+                } relative overflow-hidden group h-full flex flex-col`}
         >
             {/* Background decoration */}
             <div className="absolute top-0 right-0 p-10 opacity-5 pointer-events-none">
@@ -44,7 +44,7 @@ export default function DailyTaskCard({ day, onTaskComplete, onViewWorkout, isTo
                         )}
                     </div>
                     <div className="text-right">
-                        <p className="text-3xl font-black text-white italic tracking-tighter">{completionPercentage}%</p>
+                        <p className="text-2xl font-black text-white italic tracking-tighter">{completionPercentage}%</p>
                         <p className="text-[8px] text-muted font-black uppercase tracking-widest">Complete</p>
                     </div>
                 </div>
@@ -75,9 +75,9 @@ export default function DailyTaskCard({ day, onTaskComplete, onViewWorkout, isTo
                                     <Dumbbell className="w-6 h-6" />
                                 </div>
                                 <div className="flex-1 min-w-0">
-                                    <p className="text-sm font-black text-white uppercase italic tracking-tight group-hover/btn:text-accent transition-colors">
+                                    <h3 className="text-xl font-black text-white mb-4 uppercase italic tracking-tighter group-hover:text-accent transition-colors leading-tight">
                                         {workout.name}
-                                    </p>
+                                    </h3>
                                     <p className="text-[10px] text-muted font-bold uppercase tracking-widest mt-0.5">
                                         {workout.duration} • {workout.exercises?.length || 0} Exercises
                                     </p>
