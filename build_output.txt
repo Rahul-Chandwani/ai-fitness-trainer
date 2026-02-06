@@ -1,0 +1,2 @@
+[36mrolldown-vite v7.2.5 [32mbuilding client environment for production...[36m[39m
+[2Ktransforming...✓ 2325 modules transformed.

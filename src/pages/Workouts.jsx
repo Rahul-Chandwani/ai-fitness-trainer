@@ -118,7 +118,7 @@ export default function Workouts() {
   return (
     <DashboardLayout>
       <PageTransition>
-        <div className="max-w-7xl mx-auto space-y-6 pb-20 px-2 sm:px-4">
+        <div className="max-w-7xl mx-auto space-y-4 pb-20 px-2 sm:px-4">
           <Link to="/dashboard" className="inline-flex items-center gap-2 text-[10px] font-black text-muted hover:text-accent transition-colors group uppercase tracking-widest">
             <ChevronLeft className="w-3 h-3 group-hover:-translate-x-1 transition-transform" />
             Back to Hub
@@ -127,28 +127,28 @@ export default function Workouts() {
           {/* Header */}
           <div className="flex flex-col md:flex-row justify-between items-start md:items-center gap-4">
             <div className="flex items-center gap-3">
-              <div className="w-1 h-8 bg-accent rounded-full mb-1" />
+              <div className="w-1 h-6 bg-accent rounded-full mb-0.5" />
               <div>
-                <h1 className="text-xl md:text-3xl font-black text-white italic tracking-tighter uppercase">Training Matrix</h1>
-                <p className="text-[8px] text-muted font-bold uppercase tracking-[0.3em]">AI Synthesis & Manual Logging</p>
+                <h1 className="text-lg md:text-2xl font-black text-white italic tracking-tighter uppercase">Workouts</h1>
+                <p className="text-[7px] text-muted font-bold uppercase tracking-[0.3em]">AI Synthesis & Manual</p>
               </div>
             </div>
 
             {/* Tab Switcher */}
-            <div className="flex p-1 bg-white/5 rounded-2xl border border-white/5 w-full md:w-auto self-stretch md:self-auto">
+            <div className="flex p-0.5 bg-white/5 rounded-xl border border-white/5 w-full md:w-auto self-stretch md:self-auto">
               <button
                 onClick={() => setActiveTab("ai")}
-                className={`flex-1 md:flex-none px-4 sm:px-8 py-2.5 rounded-xl font-black uppercase tracking-tighter text-[10px] transition-all flex items-center justify-center gap-2 ${activeTab === 'ai' ? 'bg-white text-black shadow-lg' : 'text-muted hover:text-white'}`}
+                className={`flex-1 md:flex-none px-4 sm:px-6 py-1.5 rounded-lg font-black uppercase tracking-tighter text-[9px] transition-all flex items-center justify-center gap-2 ${activeTab === 'ai' ? 'bg-white text-black shadow-md' : 'text-muted hover:text-white'}`}
               >
                 <Sparkles className="w-3 h-3" />
-                AI Protocols
+                AI
               </button>
               <button
                 onClick={() => setActiveTab("manual")}
-                className={`flex-1 md:flex-none px-4 sm:px-8 py-2.5 rounded-xl font-black uppercase tracking-tighter text-[10px] transition-all flex items-center justify-center gap-2 ${activeTab === 'manual' ? 'bg-white text-black shadow-lg' : 'text-muted hover:text-white'}`}
+                className={`flex-1 md:flex-none px-4 sm:px-6 py-1.5 rounded-lg font-black uppercase tracking-tighter text-[9px] transition-all flex items-center justify-center gap-2 ${activeTab === 'manual' ? 'bg-white text-black shadow-md' : 'text-muted hover:text-white'}`}
               >
                 <Plus className="w-3 h-3" />
-                Manual Logs & Library
+                Manual
               </button>
             </div>
           </div>
@@ -159,27 +159,25 @@ export default function Workouts() {
                 key="ai-tab"
                 initial={{ opacity: 0, scale: 0.98 }}
                 animate={{ opacity: 1, scale: 1 }}
-                exit={{ opacity: 0, scale: 0.98 }}
-                className="space-y-6"
+                className="space-y-4"
               >
-                {/* AI Generation Interface */}
-                <div className="card-premium p-4 sm:p-6 rounded-[2rem] border border-white/5 bg-white/[0.02] backdrop-blur-3xl">
-                  <div className="grid grid-cols-1 lg:grid-cols-12 gap-6">
+                <div className="card-premium p-4 rounded-xl border border-white/5 bg-white/[0.02]">
+                  <div className="grid grid-cols-1 lg:grid-cols-12 gap-4">
                     {/* Muscle Target */}
                     <div className="lg:col-span-12 xl:col-span-8 space-y-4">
-                      <div className="flex items-center justify-between px-2">
+                      <div className="flex items-center justify-between px-1">
                         <div className="flex items-center gap-2">
-                          <Dumbbell className="w-4 h-4 text-accent" />
-                          <h3 className="text-[10px] font-black text-white uppercase tracking-widest">Muscle Focus</h3>
+                          <Dumbbell className="w-3.5 h-3.5 text-accent" />
+                          <h3 className="text-[9px] font-black text-white uppercase tracking-widest">Focus</h3>
                         </div>
-                        <span className="text-[8px] font-bold text-muted uppercase bg-white/5 px-2 py-0.5 rounded-lg border border-white/5">Select Multiple</span>
+                        <span className="text-[7px] font-bold text-muted uppercase">Selection</span>
                       </div>
-                      <div className="flex flex-wrap gap-1.5 p-3 bg-black/20 rounded-[1.5rem] border border-white/5 max-h-[160px] overflow-y-auto scrollbar-none">
+                      <div className="flex flex-wrap gap-1 p-2.5 bg-black/20 rounded-xl border border-white/5 max-h-[120px] overflow-y-auto scrollbar-none">
                         {MUSCLE_OPTIONS.map(m => (
                           <button
                             key={m}
                             onClick={() => toggleMuscle(m)}
-                            className={`px-3 py-1.5 rounded-xl text-[9px] font-black uppercase tracking-tighter transition-all border whitespace-nowrap active:scale-95 ${selectedMuscles.includes(m) ? 'bg-accent text-black border-accent' : 'bg-white/5 text-muted border-white/10 hover:border-white/20'}`}
+                            className={`px-2.5 py-1 rounded-lg text-[8px] font-black uppercase tracking-tighter transition-all border whitespace-nowrap active:scale-95 ${selectedMuscles.includes(m) ? 'bg-accent text-zinc-950 border-accent' : 'bg-white/5 text-muted border-white/10 hover:border-white/20'}`}
                           >
                             {m}
                           </button>
@@ -188,14 +186,14 @@ export default function Workouts() {
                     </div>
 
                     {/* Parameters */}
-                    <div className="lg:col-span-12 xl:col-span-4 grid grid-cols-2 gap-3">
+                    <div className="lg:col-span-12 xl:col-span-4 grid grid-cols-2 gap-2">
                       <div className="space-y-2">
                         <p className="text-[9px] font-black text-muted uppercase tracking-widest px-2 flex items-center gap-2"><Clock className="w-3 h-3" />Time</p>
                         <input
                           type="number"
                           value={duration || ""}
                           onChange={(e) => setDuration(e.target.value)}
-                          className="w-full bg-white/5 border border-white/10 rounded-xl py-2.5 px-3 text-white font-black text-[10px] outline-none focus:border-accent/40"
+                          className="w-full bg-white/5 border border-white/10 rounded-lg py-1.5 px-3 text-white font-black text-[10px] outline-none"
                         />
                       </div>
                       <div className="space-y-2">
@@ -204,7 +202,7 @@ export default function Workouts() {
                           type="number"
                           value={calorieTarget || ""}
                           onChange={(e) => setCalorieTarget(e.target.value)}
-                          className="w-full bg-white/5 border border-white/10 rounded-xl py-2.5 px-3 text-white font-black text-[10px] outline-none focus:border-accent/40"
+                          className="w-full bg-white/5 border border-white/10 rounded-lg py-1.5 px-3 text-white font-black text-[10px] outline-none"
                         />
                       </div>
                       <div className="col-span-2 space-y-2">
@@ -214,7 +212,7 @@ export default function Workouts() {
                             <button
                               key={loc}
                               onClick={() => setLocation(loc)}
-                              className={`py-2.5 rounded-xl font-black text-[9px] uppercase tracking-widest border transition-all active:scale-95 ${location === loc ? 'bg-white text-black border-white' : 'bg-white/5 text-muted border-white/10'}`}
+                              className={`py-1.5 rounded-lg font-black text-[9px] uppercase tracking-widest border transition-all active:scale-95 ${location === loc ? 'bg-white text-zinc-950 border-white' : 'bg-white/5 text-muted border-white/10'}`}
                             >
                               {loc}
                             </button>
@@ -225,21 +223,21 @@ export default function Workouts() {
                         <button
                           onClick={handleGenerateWorkout}
                           disabled={loading || !isPro}
-                          className={`w-full py-3.5 rounded-2xl font-black uppercase tracking-widest text-[10px] shadow-2xl transition-all flex items-center justify-center gap-3 active:scale-95 ${isPro ? 'bg-accent text-black hover:bg-white shadow-accent/20' : 'bg-white/10 text-muted opacity-50 cursor-not-allowed'}`}
+                          className={`w-full py-2.5 rounded-xl font-black uppercase tracking-widest text-[10px] transition-all flex items-center justify-center gap-2 active:scale-95 ${isPro ? 'bg-accent text-zinc-950 hover:bg-white shadow-lg shadow-accent/10' : 'bg-white/10 text-muted opacity-50 cursor-not-allowed'}`}
                         >
                           {loading ? (
-                            <div className="w-4 h-4 border-2 border-black/20 border-t-black rounded-full animate-spin" />
+                            <div className="w-3.5 h-3.5 border-2 border-zinc-950/20 border-t-zinc-950 rounded-full animate-spin" />
                           ) : (
-                            <Sparkles className="w-4 h-4" />
+                            <Sparkles className="w-3.5 h-3.5" />
                           )}
-                          {loading ? 'Transmitting...' : isPro ? 'Generate AI session' : 'Pro Required'}
+                          {loading ? 'SYNCING...' : isPro ? 'Generate Protocol' : 'Pro Required'}
                         </button>
                         <Link
                           to="/training-plan"
-                          className="w-full py-2.5 rounded-xl border border-dashed border-white/10 text-[8px] font-black text-muted hover:text-accent hover:border-accent/40 transition-all flex items-center justify-center gap-2 uppercase tracking-widest"
+                          className="w-full py-2 rounded-lg border border-dashed border-white/10 text-[7px] font-black text-muted hover:text-accent hover:border-accent/40 transition-all flex items-center justify-center gap-2 uppercase tracking-widest"
                         >
                           <Calendar className="w-3 h-3" />
-                          Build 4-Week Training Plan
+                          Full 4-Week Architecture
                         </Link>
                       </div>
                     </div>
@@ -248,21 +246,21 @@ export default function Workouts() {
 
                 {/* Active Summary Callout */}
                 {workouts.length > 0 && (
-                  <div className="flex flex-col sm:flex-row items-center justify-between p-4 bg-accent/10 border border-accent/20 rounded-[1.5rem] gap-4">
-                    <div className="flex items-center gap-4">
-                      <div className="w-10 h-10 bg-accent text-black rounded-xl flex items-center justify-center shadow-lg shadow-accent/20">
-                        <Zap className="w-5 h-5" />
+                  <div className="flex flex-col sm:flex-row items-center justify-between p-3 bg-accent/10 border border-accent/20 rounded-xl gap-3">
+                    <div className="flex items-center gap-3">
+                      <div className="w-8 h-8 bg-accent text-zinc-950 rounded-lg flex items-center justify-center shadow-lg shadow-accent/10">
+                        <Zap className="w-4 h-4" />
                       </div>
                       <div>
-                        <h4 className="text-[10px] font-black text-white uppercase tracking-widest">Active Routine Alpha</h4>
-                        <p className="text-[9px] text-accent font-bold uppercase">{workouts[0].name}</p>
+                        <h4 className="text-[9px] font-black text-white uppercase tracking-widest">Active Alpha</h4>
+                        <p className="text-[8px] text-accent font-bold uppercase truncate max-w-[150px]">{workouts[0].name}</p>
                       </div>
                     </div>
                     <button
                       onClick={() => setSelectedWorkout(workouts[0])}
-                      className="w-full sm:w-auto px-6 py-2 bg-white text-black rounded-lg font-black uppercase text-[9px] tracking-widest hover:bg-accent transition-all active:scale-95"
+                      className="w-full sm:w-auto px-4 py-1.5 bg-white text-zinc-950 rounded-lg font-black uppercase text-[8px] tracking-widest hover:bg-accent transition-all active:scale-95"
                     >
-                      View Protocol
+                      Protocol
                     </button>
                   </div>
                 )}
@@ -284,7 +282,7 @@ export default function Workouts() {
                     </motion.div>
                   ))}
                   {workouts.length === 0 && (
-                    <div className="col-span-full py-20 text-center border-2 border-dashed border-white/5 rounded-[2rem]">
+                    <div className="col-span-full py-20 text-center border-2 border-dashed border-white/5 rounded-3xl">
                       <p className="text-[10px] font-black text-muted uppercase tracking-[0.5em]">No AI Protocols for Today</p>
                     </div>
                   )}
@@ -310,12 +308,12 @@ export default function Workouts() {
                     />
                   </div>
                   <div className="flex gap-2 w-full sm:w-auto">
-                    <button className="p-2.5 bg-white/5 border border-white/5 rounded-xl text-muted hover:text-white transition-all"><Filter className="w-4 h-4" /></button>
+                    <button className="p-2 bg-white/5 border border-white/5 rounded-lg text-muted hover:text-white transition-all"><Filter className="w-3.5 h-3.5" /></button>
                     <button
                       onClick={() => setShowAddModal(true)}
-                      className="flex-1 sm:flex-none px-8 py-2.5 bg-accent text-black rounded-xl font-black text-[10px] uppercase tracking-widest shadow-lg shadow-accent/20 hover:scale-105 active:scale-95 transition-all"
+                      className="flex-1 sm:flex-none px-6 py-2 bg-accent text-zinc-950 rounded-lg font-black text-[9px] uppercase tracking-widest shadow-md hover:scale-105 active:scale-95 transition-all"
                     >
-                      Add Manually
+                      Add Log
                     </button>
                   </div>
                 </div>
@@ -337,7 +335,7 @@ export default function Workouts() {
                     </motion.div>
                   ))}
                   {workouts.length === 0 && (
-                    <div className="col-span-full py-20 text-center border-2 border-dashed border-white/5 rounded-[2rem]">
+                    <div className="col-span-full py-20 text-center border-2 border-dashed border-white/5 rounded-3xl">
                       <p className="text-[10px] font-black text-muted uppercase tracking-[0.5em]">Repository Empty</p>
                     </div>
                   )}

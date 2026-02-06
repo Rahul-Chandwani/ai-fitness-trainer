@@ -14,7 +14,7 @@ export default function ThemeSwitcher() {
       <select
         value={theme}
         onChange={(e) => setTheme(e.target.value)}
-        className="w-full p-3 rounded-xl bg-white/5 border border-white/5 text-xs font-bold text-white outline-none focus:border-accent/30 transition-all appearance-none cursor-pointer"
+        className="w-full p-3 rounded-xl bg-card border border-white/10 text-xs font-bold text-text outline-none focus:border-accent/30 transition-all cursor-pointer"
       >
         <option value="dark">Dark Fitness</option>
         <option value="amoled">AMOLED Black</option>

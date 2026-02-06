@@ -38,38 +38,38 @@ export default function PlanGenerationModal({ isOpen, onClose, onGenerate, userP
 
                 {/* Modal */}
                 <motion.div
-                    initial={{ opacity: 0, scale: 0.9, y: 20 }}
-                    animate={{ opacity: 1, scale: 1, y: 0 }}
-                    exit={{ opacity: 0, scale: 0.9, y: 20 }}
-                    className="relative w-full max-w-2xl bg-card/95 backdrop-blur-2xl border border-white/10 rounded-[3rem] p-6 md:p-10 shadow-2xl max-h-[90vh] flex flex-col overflow-hidden"
+                    initial={{ opacity: 0, scale: 0.98 }}
+                    animate={{ opacity: 1, scale: 1 }}
+                    exit={{ opacity: 0, scale: 0.98 }}
+                    className="relative w-full max-w-2xl bg-card border border-white/10 rounded-xl p-4 md:p-8 shadow-2xl max-h-[90vh] flex flex-col overflow-hidden"
                 >
                     {/* Close button */}
                     <button
                         onClick={onClose}
-                        className="absolute top-6 right-6 w-10 h-10 bg-white/5 hover:bg-white/10 rounded-2xl flex items-center justify-center transition-all"
+                        className="absolute top-4 right-4 w-8 h-8 bg-white/5 hover:bg-white/10 rounded-lg flex items-center justify-center transition-all"
                     >
-                        <X className="w-5 h-5 text-muted" />
+                        <X className="w-4 h-4 text-muted" />
                     </button>
 
                     {/* Header */}
-                    <div className="text-center mb-8">
-                        <div className="w-16 h-16 bg-accent/10 rounded-[2rem] flex items-center justify-center mx-auto mb-4 border border-accent/20">
-                            <Sparkles className="w-8 h-8 text-accent" />
+                    <div className="text-center mb-6">
+                        <div className="w-12 h-12 bg-accent/10 rounded-xl flex items-center justify-center mx-auto mb-3 border border-accent/20">
+                            <Sparkles className="w-6 h-6 text-accent" />
                         </div>
-                        <h2 className="text-3xl font-black text-white uppercase italic tracking-tight mb-2">
-                            Generate Training Plan
+                        <h2 className="text-xl font-black text-white uppercase italic tracking-tight mb-1">
+                            Generate Protocol
                         </h2>
-                        <p className="text-sm text-muted font-bold uppercase tracking-tight">
-                            Customize your AI-powered fitness journey
+                        <p className="text-[10px] text-muted font-bold uppercase tracking-widest">
+                            AI-Powered Optimization Engine
                         </p>
                     </div>
 
                     {/* Progress indicator */}
-                    <div className="flex items-center justify-center gap-2 mb-8">
+                    <div className="flex items-center justify-center gap-1.5 mb-6">
                         {[1, 2, 3, 4].map((s) => (
                             <div
                                 key={s}
-                                className={`h-1.5 rounded-full transition-all ${s === step ? "w-12 bg-accent" : s < step ? "w-8 bg-accent/50" : "w-8 bg-white/10"
+                                className={`h-1 rounded-full transition-all ${s === step ? "w-8 bg-accent" : s < step ? "w-4 bg-accent/50" : "w-4 bg-white/10"
                                     }`}
                             />
                         ))}
@@ -85,21 +85,21 @@ export default function PlanGenerationModal({ isOpen, onClose, onGenerate, userP
                                 className="space-y-6"
                             >
                                 <div>
-                                    <label className="block text-sm font-black text-white uppercase tracking-tight mb-3">
-                                        <Target className="w-4 h-4 inline mr-2" />
-                                        Fitness Goal
+                                    <label className="block text-[10px] font-black text-white uppercase tracking-widest mb-2">
+                                        <Target className="w-3 h-3 inline mr-1.5" />
+                                        Primary Directive
                                     </label>
-                                    <div className="grid grid-cols-2 gap-3">
+                                    <div className="grid grid-cols-2 gap-2">
                                         {[
-                                            { value: "weight_loss", label: "Weight Loss" },
-                                            { value: "muscle_gain", label: "Muscle Gain" },
+                                            { value: "weight_loss", label: "Loss" },
+                                            { value: "muscle_gain", label: "Gain" },
                                             { value: "endurance", label: "Endurance" },
-                                            { value: "general_fitness", label: "General Fitness" }
+                                            { value: "general_fitness", label: "General" }
                                         ].map((goal) => (
                                             <button
                                                 key={goal.value}
                                                 onClick={() => setFormData({ ...formData, goal: goal.value })}
-                                                className={`p-4 rounded-2xl border font-bold uppercase tracking-tight text-sm transition-all ${formData.goal === goal.value
+                                                className={`p-3 rounded-xl border font-black uppercase tracking-widest text-[10px] transition-all ${formData.goal === goal.value
                                                     ? "bg-accent/20 border-accent/40 text-accent"
                                                     : "bg-white/5 border-white/10 text-muted hover:border-accent/20"
                                                     }`}
@@ -111,16 +111,16 @@ export default function PlanGenerationModal({ isOpen, onClose, onGenerate, userP
                                 </div>
 
                                 <div>
-                                    <label className="block text-sm font-black text-white uppercase tracking-tight mb-3">
-                                        <Calendar className="w-4 h-4 inline mr-2" />
-                                        Plan Duration
+                                    <label className="block text-[10px] font-black text-white uppercase tracking-widest mb-2">
+                                        <Calendar className="w-3 h-3 inline mr-1.5" />
+                                        Temporal Window
                                     </label>
-                                    <div className="grid grid-cols-3 gap-3">
+                                    <div className="grid grid-cols-3 gap-2">
                                         {[4, 8, 12].map((weeks) => (
                                             <button
                                                 key={weeks}
                                                 onClick={() => setFormData({ ...formData, duration: weeks })}
-                                                className={`p-4 rounded-2xl border font-bold uppercase tracking-tight text-sm transition-all ${formData.duration === weeks
+                                                className={`p-3 rounded-xl border font-black uppercase tracking-widest text-[10px] transition-all ${formData.duration === weeks
                                                     ? "bg-accent/20 border-accent/40 text-accent"
                                                     : "bg-white/5 border-white/10 text-muted hover:border-accent/20"
                                                     }`}
@@ -141,16 +141,16 @@ export default function PlanGenerationModal({ isOpen, onClose, onGenerate, userP
                                 className="space-y-6"
                             >
                                 <div>
-                                    <label className="block text-sm font-black text-white uppercase tracking-tight mb-3">
-                                        <Dumbbell className="w-4 h-4 inline mr-2" />
-                                        Training Days per Week
+                                    <label className="block text-[10px] font-black text-white uppercase tracking-widest mb-2">
+                                        <Dumbbell className="w-3 h-3 inline mr-1.5" />
+                                        Weekly Iterations
                                     </label>
-                                    <div className="grid grid-cols-4 gap-3">
+                                    <div className="grid grid-cols-4 gap-2">
                                         {[3, 4, 5, 6].map((days) => (
                                             <button
                                                 key={days}
                                                 onClick={() => setFormData({ ...formData, daysPerWeek: days })}
-                                                className={`p-4 rounded-2xl border font-bold uppercase tracking-tight text-sm transition-all ${formData.daysPerWeek === days
+                                                className={`p-3 rounded-xl border font-black uppercase tracking-widest text-[10px] transition-all ${formData.daysPerWeek === days
                                                     ? "bg-accent/20 border-accent/40 text-accent"
                                                     : "bg-white/5 border-white/10 text-muted hover:border-accent/20"
                                                     }`}
@@ -162,19 +162,19 @@ export default function PlanGenerationModal({ isOpen, onClose, onGenerate, userP
                                 </div>
 
                                 <div>
-                                    <label className="block text-sm font-black text-white uppercase tracking-tight mb-3">
-                                        Experience Level
+                                    <label className="block text-[10px] font-black text-white uppercase tracking-widest mb-2">
+                                        Operator Status
                                     </label>
-                                    <div className="grid grid-cols-3 gap-3">
+                                    <div className="grid grid-cols-3 gap-2">
                                         {[
-                                            { value: "beginner", label: "Beginner" },
-                                            { value: "intermediate", label: "Intermediate" },
-                                            { value: "advanced", label: "Advanced" }
+                                            { value: "beginner", label: "Novice" },
+                                            { value: "intermediate", label: "Pro" },
+                                            { value: "advanced", label: "Elite" }
                                         ].map((level) => (
                                             <button
                                                 key={level.value}
                                                 onClick={() => setFormData({ ...formData, experience: level.value })}
-                                                className={`p-4 rounded-2xl border font-bold uppercase tracking-tight text-sm transition-all ${formData.experience === level.value
+                                                className={`p-3 rounded-xl border font-black uppercase tracking-widest text-[10px] transition-all ${formData.experience === level.value
                                                     ? "bg-accent/20 border-accent/40 text-accent"
                                                     : "bg-white/5 border-white/10 text-muted hover:border-accent/20"
                                                     }`}
@@ -186,20 +186,20 @@ export default function PlanGenerationModal({ isOpen, onClose, onGenerate, userP
                                 </div>
 
                                 <div>
-                                    <label className="block text-sm font-black text-white uppercase tracking-tight mb-3">
-                                        Available Equipment
+                                    <label className="block text-[10px] font-black text-white uppercase tracking-widest mb-2">
+                                        Hardware Setup
                                     </label>
-                                    <div className="grid grid-cols-2 gap-3">
+                                    <div className="grid grid-cols-2 gap-2">
                                         {[
-                                            { value: "full_gym", label: "Full Gym" },
-                                            { value: "home_basic", label: "Home (Basic)" },
-                                            { value: "bodyweight", label: "Bodyweight Only" },
-                                            { value: "dumbbells", label: "Dumbbells Only" }
+                                            { value: "full_gym", label: "HQ Gym" },
+                                            { value: "home_basic", label: "Home" },
+                                            { value: "bodyweight", label: "Kinetic" },
+                                            { value: "dumbbells", label: "Minimal" }
                                         ].map((eq) => (
                                             <button
                                                 key={eq.value}
                                                 onClick={() => setFormData({ ...formData, equipment: eq.value })}
-                                                className={`p-4 rounded-2xl border font-bold uppercase tracking-tight text-sm transition-all ${formData.equipment === eq.value
+                                                className={`p-3 rounded-xl border font-black uppercase tracking-widest text-[10px] transition-all ${formData.equipment === eq.value
                                                     ? "bg-accent/20 border-accent/40 text-accent"
                                                     : "bg-white/5 border-white/10 text-muted hover:border-accent/20"
                                                     }`}
@@ -220,25 +220,25 @@ export default function PlanGenerationModal({ isOpen, onClose, onGenerate, userP
                                 className="space-y-6"
                             >
                                 <div>
-                                    <label className="block text-sm font-black text-white uppercase tracking-tight mb-3">
-                                        <Utensils className="w-4 h-4 inline mr-2" />
-                                        Dietary Preference
+                                    <label className="block text-[10px] font-black text-white uppercase tracking-widest mb-2">
+                                        <Utensils className="w-3 h-3 inline mr-1.5" />
+                                        Fuel Type
                                     </label>
-                                    <div className="grid grid-cols-2 gap-3">
+                                    <div className="grid grid-cols-2 gap-2">
                                         {[
                                             { value: "balanced", label: "Balanced" },
-                                            { value: "high_protein", label: "High Protein" },
-                                            { value: "low_carb", label: "Low Carb" },
-                                            { value: "vegetarian", label: "Vegetarian" },
+                                            { value: "high_protein", label: "Protein" },
+                                            { value: "low_carb", label: "Slim" },
+                                            { value: "vegetarian", label: "Plant" },
                                             { value: "vegan", label: "Vegan" },
                                             { value: "keto", label: "Keto" },
-                                            { value: "non_vegetarian", label: "Non-Veg" },
-                                            { value: "eggetarian", label: "Eggitarian" }
+                                            { value: "non_vegetarian", label: "Mixed" },
+                                            { value: "eggetarian", label: "Egg" }
                                         ].map((diet) => (
                                             <button
                                                 key={diet.value}
                                                 onClick={() => setFormData({ ...formData, dietaryPreference: diet.value })}
-                                                className={`p-4 rounded-2xl border font-bold uppercase tracking-tight text-sm transition-all ${formData.dietaryPreference === diet.value
+                                                className={`p-3 rounded-xl border font-black uppercase tracking-widest text-[10px] transition-all ${formData.dietaryPreference === diet.value
                                                     ? "bg-accent/20 border-accent/40 text-accent"
                                                     : "bg-white/5 border-white/10 text-muted hover:border-accent/20"
                                                     }`}
@@ -281,20 +281,20 @@ export default function PlanGenerationModal({ isOpen, onClose, onGenerate, userP
                                 className="space-y-6"
                             >
                                 <div>
-                                    <label className="block text-sm font-black text-white uppercase tracking-tight mb-3">
-                                        <Activity className="w-4 h-4 inline mr-2" />
-                                        Workout Intensity
+                                    <label className="block text-[10px] font-black text-white uppercase tracking-widest mb-2">
+                                        <Activity className="w-3 h-3 inline mr-1.5" />
+                                        Stress Threshold
                                     </label>
-                                    <div className="grid grid-cols-3 gap-3">
+                                    <div className="grid grid-cols-3 gap-2">
                                         {[
                                             { value: "low", label: "Low" },
-                                            { value: "moderate", label: "Moderate" },
-                                            { value: "high", label: "High" }
+                                            { value: "moderate", label: "Mid" },
+                                            { value: "high", label: "Max" }
                                         ].map((intensity) => (
                                             <button
                                                 key={intensity.value}
                                                 onClick={() => setFormData({ ...formData, workoutIntensity: intensity.value })}
-                                                className={`p-4 rounded-2xl border font-bold uppercase tracking-tight text-sm transition-all ${formData.workoutIntensity === intensity.value
+                                                className={`p-3 rounded-xl border font-black uppercase tracking-widest text-[10px] transition-all ${formData.workoutIntensity === intensity.value
                                                     ? "bg-accent/20 border-accent/40 text-accent"
                                                     : "bg-white/5 border-white/10 text-muted hover:border-accent/20"
                                                     }`}
@@ -306,11 +306,11 @@ export default function PlanGenerationModal({ isOpen, onClose, onGenerate, userP
                                 </div>
 
                                 <div>
-                                    <label className="block text-sm font-black text-white uppercase tracking-tight mb-3">
-                                        <Dumbbell className="w-4 h-4 inline mr-2" />
-                                        Muscle Focus (Select Multiple)
+                                    <label className="block text-[10px] font-black text-white uppercase tracking-widest mb-2">
+                                        <Dumbbell className="w-3 h-3 inline mr-1.5" />
+                                        Vector Focus
                                     </label>
-                                    <div className="grid grid-cols-2 gap-3">
+                                    <div className="grid grid-cols-2 gap-2">
                                         {[
                                             "Chest", "Back", "Shoulders", "Arms",
                                             "Legs", "Core", "Glutes", "Full Body"
@@ -325,7 +325,7 @@ export default function PlanGenerationModal({ isOpen, onClose, onGenerate, userP
                                                             : [...formData.muscleFocus, muscle];
                                                         setFormData({ ...formData, muscleFocus: newFocus });
                                                     }}
-                                                    className={`p-3 rounded-2xl border font-bold uppercase tracking-tight text-xs transition-all ${isSelected
+                                                    className={`p-2.5 rounded-xl border font-black uppercase tracking-widest text-[9px] transition-all ${isSelected
                                                         ? "bg-accent/20 border-accent/40 text-accent"
                                                         : "bg-white/5 border-white/10 text-muted hover:border-accent/20"
                                                         }`}
@@ -338,15 +338,15 @@ export default function PlanGenerationModal({ isOpen, onClose, onGenerate, userP
                                 </div>
 
                                 <div>
-                                    <label className="block text-sm font-black text-white uppercase tracking-tight mb-3">
-                                        <Flame className="w-4 h-4 inline mr-2" />
-                                        Daily Calorie Target
+                                    <label className="block text-[10px] font-black text-white uppercase tracking-widest mb-2">
+                                        <Flame className="w-3 h-3 inline mr-1.5" />
+                                        Caloric Load
                                     </label>
                                     <input
                                         type="number"
                                         value={formData.dailyCalories}
                                         onChange={(e) => setFormData({ ...formData, dailyCalories: parseInt(e.target.value) || 2000 })}
-                                        className="w-full p-4 bg-white/5 border border-white/10 rounded-2xl text-white font-bold focus:border-accent/40 focus:outline-none transition-all"
+                                        className="w-full p-3 bg-white/5 border border-white/10 rounded-xl text-white font-black text-[11px] focus:border-accent/40 focus:outline-none transition-all"
                                         placeholder="2000"
                                         min="1200"
                                         max="5000"
@@ -354,21 +354,21 @@ export default function PlanGenerationModal({ isOpen, onClose, onGenerate, userP
                                 </div>
 
                                 <div>
-                                    <label className="block text-sm font-black text-white uppercase tracking-tight mb-3">
-                                        <Utensils className="w-4 h-4 inline mr-2" />
-                                        Meals Per Day
+                                    <label className="block text-[10px] font-black text-white uppercase tracking-widest mb-2">
+                                        <Utensils className="w-3 h-3 inline mr-1.5" />
+                                        Frequency
                                     </label>
-                                    <div className="grid grid-cols-3 gap-3">
+                                    <div className="grid grid-cols-3 gap-2">
                                         {[3, 4, 5].map((meals) => (
                                             <button
                                                 key={meals}
                                                 onClick={() => setFormData({ ...formData, mealsPerDay: meals })}
-                                                className={`p-4 rounded-2xl border font-bold uppercase tracking-tight text-sm transition-all ${formData.mealsPerDay === meals
+                                                className={`p-3 rounded-xl border font-black uppercase tracking-widest text-[10px] transition-all ${formData.mealsPerDay === meals
                                                     ? "bg-accent/20 border-accent/40 text-accent"
                                                     : "bg-white/5 border-white/10 text-muted hover:border-accent/20"
                                                     }`}
                                             >
-                                                {meals} Meals
+                                                {meals} Units
                                             </button>
                                         ))}
                                     </div>
@@ -404,13 +404,13 @@ export default function PlanGenerationModal({ isOpen, onClose, onGenerate, userP
                     </div>
 
                     {/* Navigation buttons */}
-                    <div className="flex items-center justify-between mt-8 pt-6 border-t border-white/10 shrink-0">
+                    <div className="flex items-center justify-between mt-6 pt-4 border-t border-white/10 shrink-0">
                         {step > 1 ? (
                             <button
                                 onClick={() => setStep(step - 1)}
-                                className="px-6 py-3 bg-white/5 hover:bg-white/10 text-white font-black uppercase tracking-tight text-sm rounded-2xl transition-all"
+                                className="px-5 py-2.5 bg-white/5 hover:bg-white/10 text-white font-black uppercase tracking-widest text-[9px] rounded-lg transition-all"
                             >
-                                Back
+                                Previous
                             </button>
                         ) : (
                             <div />
@@ -419,18 +419,18 @@ export default function PlanGenerationModal({ isOpen, onClose, onGenerate, userP
                         {step < 4 ? (
                             <button
                                 onClick={() => setStep(step + 1)}
-                                className="px-8 py-3 bg-accent hover:bg-accent/90 text-black font-black uppercase tracking-tight text-sm rounded-2xl transition-all flex items-center gap-2"
+                                className="px-6 py-2.5 bg-accent hover:bg-accent/90 text-zinc-950 font-black uppercase tracking-widest text-[9px] rounded-lg transition-all flex items-center gap-1.5"
                             >
-                                Next
-                                <Zap className="w-4 h-4" />
+                                Continue
+                                <Zap className="w-3.5 h-3.5" />
                             </button>
                         ) : (
                             <button
                                 onClick={handleGenerate}
-                                className="px-8 py-3 bg-accent hover:bg-accent/90 text-black font-black uppercase tracking-tight text-sm rounded-2xl transition-all flex items-center gap-2"
+                                className="px-6 py-2.5 bg-accent hover:bg-accent/90 text-zinc-950 font-black uppercase tracking-widest text-[9px] rounded-lg transition-all flex items-center gap-1.5"
                             >
-                                <Sparkles className="w-4 h-4" />
-                                Generate Plan
+                                <Sparkles className="w-3.5 h-3.5" />
+                                Initiate Engine
                             </button>
                         )}
                     </div>

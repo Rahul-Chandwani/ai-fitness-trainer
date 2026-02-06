@@ -23,8 +23,8 @@ export default function MealCard({ meal, onViewDetails, onRemove }) {
 
   return (
     <motion.div
-      whileHover={{ y: -5 }}
-      className="card-premium p-5 md:p-8 rounded-[2rem] md:rounded-[2.5rem] border border-white/5 relative overflow-hidden group h-full flex flex-col"
+      whileHover={{ y: -2 }}
+      className="card-premium p-3 rounded-xl border border-white/5 relative overflow-hidden group h-full flex flex-col"
     >
       {/* Removal Button */}
       {onRemove && (
@@ -43,19 +43,14 @@ export default function MealCard({ meal, onViewDetails, onRemove }) {
       </div>
 
       <div className="relative z-10 flex-grow">
-        <div className="flex justify-between items-start mb-8">
-          <div className="flex items-center gap-4">
-            <div className="w-14 h-14 bg-white/5 rounded-2xl flex items-center justify-center border border-white/5 group-hover:bg-accent/10 transition-colors">
-              <Utensils className="w-6 h-6 text-accent group-hover:scale-110 transition-transform" />
+        <div className="flex justify-between items-start mb-4">
+          <div className="flex items-center gap-2.5">
+            <div className="w-8 h-8 bg-white/5 rounded-lg flex items-center justify-center border border-white/5 group-hover:bg-accent/10 transition-colors shrink-0">
+              <Utensils className="w-4 h-4 text-accent group-hover:scale-110 transition-transform" />
             </div>
             <div>
-              <h3 className="text-xl font-black text-white uppercase italic tracking-tighter leading-tight">{meal.name}</h3>
-              <p className="text-[10px] text-muted font-black uppercase tracking-[0.4em] mt-1">{meal.type || "Protocol"}</p>
-              {meal.food && (
-                <p className="text-[9px] text-accent/80 font-bold uppercase italic tracking-tight mt-2 line-clamp-2 leading-tight">
-                  {meal.food}
-                </p>
-              )}
+              <h3 className="text-sm font-black text-white uppercase italic tracking-tighter leading-tight line-clamp-1">{meal.name}</h3>
+              <p className="text-[8px] text-muted font-black uppercase tracking-widest mt-0.5">{meal.type || "Fuel"}</p>
             </div>
           </div>
           <button
@@ -63,28 +58,28 @@ export default function MealCard({ meal, onViewDetails, onRemove }) {
               const fullFood = FOOD_DATABASE.find(f => f.name === meal.name);
               onViewDetails(fullFood || meal);
             }}
-            className="p-3 bg-white/5 hover:bg-white/10 rounded-2xl border border-white/5"
+            className="p-2 bg-white/5 hover:bg-white/10 rounded-lg border border-white/5"
           >
-            <Info className="w-5 h-5 text-muted" />
+            <Info className="w-4 h-4 text-muted" />
           </button>
         </div>
 
-        <div className="bg-white/5 rounded-3xl p-6 border border-white/5 mb-8 flex justify-between items-center group-hover:border-accent/10 transition-colors">
-          <p className="text-[10px] font-black text-muted uppercase tracking-widest">Caloric Load</p>
+        <div className="bg-white/5 rounded-lg p-2.5 border border-white/5 mb-3 flex justify-between items-center group-hover:border-accent/10 transition-colors">
+          <p className="text-[8px] font-black text-muted uppercase tracking-widest">Energy</p>
           <div className="text-right">
-            <span className="text-3xl font-black text-white italic tracking-tighter tabular-nums block">
+            <span className="text-lg font-black text-white italic tracking-tighter tabular-nums block opacity-90 leading-none">
               {meal.calories}
             </span>
-            <span className="text-[10px] font-black text-accent uppercase tracking-[0.2em]">KCAL</span>
+            <span className="text-[7px] font-black text-accent uppercase mt-0.5 block opacity-80">KCAL</span>
           </div>
         </div>
 
         {/* Macros Display */}
         {(meal.protein || meal.protein_g || meal.carbs || meal.carbs_g || meal.fats || meal.fats_g) && (
-          <div className="grid grid-cols-3 gap-3 mb-8">
-            <MacroStat icon={<Beef className="w-3 h-3 text-emerald-400" />} label="PRO" val={meal.protein || meal.protein_g} />
-            <MacroStat icon={<Waves className="w-3 h-3 text-blue-400" />} label="CHO" val={meal.carbs || meal.carbs_g} />
-            <MacroStat icon={<Cookie className="w-3 h-3 text-amber-500" />} label="FAT" val={meal.fats || meal.fats_g} />
+          <div className="grid grid-cols-3 gap-1.5 mb-3">
+            <MacroStat icon={<Beef className="w-2.5 h-2.5 text-emerald-400" />} label="PRO" val={meal.protein || meal.protein_g} />
+            <MacroStat icon={<Waves className="w-2.5 h-2.5 text-blue-400" />} label="CHO" val={meal.carbs || meal.carbs_g} />
+            <MacroStat icon={<Cookie className="w-2.5 h-2.5 text-amber-500" />} label="FAT" val={meal.fats || meal.fats_g} />
           </div>
         )}
       </div>
@@ -92,18 +87,18 @@ export default function MealCard({ meal, onViewDetails, onRemove }) {
       <button
         onClick={handleLog}
         disabled={logged}
-        className={`relative z-10 w-full py-5 rounded-3xl text-[10px] font-black uppercase tracking-[0.2em] flex items-center justify-center gap-3 transition-all shadow-xl group/btn
-          ${logged ? 'bg-accent text-black shadow-accent/20' : 'bg-white/5 hover:bg-white text-white hover:text-black border border-white/10 shadow-white/5'}`}
+        className={`relative z-10 w-full py-2.5 rounded-lg text-[8px] font-black uppercase tracking-widest flex items-center justify-center gap-1.5 transition-all shadow-md group/btn
+          ${logged ? 'bg-accent text-zinc-950 shadow-cyan-500/20' : 'bg-white/5 hover:bg-white text-white hover:text-black border border-white/5'}`}
       >
         {logged ? (
           <>
-            <Check className="w-4 h-4" />
-            Uplink OK
+            <Check className="w-3.5 h-3.5" />
+            Confirmed
           </>
         ) : (
           <>
-            <Plus className="w-4 h-4 group-hover/btn:rotate-90 transition-transform" />
-            Authorize Log
+            <Plus className="w-3.5 h-3.5 group-hover/btn:rotate-90 transition-transform" />
+            Acknowledge
           </>
         )}
       </button>
@@ -113,13 +108,13 @@ export default function MealCard({ meal, onViewDetails, onRemove }) {
 
 function MacroStat({ icon, label, val }) {
   return (
-    <div className="bg-white/5 rounded-2xl p-4 border border-white/5 flex flex-col items-center gap-2 group-hover:border-accent/5 transition-colors">
-      <div className="p-2 bg-white/5 rounded-xl">
+    <div className="bg-white/5 rounded-xl p-2.5 border border-white/5 flex flex-col items-center gap-1.5 group-hover:border-accent/5 transition-colors">
+      <div className="p-1.5 bg-white/5 rounded-lg">
         {icon}
       </div>
       <div>
-        <p className="text-[8px] font-black text-muted uppercase tracking-widest text-center mb-0.5">{label}</p>
-        <p className="text-sm font-black text-white tabular-nums text-center italic tracking-tighter">{val || 0}G</p>
+        <p className="text-[7px] font-black text-muted uppercase tracking-[0.15em] text-center mb-0.5">{label}</p>
+        <p className="text-[10px] font-black text-white tabular-nums text-center italic tracking-tighter opacity-90">{val || 0}G</p>
       </div>
     </div>
   );

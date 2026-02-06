@@ -127,8 +127,7 @@ export async function generateWorkoutRoutine(preferences = {}) {
         duration = "45",
         calorieTarget = "400",
         level = "intermediate",
-        location = "gym",
-        experienceLevel = "intermediate"
+        location = "gym"
     } = preferences;
 
     // Sample relevant exercises from database

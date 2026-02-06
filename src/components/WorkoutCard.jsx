@@ -4,8 +4,8 @@ import { motion } from "framer-motion";
 export default function WorkoutCard({ workout, onView, onRemove }) {
   return (
     <motion.div
-      whileHover={{ y: -5 }}
-      className="card-premium p-4 md:p-6 rounded-2xl md:rounded-3xl border border-white/5 relative overflow-hidden group h-full flex flex-col"
+      whileHover={{ y: -2 }}
+      className="card-premium p-3 rounded-xl border border-white/5 relative overflow-hidden group h-full flex flex-col"
     >
       {/* Removal Button */}
       {onRemove && (
@@ -24,30 +24,30 @@ export default function WorkoutCard({ workout, onView, onRemove }) {
       </div>
 
       <div className="relative z-10 flex-grow">
-        <div className="inline-flex items-center gap-2 px-3 py-1 bg-accent/10 rounded-full border border-accent/20 mb-6">
-          <span className="w-1.5 h-1.5 bg-accent rounded-full"></span>
-          <p className="text-[8px] font-black text-accent uppercase tracking-widest">Active Protocol</p>
+        <div className="inline-flex items-center gap-1.5 px-2 py-0.5 bg-accent/10 rounded-full border border-accent/20 mb-3">
+          <span className="w-1 h-1 bg-accent rounded-full"></span>
+          <p className="text-[7px] font-black text-accent uppercase tracking-widest">Protocol</p>
         </div>
 
-        <h3 className="text-2xl font-black text-white mb-6 uppercase italic tracking-tighter group-hover:text-accent transition-colors leading-tight">
+        <h3 className="text-sm font-black text-white mb-3 uppercase italic tracking-tighter group-hover:text-accent transition-colors leading-tight line-clamp-1">
           {workout.name}
         </h3>
 
-        <div className="grid grid-cols-2 gap-4 mb-8">
-          <div className="flex flex-col gap-1 p-4 bg-white/5 rounded-2xl border border-white/5 group-hover:border-accent/10 transition-colors">
-            <div className="flex items-center gap-2 text-[8px] font-black text-muted uppercase tracking-widest mb-1">
-              <Timer className="w-3 h-3 text-accent" />
-              <span>Duration</span>
+        <div className="grid grid-cols-2 gap-1.5 mb-3">
+          <div className="flex flex-col gap-0.5 p-2 bg-white/5 rounded-lg border border-white/5 group-hover:border-accent/10 transition-colors">
+            <div className="flex items-center gap-1 text-[6px] font-black text-muted uppercase tracking-widest mb-0.5">
+              <Timer className="w-2.5 h-2.5 text-accent opacity-50" />
+              <span>Time</span>
             </div>
-            <p className="text-sm font-black text-white italic tracking-tight">{workout.duration}</p>
+            <p className="text-[10px] font-black text-white italic tracking-tight">{workout.duration}</p>
           </div>
 
-          <div className="flex flex-col gap-1 p-4 bg-white/5 rounded-2xl border border-white/5 group-hover:border-accent/10 transition-colors">
-            <div className="flex items-center gap-2 text-[8px] font-black text-muted uppercase tracking-widest mb-1">
-              <Layers className="w-3 h-3 text-accent" />
-              <span>Architecture</span>
+          <div className="flex flex-col gap-0.5 p-2 bg-white/5 rounded-lg border border-white/5 group-hover:border-accent/10 transition-colors">
+            <div className="flex items-center gap-1 text-[6px] font-black text-muted uppercase tracking-widest mb-0.5">
+              <Layers className="w-2.5 h-2.5 text-accent opacity-50" />
+              <span>Build</span>
             </div>
-            <p className="text-sm font-black text-white italic tracking-tight">
+            <p className="text-[10px] font-black text-white italic tracking-tight">
               {Array.isArray(workout.exercises) ? workout.exercises.length : workout.exercises} EX
             </p>
           </div>
@@ -56,10 +56,10 @@ export default function WorkoutCard({ workout, onView, onRemove }) {
 
       <button
         onClick={() => onView(workout)}
-        className="relative z-10 w-full bg-white text-black font-black py-4 rounded-3xl text-[10px] uppercase tracking-[0.2em] flex items-center justify-center gap-3 transition-all shadow-xl shadow-white/5 group/btn hover:bg-accent"
+        className="relative z-10 w-full bg-white text-black font-black py-2 rounded-lg text-[8px] uppercase tracking-widest flex items-center justify-center gap-1.5 transition-all shadow-md group/btn hover:bg-accent"
       >
-        ANALYZE PROTOCOL
-        <ChevronRight className="w-4 h-4 group-hover/btn:translate-x-2 transition-transform" />
+        ANALYSIS
+        <ChevronRight className="w-2.5 h-2.5 group-hover/btn:translate-x-1 transition-transform" />
       </button>
     </motion.div>
   );

@@ -122,7 +122,7 @@ export default function TrainingPlan() {
 
                         <div className="flex items-center justify-center min-h-[60vh]">
                             <div className="max-w-md text-center space-y-8">
-                                <div className="w-24 h-24 sm:w-32 sm:h-32 bg-accent/10 rounded-[2.5rem] sm:rounded-[3rem] flex items-center justify-center mx-auto border border-accent/20 shadow-2xl shadow-accent/5">
+                                <div className="w-24 h-24 sm:w-32 sm:h-32 bg-accent/10 rounded-3xl flex items-center justify-center mx-auto border border-accent/20 shadow-2xl shadow-accent/5">
                                     <Lock className="w-10 h-10 sm:w-12 sm:h-12 text-accent animate-pulse" />
                                 </div>
                                 <div>
@@ -137,10 +137,10 @@ export default function TrainingPlan() {
                                 </div>
                                 <Link
                                     to="/plans"
-                                    className="inline-flex items-center gap-3 px-8 sm:px-12 py-5 sm:py-6 bg-white text-black font-black uppercase tracking-tighter rounded-full sm:rounded-[2rem] hover:bg-accent transition-all shadow-2xl shadow-white/5 active:scale-95 text-xs sm:text-sm"
+                                    className="inline-flex items-center gap-2.5 px-6 py-3 bg-white text-zinc-950 font-black uppercase tracking-tighter rounded-xl hover:bg-accent transition-all shadow-lg active:scale-95 text-[10px]"
                                 >
-                                    <Sparkles className="w-5 h-5" />
-                                    Upgrade Now
+                                    <Sparkles className="w-4 h-4" />
+                                    Upgrade Protocol
                                 </Link>
                             </div>
                         </div>
@@ -162,7 +162,7 @@ export default function TrainingPlan() {
 
                         <div className="flex items-center justify-center min-h-[60vh]">
                             <div className="max-w-md text-center space-y-8">
-                                <div className="w-24 h-24 sm:w-32 sm:h-32 bg-accent/10 rounded-[2.5rem] sm:rounded-[3rem] flex items-center justify-center mx-auto border border-accent/20 shadow-2xl shadow-accent/5">
+                                <div className="w-24 h-24 sm:w-32 sm:h-32 bg-accent/10 rounded-3xl flex items-center justify-center mx-auto border border-accent/20 shadow-2xl shadow-accent/5">
                                     <Sparkles className="w-10 h-10 sm:w-12 sm:h-12 text-accent" />
                                 </div>
                                 <div>
@@ -175,14 +175,14 @@ export default function TrainingPlan() {
                                 </div>
                                 <button
                                     onClick={() => setShowGenModal(true)}
-                                    className="inline-flex items-center gap-3 px-8 sm:px-12 py-5 sm:py-6 bg-white text-black font-black uppercase tracking-tighter rounded-full sm:rounded-[2rem] hover:bg-accent transition-all shadow-2xl active:scale-95 text-xs sm:text-sm"
+                                    className="inline-flex items-center gap-2.5 px-6 py-3 bg-white text-zinc-950 font-black uppercase tracking-tighter rounded-xl hover:bg-accent transition-all shadow-lg active:scale-95 text-[10px]"
                                 >
                                     {isGenerating ? (
-                                        <RefreshCw className="w-5 h-5 animate-spin" />
+                                        <RefreshCw className="w-4 h-4 animate-spin" />
                                     ) : (
-                                        <Sparkles className="w-5 h-5" />
+                                        <Sparkles className="w-4 h-4" />
                                     )}
-                                    {isGenerating ? "Processing Plan..." : "Generate AI Plan"}
+                                    {isGenerating ? "Processing..." : "Sync AI Plan"}
                                 </button>
                             </div>
                         </div>
@@ -212,59 +212,58 @@ export default function TrainingPlan() {
     return (
         <DashboardLayout hideHeader={showGenModal}>
             <PageTransition>
-                <div className="max-w-7xl mx-auto space-y-8 pb-32 px-4">
+                <div className="max-w-7xl mx-auto space-y-4 pb-32 px-4">
                     {/* Header */}
-                    <div className="flex flex-col xl:flex-row justify-between items-start xl:items-center gap-6">
-                        <div className="flex items-center gap-4 min-w-0">
-                            <div className="w-1.5 h-12 md:h-16 bg-accent rounded-full flex-shrink-0" />
+                    <div className="flex flex-col xl:flex-row justify-between items-start xl:items-center gap-4">
+                        <div className="flex items-center gap-3 min-w-0">
+                            <div className="w-1 h-8 md:h-10 bg-accent rounded-full flex-shrink-0" />
                             <div className="min-w-0">
-                                <h1 className="text-2xl md:text-4xl font-extrabold tracking-tight text-white truncate uppercase italic">AI Training Protocol</h1>
-                                <p className="text-[10px] text-muted font-bold uppercase tracking-widest mt-1 truncate">
-                                    Week {trainingPlan.currentWeek} of {trainingPlan.duration} • {(trainingPlan.goal || 'General').replace('_', ' ')}
+                                <h1 className="text-xl md:text-2xl font-black tracking-tight text-white truncate uppercase italic">AI Plan</h1>
+                                <p className="text-[9px] text-muted font-bold uppercase tracking-widest mt-0.5 truncate">
+                                    Week {trainingPlan.currentWeek} • {trainingPlan.duration} Total • {(trainingPlan.goal || 'Alpha').replace('_', ' ')}
                                 </p>
                             </div>
                         </div>
 
-                        <div className="flex items-center gap-4 w-full xl:w-auto">
-                            <div className="p-3 md:p-4 bg-white/5 rounded-2xl border border-white/5 flex-grow xl:flex-grow-0 min-w-[140px]">
-                                <p className="text-[8px] text-muted font-black uppercase tracking-widest mb-1">Weekly Metric</p>
-                                <p className="text-xl md:text-2xl font-black text-white italic tracking-tighter">{weeklyCompletion}% DONE</p>
+                        <div className="flex items-center gap-3 w-full xl:w-auto">
+                            <div className="p-2 bg-white/5 rounded-xl border border-white/5 flex-grow xl:flex-grow-0 min-w-[120px]">
+                                <p className="text-[8px] text-muted font-black uppercase tracking-widest mb-0.5">Status</p>
+                                <p className="text-lg font-black text-white italic tracking-tighter">{weeklyCompletion}% SYNC</p>
                             </div>
                             <button
                                 onClick={loadAIInsights}
                                 disabled={loadingInsights}
-                                className="p-4 bg-accent/10 hover:bg-accent/20 rounded-2xl border border-accent/20 transition-all flex-shrink-0"
+                                className="p-3 bg-accent/10 hover:bg-accent/20 rounded-xl border border-accent/20 transition-all flex-shrink-0"
                             >
-                                <RefreshCw className={`w-5 h-5 text-accent ${loadingInsights ? 'animate-spin' : ''}`} />
+                                <RefreshCw className={`w-4 h-4 text-accent ${loadingInsights ? 'animate-spin' : ''}`} />
                             </button>
                             <button
                                 onClick={() => setShowResetConfirm(true)}
-                                className="p-4 bg-red-500/10 hover:bg-red-500/20 rounded-2xl border border-red-500/20 transition-all flex-shrink-0 group"
-                                title="Reset Training Plan"
+                                className="p-3 bg-red-500/10 hover:bg-red-500/20 rounded-xl border border-red-500/20 transition-all flex-shrink-0 group"
                             >
-                                <Trash2 className="w-5 h-5 text-red-500 group-hover:scale-110 transition-transform" />
+                                <Trash2 className="w-4 h-4 text-red-500" />
                             </button>
                         </div>
                     </div>
 
                     {/* Tabs */}
-                    <div className="flex gap-2 p-1.5 md:p-2 bg-white/5 rounded-3xl border border-white/5 overflow-x-auto min-w-0 scrollbar-none">
+                    <div className="flex gap-1.5 p-1 bg-white/5 rounded-xl border border-white/5 overflow-x-auto min-w-0 scrollbar-none">
                         <TabButton
                             active={activeTab === "overview"}
                             onClick={() => setActiveTab("overview")}
-                            icon={<Target className="w-4 h-4" />}
+                            icon={<Target className="w-3.5 h-3.5" />}
                             label="Today"
                         />
                         <TabButton
                             active={activeTab === "schedule"}
                             onClick={() => setActiveTab("schedule")}
-                            icon={<Calendar className="w-4 h-4" />}
+                            icon={<Calendar className="w-3.5 h-3.5" />}
                             label="Schedule"
                         />
                         <TabButton
                             active={activeTab === "progress"}
                             onClick={() => setActiveTab("progress")}
-                            icon={<TrendingUp className="w-4 h-4" />}
+                            icon={<TrendingUp className="w-3.5 h-3.5" />}
                             label="Insights"
                         />
                     </div>
@@ -274,16 +273,16 @@ export default function TrainingPlan() {
                         {activeTab === "overview" && (
                             <motion.div
                                 key="overview"
-                                initial={{ opacity: 0, y: 10 }}
-                                animate={{ opacity: 1, y: 0 }}
-                                exit={{ opacity: 0, y: -10 }}
-                                className="space-y-10"
+                                initial={{ opacity: 0, scale: 0.98 }}
+                                animate={{ opacity: 1, scale: 1 }}
+                                exit={{ opacity: 0, scale: 0.98 }}
+                                className="space-y-4"
                             >
-                                <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
-                                    <div className="lg:col-span-2 space-y-8">
-                                        <div className="flex items-center gap-3">
-                                            <div className="w-1 h-6 bg-accent rounded-full"></div>
-                                            <h2 className="text-xl font-black text-white uppercase italic tracking-tighter">Current Protocol</h2>
+                                <div className="grid grid-cols-1 lg:grid-cols-3 gap-4">
+                                    <div className="lg:col-span-2 space-y-4">
+                                        <div className="flex items-center gap-2 px-1">
+                                            <div className="w-1 h-5 bg-accent rounded-full"></div>
+                                            <h2 className="text-sm font-black text-white uppercase italic tracking-tighter">Current Protocol</h2>
                                         </div>
                                         {todayData ? (
                                             <DailyTaskCard
@@ -293,29 +292,30 @@ export default function TrainingPlan() {
                                                 isToday={true}
                                             />
                                         ) : (
-                                            <div className="card-premium p-12 rounded-[2.5rem] border border-white/5 text-center bg-white/5">
-                                                <p className="text-muted font-bold uppercase tracking-tight">Active Rest Day</p>
+                                            <div className="card-premium p-8 rounded-xl border border-white/5 text-center bg-white/5">
+                                                <p className="text-[11px] font-black text-muted uppercase tracking-widest">Active Rest Day</p>
                                             </div>
                                         )}
                                     </div>
 
-                                    <div className="space-y-8">
-                                        <div className="flex items-center gap-3">
-                                            <div className="w-1 h-6 bg-accent rounded-full"></div>
-                                            <h2 className="text-xl font-black text-white uppercase italic tracking-tighter">AI Intelligence</h2>
+                                    <div className="space-y-4">
+                                        <div className="flex items-center gap-2 px-1">
+                                            <div className="w-1 h-5 bg-accent rounded-full"></div>
+                                            <h2 className="text-sm font-black text-white uppercase italic tracking-tighter">AI Intelligence</h2>
                                         </div>
                                         <AIInsightsWidget insights={aiInsights} loading={loadingInsights} />
 
-                                        <div className="grid grid-cols-1 gap-4">
+                                        <div className="grid grid-cols-2 gap-3">
                                             <StatCard
-                                                icon={<Flame className="w-6 h-6 text-orange-400" />}
-                                                label="Target Calories"
-                                                value={`${trainingPlan.targetCalories || 0} kcal`}
+                                                icon={<Flame className="w-4 h-4 text-orange-400" />}
+                                                label="Target"
+                                                value={`${trainingPlan.targetCalories || 0}`}
+                                                unit="KCAL"
                                                 color="orange"
                                             />
                                             <StatCard
-                                                icon={<Target className="w-6 h-6 text-accent" />}
-                                                label="Protein Goal"
+                                                icon={<Target className="w-4 h-4 text-accent" />}
+                                                label="Protein"
                                                 value={`${trainingPlan.targetMacros?.protein || 0}g`}
                                                 color="accent"
                                             />
@@ -357,14 +357,14 @@ export default function TrainingPlan() {
                                 exit={{ opacity: 0, y: -10 }}
                                 className="grid grid-cols-1 lg:grid-cols-2 gap-8"
                             >
-                                <div className="card-premium p-6 sm:p-8 rounded-[2rem] sm:rounded-[2.5rem] border border-white/5 bg-white/5">
-                                    <div className="flex items-center gap-3 mb-6">
-                                        <div className="w-10 h-10 bg-accent/10 rounded-2xl flex items-center justify-center border border-accent/20">
-                                            <TrendingUp className="w-5 h-5 text-accent" />
+                                <div className="card-premium p-4 rounded-xl border border-white/5 bg-white/5">
+                                    <div className="flex items-center gap-3 mb-4">
+                                        <div className="w-8 h-8 bg-accent/10 rounded-lg flex items-center justify-center border border-accent/20">
+                                            <TrendingUp className="w-4 h-4 text-accent" />
                                         </div>
-                                        <h3 className="text-lg sm:text-xl font-black text-white uppercase italic tracking-tight">Vitals Track</h3>
+                                        <h3 className="text-sm font-black text-white uppercase italic tracking-tighter">Weight Sync</h3>
                                     </div>
-                                    <div className="h-[250px] sm:h-[300px]">
+                                    <div className="h-[200px]">
                                         <ProgressChart data={weightChartData} type="weight" title="Weight (kg)" />
                                     </div>
                                 </div>
@@ -390,10 +390,10 @@ export default function TrainingPlan() {
                                     />
                                     <button
                                         onClick={() => setShowGenModal(true)}
-                                        className="w-full mt-4 p-8 rounded-[2rem] border border-dashed border-white/10 hover:border-accent/40 text-muted hover:text-accent transition-all uppercase font-black tracking-widest text-[10px] flex flex-col items-center gap-3 bg-white/2"
+                                        className="w-full mt-2 p-6 rounded-xl border border-dashed border-white/10 hover:border-accent/40 text-muted hover:text-accent transition-all uppercase font-black tracking-widest text-[9px] flex flex-col items-center gap-2 bg-white/2"
                                     >
-                                        <Sparkles className="w-6 h-6" />
-                                        Refactor Training Plan
+                                        <Sparkles className="w-5 h-5" />
+                                        Refactor Architecture
                                     </button>
                                 </div>
                             </motion.div>
@@ -424,10 +424,10 @@ export default function TrainingPlan() {
                             animate={{ scale: 1, opacity: 1 }}
                             exit={{ scale: 0.9, opacity: 0 }}
                             onClick={(e) => e.stopPropagation()}
-                            className="bg-dark border border-red-500/20 rounded-[2rem] p-8 max-w-md w-full space-y-6"
+                            className="bg-dark border border-red-500/20 rounded-xl p-6 max-w-sm w-full space-y-4"
                         >
-                            <div className="w-16 h-16 bg-red-500/10 rounded-2xl flex items-center justify-center mx-auto border border-red-500/20">
-                                <Trash2 className="w-8 h-8 text-red-500" />
+                            <div className="w-12 h-12 bg-red-500/10 rounded-xl flex items-center justify-center mx-auto border border-red-500/20">
+                                <Trash2 className="w-6 h-6 text-red-500" />
                             </div>
 
                             <div className="text-center space-y-2">
@@ -471,8 +471,8 @@ function TabButton({ active, onClick, icon, label }) {
     return (
         <button
             onClick={onClick}
-            className={`flex-1 flex items-center justify-center gap-2 px-6 py-4 rounded-2xl font-black uppercase tracking-tight text-[10px] sm:text-xs transition-all whitespace-nowrap min-w-[100px] ${active
-                ? "bg-white text-black shadow-xl"
+            className={`flex-1 flex items-center justify-center gap-2 px-4 py-2.5 rounded-xl font-black uppercase tracking-tight text-[9px] transition-all whitespace-nowrap ${active
+                ? "bg-white text-zinc-950 shadow-md"
                 : "text-muted hover:text-white hover:bg-white/5"
                 }`}
         >
@@ -482,7 +482,7 @@ function TabButton({ active, onClick, icon, label }) {
     );
 }
 
-function StatCard({ icon, label, value, color = "accent" }) {
+function StatCard({ icon, label, value, unit, color = "accent" }) {
     const colorMap = {
         accent: "bg-accent/10 border-accent/20",
         orange: "bg-orange-500/10 border-orange-500/20",
@@ -490,13 +490,16 @@ function StatCard({ icon, label, value, color = "accent" }) {
     };
 
     return (
-        <div className="card-premium p-5 sm:p-6 rounded-[2rem] border border-white/5 flex items-center gap-4 bg-white/5 group hover:bg-white/10 transition-all">
-            <div className={`w-10 h-10 sm:w-12 sm:h-12 ${colorMap[color] || colorMap.accent} rounded-2xl flex items-center justify-center border shrink-0`}>
-                {icon}
+        <div className="card-premium p-3 rounded-xl border border-white/5 flex items-center gap-3 bg-white/5 group hover:bg-white/10 transition-all">
+            <div className={`w-8 h-8 ${colorMap[color] || colorMap.accent} rounded-lg flex items-center justify-center border shrink-0`}>
+                <div className="scale-75">{icon}</div>
             </div>
             <div className="min-w-0">
-                <p className="text-[8px] sm:text-[9px] text-muted font-black uppercase tracking-widest truncate">{label}</p>
-                <p className="text-xl sm:text-2xl font-black text-white italic tracking-tighter truncate">{value}</p>
+                <p className="text-[7px] text-muted font-black uppercase tracking-widest truncate">{label}</p>
+                <div className="flex items-baseline gap-1">
+                    <p className="text-lg font-black text-white italic tracking-tighter truncate">{value}</p>
+                    {unit && <span className="text-[8px] font-black text-muted uppercase italic">{unit}</span>}
+                </div>
             </div>
         </div>
     );

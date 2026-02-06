@@ -86,10 +86,10 @@ export default function AICoach() {
           </Link>
           <div className="flex flex-row items-center justify-between mb-3 flex-shrink-0 gap-4">
             <div className="flex items-center gap-3 min-w-0">
-              <div className="w-1 h-8 bg-accent rounded-full flex-shrink-0"></div>
+              <div className="w-1 h-6 bg-accent rounded-full mb-0.5 flex-shrink-0"></div>
               <div className="min-w-0">
-                <h1 className="text-xl md:text-3xl font-extrabold tracking-tight text-white uppercase truncate">AI Trainer</h1>
-                <p className="text-[8px] text-muted font-bold uppercase tracking-widest mt-0.5 truncate">Transformation Active</p>
+                <h1 className="text-lg md:text-2xl font-black tracking-tight text-white uppercase italic truncate">Coach Sync</h1>
+                <p className="text-[7px] text-muted font-bold uppercase tracking-widest mt-0.5 truncate">Uplink Active</p>
               </div>
             </div>
             <div className="flex items-center gap-2 self-center flex-shrink-0">
@@ -120,28 +120,27 @@ export default function AICoach() {
                 <Bot className="w-[200px] h-[200px] md:w-[400px] md:h-[400px] text-accent" />
               </div>
 
-              <div className="max-w-md text-center space-y-4 relative z-10 w-full px-4">
-                <div className="w-16 h-16 md:w-24 md:h-24 bg-accent/10 rounded-[1.5rem] md:rounded-[2rem] flex items-center justify-center mx-auto mb-4 relative border border-accent/20 shadow-2xl shadow-accent/5">
-                  <Lock className="w-6 h-6 md:w-10 md:h-10 text-accent animate-pulse" />
-                  <div className="absolute inset-0 bg-accent/5 blur-3xl rounded-full"></div>
+              <div className="max-w-md text-center space-y-3 relative z-10 w-full px-4">
+                <div className="w-12 h-12 md:w-16 md:h-16 bg-accent/10 rounded-xl flex items-center justify-center mx-auto mb-2.5 relative border border-accent/20 ">
+                  <Lock className="w-5 h-5 md:w-8 md:h-8 text-accent animate-pulse" />
                 </div>
                 <div>
-                  <h2 className="text-xl md:text-3xl font-extrabold text-white uppercase tracking-tight mb-2">Training Locked</h2>
-                  <p className="text-muted font-bold text-[10px] md:text-xs leading-relaxed uppercase tracking-tight">
-                    AI Assistant is for <span className="text-accent underline decoration-2 underline-offset-4">Advanced members</span> only.
+                  <h2 className="text-lg md:text-2xl font-black text-white uppercase tracking-tight mb-1">PRO ACCESS</h2>
+                  <p className="text-muted font-bold text-[9px] leading-relaxed uppercase tracking-tight">
+                    AI Assistant is for <span className="text-accent">Advanced members</span> only.
                   </p>
                 </div>
                 <Link
                   to="/plans"
-                  className="w-full py-3 md:py-4 bg-white text-black font-black uppercase tracking-tighter rounded-xl md:rounded-2xl flex items-center justify-center gap-2 md:gap-3 hover:bg-accent transition-all shadow-xl active:scale-95 italic text-xs md:text-sm"
+                  className="w-full py-2.5 bg-white text-zinc-950 font-black uppercase tracking-widest rounded-lg flex items-center justify-center gap-2 hover:bg-accent transition-all shadow-md active:scale-95 italic text-[10px]"
                 >
-                  <Sparkles className="w-3 h-3 md:w-4 md:h-4" />
-                  View Plans
+                  <Sparkles className="w-3.5 h-3.5" />
+                  Upgrade Protocol
                 </Link>
               </div>
             </div>
           ) : (
-            <div className="card-premium backdrop-blur-3xl border border-white/10 rounded-[2rem] md:rounded-[3rem] p-3 md:p-6 flex-1 flex flex-col min-h-0 relative overflow-hidden h-full w-full">
+            <div className="card-premium p-2 md:p-3 flex-1 flex flex-col min-h-0 relative overflow-hidden h-full w-full rounded-xl">
               {/* Grid Background */}
               <div className="absolute inset-0 bg-grid opacity-10 pointer-events-none"></div>
 
@@ -188,7 +187,7 @@ export default function AICoach() {
                     onKeyDown={(e) => e.key === "Enter" && sendMessage()}
                     placeholder="Ask your AI Trainer..."
                     disabled={loading}
-                    className="relative w-full bg-white/5 border border-white/10 p-3 pl-4 pr-12 md:p-4 md:pl-5 md:pr-14 rounded-xl md:rounded-2xl outline-none focus:border-accent/40 focus:bg-white/[0.08] transition-all text-white font-bold text-xs md:text-sm placeholder:opacity-20 min-w-0"
+                    className="relative w-full bg-white/5 border border-white/10 p-2.5 pl-4 pr-12 md:p-3 md:pl-5 md:pr-14 rounded-xl outline-none focus:border-accent/40 focus:bg-white/[0.08] transition-all text-white font-bold text-[11px] placeholder:opacity-20 min-w-0"
                   />
                   <button
                     onClick={sendMessage}
@@ -197,13 +196,6 @@ export default function AICoach() {
                   >
                     <Send className="w-3 h-3 md:w-4 md:h-4" />
                   </button>
-                </div>
-                <div className="flex justify-center mt-2 md:mt-3">
-                  <div className="flex items-center gap-2 opacity-20">
-                    <div className="h-[1px] w-4 md:w-6 bg-white"></div>
-                    <p className="text-[6px] font-black text-white uppercase tracking-[0.4em]">Secure</p>
-                    <div className="h-[1px] w-4 md:w-6 bg-white"></div>
-                  </div>
                 </div>
               </div>
             </div>
@@ -220,25 +212,25 @@ export default function AICoach() {
               className="fixed inset-0 z-[100] bg-bg/95 backdrop-blur-xl flex items-center justify-center p-4 md:p-10"
             >
               <motion.div
-                initial={{ scale: 0.95, y: 20 }}
-                animate={{ scale: 1, y: 0 }}
-                exit={{ scale: 0.95, y: 20 }}
-                className="bg-card border border-white/10 w-full max-w-6xl h-full rounded-[2.5rem] shadow-2xl flex flex-col overflow-hidden relative"
+                initial={{ opacity: 0, scale: 0.98 }}
+                animate={{ opacity: 1, scale: 1 }}
+                exit={{ opacity: 0, scale: 0.98 }}
+                className="bg-card border border-white/10 w-full max-w-5xl h-full rounded-2xl shadow-2xl flex flex-col overflow-hidden relative"
               >
-                <div className="p-8 border-b border-white/5 flex items-center justify-between bg-black/20">
-                  <div className="flex items-center gap-4">
-                    <div className="w-1.5 h-8 bg-accent rounded-full"></div>
-                    <h2 className="text-2xl font-black text-white uppercase italic tracking-tight">AI Trainer PRO</h2>
+                <div className="p-4 border-b border-white/5 flex items-center justify-between bg-black/20">
+                  <div className="flex items-center gap-3">
+                    <div className="w-1 h-6 bg-accent rounded-full"></div>
+                    <h2 className="text-xl font-black text-white uppercase italic tracking-tight">Coach Pro</h2>
                   </div>
                   <button
                     onClick={() => setIsExtended(false)}
-                    className="p-3 bg-white/5 rounded-2xl hover:bg-white/10 transition-all text-muted hover:text-white"
+                    className="p-2 bg-white/5 rounded-xl hover:bg-white/10 transition-all text-muted hover:text-white"
                   >
-                    <Minimize2 className="w-6 h-6" />
+                    <Minimize2 className="w-5 h-5" />
                   </button>
                 </div>
 
-                <div className="flex-1 overflow-y-auto p-8 space-y-8 scrollbar-none">
+                <div className="flex-1 overflow-y-auto p-4 space-y-4 scrollbar-none">
                   <AnimatePresence>
                     {messages.map((msg, i) => (
                       <motion.div
@@ -252,31 +244,31 @@ export default function AICoach() {
                   </AnimatePresence>
                   {loading && (
                     <div className="flex justify-start">
-                      <div className="bg-white/5 border border-white/10 p-6 rounded-[2.5rem] text-[10px] font-black text-accent uppercase tracking-widest flex items-center gap-4">
-                        <div className="w-5 h-5 border-2 border-accent/20 border-t-accent rounded-full animate-spin"></div>
-                        AI Assistant is thinking...
+                      <div className="bg-white/5 border border-white/10 p-4 rounded-2xl text-[9px] font-black text-accent uppercase tracking-widest flex items-center gap-3 w-fit">
+                        <div className="w-4 h-4 border-2 border-accent/20 border-t-accent rounded-full animate-spin"></div>
+                        PRO Assistant thinking...
                       </div>
                     </div>
                   )}
                   <div ref={messagesEndRef} className="h-4" />
                 </div>
 
-                <div className="p-8 bg-black/40 border-t border-white/5">
-                  <div className="max-w-4xl mx-auto relative">
+                <div className="p-4 bg-black/40 border-t border-white/5">
+                  <div className="max-w-3xl mx-auto relative px-2">
                     <input
                       value={input}
                       onChange={(e) => setInput(e.target.value)}
                       onKeyDown={(e) => e.key === "Enter" && sendMessage()}
                       placeholder="Ask anything..."
                       disabled={loading}
-                      className="w-full bg-white/5 border border-white/10 p-6 pr-20 rounded-3xl outline-none focus:border-accent/40 text-white font-bold"
+                      className="w-full bg-white/5 border border-white/10 p-4 pr-16 rounded-xl outline-none focus:border-accent/40 text-white font-bold text-xs"
                     />
                     <button
                       onClick={sendMessage}
                       disabled={loading || !input.trim()}
-                      className="absolute right-3 top-1/2 -translate-y-1/2 bg-white text-black p-4 rounded-xl hover:bg-accent disabled:opacity-5 transition-all"
+                      className="absolute right-4 top-1/2 -translate-y-1/2 bg-white text-zinc-950 p-2.5 rounded-lg hover:bg-accent disabled:opacity-5 transition-all"
                     >
-                      <Send className="w-5 h-5" />
+                      <Send className="w-4 h-4" />
                     </button>
                   </div>
                 </div>

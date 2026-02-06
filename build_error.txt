@@ -1,0 +1,23 @@
+[31m✗[39m Build failed in 557ms
+[31merror during build:
+[31mBuild failed with 1 error:
+
+[plugin @tailwindcss/vite:generate:build] D:/ai-fitness-trainer/src/index.css
+Error: Cannot apply unknown utility class `group`
+    at onInvalidCandidate (file:///D:/ai-fitness-trainer/node_modules/tailwindcss/dist/chunk-CT46QCH7.mjs:21:1511)
+    at Ce (file:///D:/ai-fitness-trainer/node_modules/tailwindcss/dist/chunk-CT46QCH7.mjs:16:36326)
+    at file:///D:/ai-fitness-trainer/node_modules/tailwindcss/dist/chunk-CT46QCH7.mjs:21:355
+    at br (file:///D:/ai-fitness-trainer/node_modules/tailwindcss/dist/chunk-CT46QCH7.mjs:3:1718)
+    at I (file:///D:/ai-fitness-trainer/node_modules/tailwindcss/dist/chunk-CT46QCH7.mjs:3:1377)
+    at Ae (file:///D:/ai-fitness-trainer/node_modules/tailwindcss/dist/chunk-CT46QCH7.mjs:21:172)
+    at Wi (file:///D:/ai-fitness-trainer/node_modules/tailwindcss/dist/chunk-CT46QCH7.mjs:38:294)
+    at async Za (file:///D:/ai-fitness-trainer/node_modules/tailwindcss/dist/chunk-CT46QCH7.mjs:38:631)
+    at async rf (file:///D:/ai-fitness-trainer/node_modules/tailwindcss/dist/chunk-CT46QCH7.mjs:38:1406)
+    at async lu (file:///D:/ai-fitness-trainer/node_modules/@tailwindcss/node/dist/index.mjs:10:3458)[31m
+    at aggregateBindingErrorsIntoJsError (file:///D:/ai-fitness-trainer/node_modules/rolldown/dist/shared/src-CYkh2Ybc.mjs:2659:18)
+    at unwrapBindingResult (file:///D:/ai-fitness-trainer/node_modules/rolldown/dist/shared/src-CYkh2Ybc.mjs:2634:128)
+    at #build (file:///D:/ai-fitness-trainer/node_modules/rolldown/dist/shared/src-CYkh2Ybc.mjs:4433:34)
+    at async buildEnvironment (file:///D:/ai-fitness-trainer/node_modules/vite/dist/node/chunks/node.js:33468:64)
+    at async Object.build (file:///D:/ai-fitness-trainer/node_modules/vite/dist/node/chunks/node.js:33871:19)
+    at async Object.buildApp (file:///D:/ai-fitness-trainer/node_modules/vite/dist/node/chunks/node.js:33868:153)
+    at async CAC.<anonymous> (file:///D:/ai-fitness-trainer/node_modules/vite/dist/node/cli.js:629:3)[39m

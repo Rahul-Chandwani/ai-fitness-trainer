@@ -27,16 +27,16 @@ export default function Navbar() {
     // Hide the global navbar on desktop dashboard (sidebar covers it)
     // But keep it for mobile dashboard
     return (
-        <nav className={`fixed top-0 left-0 right-0 z-[150] transition-all duration-500 ${scrolled ? 'p-0' : 'px-6 pt-8'} ${isDashboard ? 'lg:hidden' : ''}`}>
+        <nav className={`fixed top-0 left-0 right-0 z-[150] transition-all duration-500 ${scrolled ? 'p-0' : 'px-4 pt-4'} ${isDashboard ? 'lg:hidden' : ''}`}>
             <div className={`transition-all duration-500 backdrop-blur-2xl border flex items-center justify-between ${scrolled
-                ? 'bg-card/90 shadow-2xl w-full rounded-none border-b border-white/10 p-6'
-                : 'max-w-7xl mx-auto rounded-[2.5rem] p-4 border-white/5 bg-transparent shadow-none'}`}>
+                ? 'bg-card/90 shadow-lg w-full rounded-none border-b border-white/10 p-3'
+                : 'max-w-7xl mx-auto rounded-xl p-2 border-white/5 bg-transparent shadow-none'}`}>
                 {/* Logo */}
-                <Link to="/" className="flex items-center gap-3 group">
-                    <div className="w-10 h-10 bg-accent rounded-xl flex items-center justify-center transform group-hover:rotate-6 transition-transform">
-                        <Bot className="w-6 h-6 text-black" />
+                <Link to="/" className="flex items-center gap-2 group">
+                    <div className="w-8 h-8 bg-accent rounded-lg flex items-center justify-center transform group-hover:rotate-6 transition-transform shadow-sm">
+                        <Bot className="w-5 h-5 text-black" />
                     </div>
-                    <h1 className="text-xl font-extrabold text-white tracking-tight uppercase">SmartFit AI</h1>
+                    <h1 className="text-lg font-extrabold text-white tracking-tight uppercase">SmartFit <span className="text-accent">AI</span></h1>
                 </Link>
 
                 {/* Desktop Nav */}
@@ -47,7 +47,7 @@ export default function Navbar() {
                             <Link to="/plans" className="text-[10px] font-bold text-muted hover:text-white uppercase tracking-widest transition-colors">Plans</Link>
                             <div className="h-4 w-[1px] bg-white/10"></div>
                             <Link to="/login" className="text-[10px] font-bold text-muted hover:text-white uppercase tracking-widest transition-colors">Log In</Link>
-                            <Link to="/signup" className="bg-accent text-black px-6 py-2.5 rounded-lg text-[10px] font-bold uppercase tracking-widest transition-all">Start Now</Link>
+                            <Link to="/signup" className="btn btn-primary px-4 py-2 text-[10px]">Start Now</Link>
                         </>
                     ) : (
                         <>
@@ -86,7 +86,7 @@ export default function Navbar() {
                         initial={{ opacity: 0, scale: 0.95, y: -20 }}
                         animate={{ opacity: 1, scale: 1, y: 0 }}
                         exit={{ opacity: 0, scale: 0.95, y: -20 }}
-                        className="absolute top-24 left-6 right-6 bg-card/95 border border-white/10 backdrop-blur-3xl rounded-[3rem] p-10 md:hidden z-[160] shadow-2xl"
+                        className="absolute top-20 left-4 right-4 bg-card/98 border border-white/10 backdrop-blur-3xl rounded-xl p-6 md:hidden z-[160] shadow-2xl"
                     >
                         <div className="flex flex-col gap-8 text-center">
                             {!user ? (
@@ -95,7 +95,7 @@ export default function Navbar() {
                                     <Link onClick={() => setMobileMenu(false)} to="/plans" className="text-[10px] font-black text-muted uppercase tracking-[0.4em]">Plans</Link>
                                     <div className="h-[1px] w-full bg-white/5"></div>
                                     <Link onClick={() => setMobileMenu(false)} to="/login" className="text-[10px] font-black text-white uppercase tracking-[0.4em]">Log In</Link>
-                                    <Link onClick={() => setMobileMenu(false)} to="/signup" className="bg-accent text-black py-5 rounded-[2rem] text-[10px] font-black uppercase tracking-[0.4em] shadow-xl shadow-accent/20">Start Now</Link>
+                                    <Link onClick={() => setMobileMenu(false)} to="/signup" className="bg-accent text-black py-3 rounded-lg text-[10px] font-black uppercase tracking-[0.4em]">Start Now</Link>
                                 </>
                             ) : (
                                 <>

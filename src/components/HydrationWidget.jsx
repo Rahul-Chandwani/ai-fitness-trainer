@@ -9,7 +9,7 @@ export default function HydrationWidget() {
     const percentage = Math.min(100, (hydration / goal) * 100);
 
     return (
-        <div className="card-premium border border-white/5 rounded-[2.5rem] md:rounded-[3.5rem] p-6 md:p-10 relative overflow-hidden group h-full flex flex-col justify-between">
+        <div className="card-premium border border-white/5 rounded-xl p-3.5 relative overflow-hidden group h-full flex flex-col justify-between">
             {/* Background Liquid Surface */}
             <motion.div
                 initial={{ y: "100%" }}
@@ -21,19 +21,19 @@ export default function HydrationWidget() {
                 <div className="absolute top-0 inset-x-0 h-4 bg-gradient-to-b from-blue-400/20 to-transparent"></div>
             </motion.div>
 
-            <div className="absolute top-0 right-0 p-10 opacity-5 group-hover:opacity-10 transition-opacity">
-                <Waves className="w-40 h-40 text-blue-400" />
+            <div className="absolute top-0 right-0 p-6 opacity-5 group-hover:opacity-10 transition-opacity">
+                <Waves className="w-20 h-20 text-blue-400" />
             </div>
 
             <div className="relative z-10">
-                <div className="flex items-center justify-between mb-10">
-                    <div className="flex items-center gap-4">
-                        <div className="w-12 h-12 bg-blue-500/10 rounded-2xl flex items-center justify-center border border-blue-500/20 shadow-lg shadow-blue-500/5">
-                            <Droplets className="w-6 h-6 text-blue-400" />
+                <div className="flex items-center justify-between mb-4">
+                    <div className="flex items-center gap-2">
+                        <div className="w-7 h-7 bg-blue-500/10 rounded-lg flex items-center justify-center border border-blue-500/20">
+                            <Droplets className="w-3.5 h-3.5 text-blue-400" />
                         </div>
                         <div>
-                            <h3 className="text-sm font-black text-white uppercase italic tracking-tighter">Hydration Matrix</h3>
-                            <p className="text-[8px] text-muted font-black uppercase tracking-[0.4em] mt-1">H2O Saturation Protocol</p>
+                            <h3 className="text-xs font-black text-white uppercase italic tracking-tighter">Hydration</h3>
+                            <p className="text-[7px] text-muted font-black uppercase tracking-widest mt-0.5">Matrix</p>
                         </div>
                     </div>
                     <div className="text-right">
@@ -44,28 +44,28 @@ export default function HydrationWidget() {
                     </div>
                 </div>
 
-                <div className="flex items-baseline gap-4 mb-10">
-                    <h2 className="text-7xl font-black text-white italic tracking-tighter leading-none">{hydration}</h2>
+                <div className="flex items-baseline gap-1.5 mb-3">
+                    <h2 className="text-3xl font-black text-white italic tracking-tighter leading-none">{hydration}</h2>
                     <div className="flex flex-col">
-                        <span className="text-xl font-black text-muted uppercase tracking-widest leading-none">/ {goal}</span>
-                        <span className="text-[8px] font-black text-muted uppercase tracking-[0.5em] mt-2">Doses Authorized</span>
+                        <span className="text-base font-black text-muted uppercase tracking-widest leading-none">/ {goal}</span>
+                        <span className="text-[6px] font-black text-muted uppercase tracking-[0.2em] mt-0.5">Units</span>
                     </div>
                 </div>
 
                 {/* Technical Progress View */}
-                <div className="space-y-4 mb-10">
-                    <div className="flex justify-between items-center px-1">
-                        <div className="flex gap-1.5">
+                <div className="space-y-2 mb-4">
+                    <div className="flex justify-between items-center">
+                        <div className="flex gap-1">
                             {[...Array(8)].map((_, i) => (
                                 <div
                                     key={i}
-                                    className={`w-4 h-4 rounded-md border transition-all duration-500 ${i < hydration ? 'bg-blue-500 border-blue-400 shadow-[0_0_8px_rgba(96,165,250,0.5)]' : 'bg-white/5 border-white/10'}`}
+                                    className={`w-2 h-2 rounded-sm border transition-all duration-500 ${i < hydration ? 'bg-blue-500 border-blue-400 shadow-[0_0_5px_rgba(96,165,250,0.5)]' : 'bg-white/5 border-white/10'}`}
                                 ></div>
                             ))}
                         </div>
-                        <span className="text-[10px] font-black text-white italic tabular-nums">{Math.round(percentage)}%</span>
+                        <span className="text-[8px] font-black text-white italic tabular-nums">{Math.round(percentage)}%</span>
                     </div>
-                    <div className="h-1.5 w-full bg-white/5 rounded-full overflow-hidden border border-white/5">
+                    <div className="h-1 w-full bg-white/5 rounded-full overflow-hidden border border-white/5">
                         <motion.div
                             initial={{ width: 0 }}
                             animate={{ width: `${percentage}%` }}
@@ -75,19 +75,19 @@ export default function HydrationWidget() {
                 </div>
             </div>
 
-            <div className="flex gap-4 relative z-10">
+            <div className="flex gap-1.5 relative z-10">
                 <button
                     onClick={() => updateHydration(1)}
-                    className="flex-grow bg-white text-black py-5 rounded-3xl flex items-center justify-center gap-3 hover:bg-blue-400 transition-all font-black uppercase tracking-widest text-[10px] shadow-2xl shadow-blue-500/5 active:scale-95 group"
+                    className="flex-grow bg-white text-zinc-950 py-2.5 rounded-lg flex items-center justify-center gap-1.5 hover:bg-blue-400 transition-all font-black uppercase tracking-widest text-[8px] shadow-sm active:scale-95 group"
                 >
-                    <Plus className="w-4 h-4 group-hover:rotate-90 transition-transform" />
+                    <Plus className="w-3 h-3" />
                     Input Dose
                 </button>
                 <button
                     onClick={() => updateHydration(-1)}
-                    className="px-8 bg-white/5 text-white py-5 rounded-3xl flex items-center justify-center hover:bg-white/10 transition-all border border-white/5 active:scale-90"
+                    className="px-3 bg-white/5 text-white py-2.5 rounded-lg flex items-center justify-center hover:bg-white/10 transition-all border border-white/5 active:scale-90"
                 >
-                    <Minus className="w-5 h-5" />
+                    <Minus className="w-3.5 h-3.5" />
                 </button>
             </div>
         </div>
