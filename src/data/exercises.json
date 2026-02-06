@@ -957,5 +957,761 @@
         "calories_per_min": 5.5,
         "unit": "reps",
         "effective_parts": "Primary: Biceps"
+    },
+    {
+        "id": "ex_201",
+        "name": "Dumbbell Shoulder Press",
+        "muscles": [
+            "shoulders",
+            "triceps",
+            "upper chest"
+        ],
+        "level": "beginner",
+        "location": "gym",
+        "tutorial": "Press dumbbells overhead from shoulder height until arms are extended.",
+        "form_tips": [
+            "Core tight",
+            "No elbow lock",
+            "Controlled movement"
+        ],
+        "calories_per_min": 7.2,
+        "unit": "reps",
+        "effective_parts": "Primary: Deltoids; Secondary: Triceps"
+    },
+    {
+        "id": "ex_202",
+        "name": "Lateral Raises",
+        "muscles": [
+            "shoulders"
+        ],
+        "level": "beginner",
+        "location": "home",
+        "tutorial": "Raise arms sideways to shoulder height with dumbbells.",
+        "form_tips": [
+            "No swinging",
+            "Soft elbows",
+            "Slow tempo"
+        ],
+        "calories_per_min": 4.8,
+        "unit": "reps",
+        "effective_parts": "Primary: Lateral Deltoids"
+    },
+    {
+        "id": "ex_203",
+        "name": "Front Raises",
+        "muscles": [
+            "shoulders",
+            "upper chest"
+        ],
+        "level": "beginner",
+        "location": "home",
+        "tutorial": "Lift dumbbells forward to shoulder height.",
+        "form_tips": [
+            "Core engaged",
+            "No momentum",
+            "Controlled descent"
+        ],
+        "calories_per_min": 4.6,
+        "unit": "reps",
+        "effective_parts": "Primary: Anterior Deltoids"
+    },
+    {
+        "id": "ex_204",
+        "name": "Seated Cable Row",
+        "muscles": [
+            "back",
+            "biceps"
+        ],
+        "level": "intermediate",
+        "location": "gym",
+        "tutorial": "Pull cable handle toward waist while squeezing shoulder blades.",
+        "form_tips": [
+            "Straight back",
+            "No jerking",
+            "Slow return"
+        ],
+        "calories_per_min": 7.5,
+        "unit": "reps",
+        "effective_parts": "Primary: Middle Back; Secondary: Biceps"
+    },
+    {
+        "id": "ex_205",
+        "name": "One Arm Dumbbell Row",
+        "muscles": [
+            "back",
+            "biceps"
+        ],
+        "level": "beginner",
+        "location": "home",
+        "tutorial": "Row dumbbell toward hip with elbow close to body.",
+        "form_tips": [
+            "Flat back",
+            "Pull elbow back",
+            "Control weight"
+        ],
+        "calories_per_min": 6.8,
+        "unit": "reps",
+        "effective_parts": "Primary: Lats; Secondary: Biceps"
+    },
+    {
+        "id": "ex_206",
+        "name": "Bodyweight Squats",
+        "muscles": [
+            "legs",
+            "glutes"
+        ],
+        "level": "beginner",
+        "location": "home",
+        "tutorial": "Lower hips until thighs are parallel, then stand up.",
+        "form_tips": [
+            "Heels grounded",
+            "Chest up",
+            "Knees aligned"
+        ],
+        "calories_per_min": 8.0,
+        "unit": "reps",
+        "effective_parts": "Primary: Quadriceps; Secondary: Glutes"
+    },
+    {
+        "id": "ex_207",
+        "name": "Goblet Squats",
+        "muscles": [
+            "legs",
+            "glutes",
+            "core"
+        ],
+        "level": "beginner",
+        "location": "gym",
+        "tutorial": "Hold dumbbell at chest and perform squat.",
+        "form_tips": [
+            "Core tight",
+            "Upright torso",
+            "Controlled depth"
+        ],
+        "calories_per_min": 9.0,
+        "unit": "reps",
+        "effective_parts": "Primary: Quadriceps; Secondary: Core"
+    },
+    {
+        "id": "ex_208",
+        "name": "Hip Thrusts",
+        "muscles": [
+            "glutes",
+            "hamstrings"
+        ],
+        "level": "intermediate",
+        "location": "gym",
+        "tutorial": "Drive hips upward while upper back rests on bench.",
+        "form_tips": [
+            "Chin tucked",
+            "Squeeze glutes",
+            "Pause at top"
+        ],
+        "calories_per_min": 9.5,
+        "unit": "reps",
+        "effective_parts": "Primary: Gluteus Maximus"
+    },
+    {
+        "id": "ex_209",
+        "name": "Plank Hold",
+        "muscles": [
+            "core",
+            "shoulders"
+        ],
+        "level": "beginner",
+        "location": "home",
+        "tutorial": "Hold forearm plank with body in straight line.",
+        "form_tips": [
+            "No hip sag",
+            "Core engaged",
+            "Neutral neck"
+        ],
+        "calories_per_min": 4.5,
+        "unit": "min",
+        "effective_parts": "Primary: Core"
+    },
+    {
+        "id": "ex_210",
+        "name": "Hanging Leg Raises",
+        "muscles": [
+            "abs",
+            "hip flexors"
+        ],
+        "level": "advanced",
+        "location": "gym",
+        "tutorial": "Raise legs toward chest while hanging from bar.",
+        "form_tips": [
+            "No swinging",
+            "Slow reps",
+            "Core tight"
+        ],
+        "calories_per_min": 9.0,
+        "unit": "reps",
+        "effective_parts": "Primary: Lower Abs"
+    },
+    {
+        "id": "ex_221",
+        "name": "Barbell Bicep Curl",
+        "muscles": [
+            "biceps"
+        ],
+        "level": "beginner",
+        "location": "gym",
+        "tutorial": "Curl barbell upward while keeping elbows fixed.",
+        "form_tips": [
+            "No swinging",
+            "Elbows tucked",
+            "Controlled reps"
+        ],
+        "calories_per_min": 5.5,
+        "unit": "reps",
+        "effective_parts": "Primary: Biceps Brachii"
+    },
+    {
+        "id": "ex_222",
+        "name": "EZ Bar Curl",
+        "muscles": [
+            "biceps",
+            "forearms"
+        ],
+        "level": "beginner",
+        "location": "gym",
+        "tutorial": "Curl EZ bar upward using angled grip.",
+        "form_tips": [
+            "Neutral wrists",
+            "Slow movement",
+            "Full extension"
+        ],
+        "calories_per_min": 5.6,
+        "unit": "reps",
+        "effective_parts": "Primary: Biceps; Secondary: Forearms"
+    },
+    {
+        "id": "ex_223",
+        "name": "Incline Dumbbell Curl",
+        "muscles": [
+            "biceps"
+        ],
+        "level": "intermediate",
+        "location": "gym",
+        "tutorial": "Curl dumbbells while seated on incline bench.",
+        "form_tips": [
+            "Stretch at bottom",
+            "No shoulder movement",
+            "Slow tempo"
+        ],
+        "calories_per_min": 6.2,
+        "unit": "reps",
+        "effective_parts": "Primary: Long Head Biceps"
+    },
+    {
+        "id": "ex_224",
+        "name": "Hammer Curl",
+        "muscles": [
+            "biceps",
+            "forearms"
+        ],
+        "level": "beginner",
+        "location": "home",
+        "tutorial": "Curl dumbbells with palms facing each other.",
+        "form_tips": [
+            "No momentum",
+            "Elbows tight",
+            "Full range"
+        ],
+        "calories_per_min": 5.0,
+        "unit": "reps",
+        "effective_parts": "Primary: Brachialis"
+    },
+    {
+        "id": "ex_225",
+        "name": "Concentration Curl",
+        "muscles": [
+            "biceps"
+        ],
+        "level": "beginner",
+        "location": "home",
+        "tutorial": "Curl dumbbell while elbow rests on inner thigh.",
+        "form_tips": [
+            "Slow squeeze",
+            "Full contraction",
+            "No swing"
+        ],
+        "calories_per_min": 4.8,
+        "unit": "reps",
+        "effective_parts": "Primary: Biceps Peak"
+    },
+    {
+        "id": "ex_226",
+        "name": "Close Grip Bench Press",
+        "muscles": [
+            "triceps",
+            "chest"
+        ],
+        "level": "intermediate",
+        "location": "gym",
+        "tutorial": "Press barbell with hands close together.",
+        "form_tips": [
+            "Elbows close",
+            "Control descent",
+            "Feet planted"
+        ],
+        "calories_per_min": 8.5,
+        "unit": "reps",
+        "effective_parts": "Primary: Triceps; Secondary: Chest"
+    },
+    {
+        "id": "ex_227",
+        "name": "Skull Crushers",
+        "muscles": [
+            "triceps"
+        ],
+        "level": "intermediate",
+        "location": "gym",
+        "tutorial": "Lower bar toward forehead then extend arms.",
+        "form_tips": [
+            "Elbows fixed",
+            "Slow reps",
+            "No flare"
+        ],
+        "calories_per_min": 6.5,
+        "unit": "reps",
+        "effective_parts": "Primary: Triceps"
+    },
+    {
+        "id": "ex_228",
+        "name": "Overhead Tricep Extension",
+        "muscles": [
+            "triceps"
+        ],
+        "level": "beginner",
+        "location": "home",
+        "tutorial": "Extend dumbbell overhead using both hands.",
+        "form_tips": [
+            "Elbows close",
+            "Full stretch",
+            "Controlled motion"
+        ],
+        "calories_per_min": 5.2,
+        "unit": "reps",
+        "effective_parts": "Primary: Triceps Long Head"
+    },
+    {
+        "id": "ex_229",
+        "name": "Barbell Shrugs",
+        "muscles": [
+            "traps"
+        ],
+        "level": "beginner",
+        "location": "gym",
+        "tutorial": "Lift shoulders straight upward holding barbell.",
+        "form_tips": [
+            "No rolling shoulders",
+            "Pause at top",
+            "Heavy control"
+        ],
+        "calories_per_min": 5.0,
+        "unit": "reps",
+        "effective_parts": "Primary: Upper Trapezius"
+    },
+    {
+        "id": "ex_230",
+        "name": "Hack Squat",
+        "muscles": [
+            "legs",
+            "glutes"
+        ],
+        "level": "intermediate",
+        "location": "gym",
+        "tutorial": "Squat using hack squat machine keeping back supported.",
+        "form_tips": [
+            "Feet shoulder width",
+            "No knee lock",
+            "Controlled depth"
+        ],
+        "calories_per_min": 10.0,
+        "unit": "reps",
+        "effective_parts": "Primary: Quadriceps; Secondary: Glutes"
+    },
+    {
+        "id": "ex_241",
+        "name": "Leg Extensions",
+        "muscles": [
+            "quadriceps"
+        ],
+        "level": "beginner",
+        "location": "gym",
+        "tutorial": "Extend legs upward from seated position using machine.",
+        "form_tips": [
+            "Slow extension",
+            "Pause at top",
+            "Controlled descent"
+        ],
+        "calories_per_min": 5.5,
+        "unit": "reps",
+        "effective_parts": "Primary: Quadriceps"
+    },
+    {
+        "id": "ex_242",
+        "name": "Lying Leg Curls",
+        "muscles": [
+            "hamstrings"
+        ],
+        "level": "beginner",
+        "location": "gym",
+        "tutorial": "Curl legs toward glutes while lying face down on machine.",
+        "form_tips": [
+            "No jerking",
+            "Full curl",
+            "Slow return"
+        ],
+        "calories_per_min": 6.0,
+        "unit": "reps",
+        "effective_parts": "Primary: Hamstrings"
+    },
+    {
+        "id": "ex_243",
+        "name": "Seated Leg Curls",
+        "muscles": [
+            "hamstrings"
+        ],
+        "level": "beginner",
+        "location": "gym",
+        "tutorial": "Curl legs downward from seated position.",
+        "form_tips": [
+            "Controlled reps",
+            "Pause at contraction",
+            "Stable torso"
+        ],
+        "calories_per_min": 6.2,
+        "unit": "reps",
+        "effective_parts": "Primary: Hamstrings"
+    },
+    {
+        "id": "ex_244",
+        "name": "Walking Lunges",
+        "muscles": [
+            "legs",
+            "glutes",
+            "core"
+        ],
+        "level": "intermediate",
+        "location": "home",
+        "tutorial": "Step forward into lunge and continue alternating legs.",
+        "form_tips": [
+            "Upright torso",
+            "Heel push",
+            "Knee aligned"
+        ],
+        "calories_per_min": 9.0,
+        "unit": "reps",
+        "effective_parts": "Primary: Quadriceps, Glutes"
+    },
+    {
+        "id": "ex_245",
+        "name": "Reverse Lunges",
+        "muscles": [
+            "legs",
+            "glutes"
+        ],
+        "level": "beginner",
+        "location": "home",
+        "tutorial": "Step backward into lunge and return to standing.",
+        "form_tips": [
+            "Controlled step",
+            "Stable knee",
+            "Core tight"
+        ],
+        "calories_per_min": 8.2,
+        "unit": "reps",
+        "effective_parts": "Primary: Glutes; Secondary: Quadriceps"
+    },
+    {
+        "id": "ex_246",
+        "name": "Standing Calf Raises",
+        "muscles": [
+            "calves"
+        ],
+        "level": "beginner",
+        "location": "home",
+        "tutorial": "Raise heels off the ground while standing.",
+        "form_tips": [
+            "Full range",
+            "Pause at top",
+            "Slow tempo"
+        ],
+        "calories_per_min": 4.0,
+        "unit": "reps",
+        "effective_parts": "Primary: Gastrocnemius"
+    },
+    {
+        "id": "ex_247",
+        "name": "Seated Calf Raises",
+        "muscles": [
+            "calves"
+        ],
+        "level": "beginner",
+        "location": "gym",
+        "tutorial": "Raise heels while seated with weight on knees.",
+        "form_tips": [
+            "Controlled reps",
+            "Full stretch",
+            "Pause at top"
+        ],
+        "calories_per_min": 4.2,
+        "unit": "reps",
+        "effective_parts": "Primary: Soleus"
+    },
+    {
+        "id": "ex_248",
+        "name": "Back Extensions",
+        "muscles": [
+            "lower back",
+            "glutes"
+        ],
+        "level": "beginner",
+        "location": "gym",
+        "tutorial": "Extend torso upward from bent position on hyperextension bench.",
+        "form_tips": [
+            "Neutral spine",
+            "No overextension",
+            "Slow reps"
+        ],
+        "calories_per_min": 6.5,
+        "unit": "reps",
+        "effective_parts": "Primary: Erector Spinae; Secondary: Glutes"
+    },
+    {
+        "id": "ex_249",
+        "name": "Good Mornings (Barbell)",
+        "muscles": [
+            "hamstrings",
+            "lower back"
+        ],
+        "level": "advanced",
+        "location": "gym",
+        "tutorial": "Hinge forward at hips with barbell on shoulders.",
+        "form_tips": [
+            "Flat back",
+            "Soft knees",
+            "Hip hinge"
+        ],
+        "calories_per_min": 9.0,
+        "unit": "reps",
+        "effective_parts": "Primary: Hamstrings; Secondary: Lower Back"
+    },
+    {
+        "id": "ex_250",
+        "name": "Farmer Walk",
+        "muscles": [
+            "forearms",
+            "shoulders",
+            "core"
+        ],
+        "level": "intermediate",
+        "location": "gym",
+        "tutorial": "Walk while holding heavy dumbbells at sides.",
+        "form_tips": [
+            "Chest up",
+            "Short steps",
+            "Strong grip"
+        ],
+        "calories_per_min": 10.0,
+        "unit": "min",
+        "effective_parts": "Primary: Grip; Secondary: Core, Traps"
+    },
+    {
+        "id": "ex_261",
+        "name": "Barbell Front Squat",
+        "muscles": [
+            "quadriceps",
+            "glutes",
+            "core"
+        ],
+        "level": "advanced",
+        "location": "gym",
+        "tutorial": "Hold barbell on front shoulders and squat down keeping torso upright.",
+        "form_tips": [
+            "Elbows high",
+            "Chest up",
+            "Heels grounded"
+        ],
+        "calories_per_min": 11.0,
+        "unit": "reps",
+        "effective_parts": "Primary: Quadriceps; Secondary: Core, Glutes"
+    },
+    {
+        "id": "ex_262",
+        "name": "Zercher Squat",
+        "muscles": [
+            "legs",
+            "glutes",
+            "core"
+        ],
+        "level": "advanced",
+        "location": "gym",
+        "tutorial": "Hold barbell in elbow crook and perform squat.",
+        "form_tips": [
+            "Brace core",
+            "Neutral spine",
+            "Controlled depth"
+        ],
+        "calories_per_min": 11.5,
+        "unit": "reps",
+        "effective_parts": "Primary: Quadriceps; Secondary: Core"
+    },
+    {
+        "id": "ex_263",
+        "name": "Box Squats",
+        "muscles": [
+            "glutes",
+            "legs"
+        ],
+        "level": "intermediate",
+        "location": "gym",
+        "tutorial": "Sit back onto box then explode upward.",
+        "form_tips": [
+            "Shins vertical",
+            "Sit back",
+            "Explode up"
+        ],
+        "calories_per_min": 9.5,
+        "unit": "reps",
+        "effective_parts": "Primary: Glutes; Secondary: Quadriceps"
+    },
+    {
+        "id": "ex_264",
+        "name": "Deficit Deadlift",
+        "muscles": [
+            "hamstrings",
+            "glutes",
+            "back"
+        ],
+        "level": "advanced",
+        "location": "gym",
+        "tutorial": "Deadlift from elevated platform increasing range of motion.",
+        "form_tips": [
+            "Tight setup",
+            "Flat back",
+            "Drive through heels"
+        ],
+        "calories_per_min": 12.5,
+        "unit": "reps",
+        "effective_parts": "Primary: Hamstrings, Glutes; Secondary: Back"
+    },
+    {
+        "id": "ex_265",
+        "name": "Rack Pull",
+        "muscles": [
+            "back",
+            "glutes"
+        ],
+        "level": "intermediate",
+        "location": "gym",
+        "tutorial": "Pull barbell from rack pins above knee level.",
+        "form_tips": [
+            "Neutral spine",
+            "Lock out strong",
+            "Control descent"
+        ],
+        "calories_per_min": 10.5,
+        "unit": "reps",
+        "effective_parts": "Primary: Upper Back; Secondary: Glutes"
+    },
+    {
+        "id": "ex_266",
+        "name": "Neutral Grip Pull-Ups",
+        "muscles": [
+            "back",
+            "biceps"
+        ],
+        "level": "intermediate",
+        "location": "gym",
+        "tutorial": "Pull body upward using neutral grip handles.",
+        "form_tips": [
+            "Full hang",
+            "Chest to bar",
+            "No swinging"
+        ],
+        "calories_per_min": 9.2,
+        "unit": "reps",
+        "effective_parts": "Primary: Lats; Secondary: Biceps"
+    },
+    {
+        "id": "ex_267",
+        "name": "Chin-Ups",
+        "muscles": [
+            "biceps",
+            "back"
+        ],
+        "level": "intermediate",
+        "location": "home",
+        "tutorial": "Pull body up with palms facing toward you.",
+        "form_tips": [
+            "Squeeze biceps",
+            "Full range",
+            "Controlled descent"
+        ],
+        "calories_per_min": 9.0,
+        "unit": "reps",
+        "effective_parts": "Primary: Biceps; Secondary: Lats"
+    },
+    {
+        "id": "ex_268",
+        "name": "Inverted Rows",
+        "muscles": [
+            "back",
+            "biceps",
+            "core"
+        ],
+        "level": "beginner",
+        "location": "home",
+        "tutorial": "Pull chest toward bar while body stays straight.",
+        "form_tips": [
+            "Straight body",
+            "Pull elbows back",
+            "Controlled reps"
+        ],
+        "calories_per_min": 7.5,
+        "unit": "reps",
+        "effective_parts": "Primary: Upper Back; Secondary: Core"
+    },
+    {
+        "id": "ex_269",
+        "name": "Arnold Press",
+        "muscles": [
+            "shoulders",
+            "triceps"
+        ],
+        "level": "intermediate",
+        "location": "gym",
+        "tutorial": "Rotate dumbbells while pressing overhead.",
+        "form_tips": [
+            "Smooth rotation",
+            "Core tight",
+            "No jerking"
+        ],
+        "calories_per_min": 8.0,
+        "unit": "reps",
+        "effective_parts": "Primary: Deltoids; Secondary: Triceps"
+    },
+    {
+        "id": "ex_270",
+        "name": "Turkish Get-Up",
+        "muscles": [
+            "full body",
+            "core"
+        ],
+        "level": "advanced",
+        "location": "home",
+        "tutorial": "Move from lying to standing while holding kettlebell overhead.",
+        "form_tips": [
+            "Eyes on kettlebell",
+            "Slow transitions",
+            "Stable core"
+        ],
+        "calories_per_min": 12.0,
+        "unit": "reps",
+        "effective_parts": "Primary: Core; Secondary: Full Body"
     }
 ]

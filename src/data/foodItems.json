@@ -7773,5 +7773,1550 @@
             "Eggitarian",
             "Non-Vegetarian"
         ]
+    },
+    {
+        "id": "food_401",
+        "name": "Steamed White Rice",
+        "region": "Global",
+        "category": "Vegan",
+        "nutrition_per": "per 100g",
+        "calories": 130,
+        "protein_g": 2.4,
+        "carbs_g": 28.0,
+        "fats_g": 0.3,
+        "sugar_g": 0.1,
+        "benefits": "Primary energy source and easy to digest.",
+        "drawbacks": "Low fiber and micronutrients.",
+        "suitable_for": [
+            "Vegan",
+            "Vegetarian",
+            "Eggitarian",
+            "Non-Vegetarian"
+        ]
+    },
+    {
+        "id": "food_402",
+        "name": "Brown Rice",
+        "region": "Global",
+        "category": "Vegan",
+        "nutrition_per": "per 100g",
+        "calories": 123,
+        "protein_g": 2.7,
+        "carbs_g": 25.6,
+        "fats_g": 1.0,
+        "sugar_g": 0.7,
+        "benefits": "Higher fiber than white rice.",
+        "drawbacks": "Takes longer to digest.",
+        "suitable_for": [
+            "Vegan",
+            "Vegetarian",
+            "Eggitarian",
+            "Non-Vegetarian"
+        ]
+    },
+    {
+        "id": "food_403",
+        "name": "Quinoa (Cooked)",
+        "region": "South American",
+        "category": "Vegan",
+        "nutrition_per": "per 100g",
+        "calories": 120,
+        "protein_g": 4.4,
+        "carbs_g": 21.3,
+        "fats_g": 1.9,
+        "sugar_g": 0.9,
+        "benefits": "Complete plant protein.",
+        "drawbacks": "Expensive in some regions.",
+        "suitable_for": [
+            "Vegan",
+            "Vegetarian",
+            "Eggitarian",
+            "Non-Vegetarian"
+        ]
+    },
+    {
+        "id": "food_404",
+        "name": "Oats (Cooked)",
+        "region": "Global",
+        "category": "Vegan",
+        "nutrition_per": "per 100g",
+        "calories": 71,
+        "protein_g": 2.5,
+        "carbs_g": 12.0,
+        "fats_g": 1.4,
+        "sugar_g": 0.4,
+        "benefits": "Good for heart health and digestion.",
+        "drawbacks": "May cause bloating in some.",
+        "suitable_for": [
+            "Vegan",
+            "Vegetarian",
+            "Eggitarian",
+            "Non-Vegetarian"
+        ]
+    },
+    {
+        "id": "food_405",
+        "name": "Whole Wheat Pasta",
+        "region": "Italian",
+        "category": "Vegan",
+        "nutrition_per": "per 100g",
+        "calories": 149,
+        "protein_g": 5.5,
+        "carbs_g": 30.0,
+        "fats_g": 1.1,
+        "sugar_g": 2.0,
+        "benefits": "Complex carbs with fiber.",
+        "drawbacks": "Contains gluten.",
+        "suitable_for": [
+            "Vegan",
+            "Vegetarian",
+            "Eggitarian",
+            "Non-Vegetarian"
+        ]
+    },
+    {
+        "id": "food_406",
+        "name": "White Pasta",
+        "region": "Italian",
+        "category": "Vegan",
+        "nutrition_per": "per 100g",
+        "calories": 158,
+        "protein_g": 5.8,
+        "carbs_g": 31.0,
+        "fats_g": 0.9,
+        "sugar_g": 1.5,
+        "benefits": "Quick energy source.",
+        "drawbacks": "Low fiber.",
+        "suitable_for": [
+            "Vegan",
+            "Vegetarian",
+            "Eggitarian",
+            "Non-Vegetarian"
+        ]
+    },
+    {
+        "id": "food_407",
+        "name": "Mashed Potatoes",
+        "region": "Global",
+        "category": "Vegetarian",
+        "nutrition_per": "per 100g",
+        "calories": 88,
+        "protein_g": 2.1,
+        "carbs_g": 14.0,
+        "fats_g": 3.5,
+        "sugar_g": 1.2,
+        "benefits": "Comfort food and potassium source.",
+        "drawbacks": "Butter increases fat content.",
+        "suitable_for": [
+            "Vegetarian",
+            "Eggitarian",
+            "Non-Vegetarian"
+        ]
+    },
+    {
+        "id": "food_408",
+        "name": "Sweet Corn (Boiled)",
+        "region": "Global",
+        "category": "Vegan",
+        "nutrition_per": "per 100g",
+        "calories": 96,
+        "protein_g": 3.4,
+        "carbs_g": 21.0,
+        "fats_g": 1.5,
+        "sugar_g": 4.5,
+        "benefits": "Fiber rich and antioxidant source.",
+        "drawbacks": "High carbs.",
+        "suitable_for": [
+            "Vegan",
+            "Vegetarian",
+            "Eggitarian",
+            "Non-Vegetarian"
+        ]
+    },
+    {
+        "id": "food_409",
+        "name": "Green Peas",
+        "region": "Global",
+        "category": "Vegan",
+        "nutrition_per": "per 100g",
+        "calories": 81,
+        "protein_g": 5.4,
+        "carbs_g": 14.0,
+        "fats_g": 0.4,
+        "sugar_g": 5.7,
+        "benefits": "Plant protein and fiber rich.",
+        "drawbacks": "Can cause bloating.",
+        "suitable_for": [
+            "Vegan",
+            "Vegetarian",
+            "Eggitarian",
+            "Non-Vegetarian"
+        ]
+    },
+    {
+        "id": "food_410",
+        "name": "Chickpeas (Boiled)",
+        "region": "Middle Eastern",
+        "category": "Vegan",
+        "nutrition_per": "per 100g",
+        "calories": 164,
+        "protein_g": 8.9,
+        "carbs_g": 27.0,
+        "fats_g": 2.6,
+        "sugar_g": 4.8,
+        "benefits": "High protein and fiber.",
+        "drawbacks": "Gas forming.",
+        "suitable_for": [
+            "Vegan",
+            "Vegetarian",
+            "Eggitarian",
+            "Non-Vegetarian"
+        ]
+    },
+    {
+        "id": "food_411",
+        "name": "Lentils (Boiled)",
+        "region": "Global",
+        "category": "Vegan",
+        "nutrition_per": "per 100g",
+        "calories": 116,
+        "protein_g": 9.0,
+        "carbs_g": 20.0,
+        "fats_g": 0.4,
+        "sugar_g": 1.8,
+        "benefits": "Excellent plant protein source.",
+        "drawbacks": "Incomplete protein.",
+        "suitable_for": [
+            "Vegan",
+            "Vegetarian",
+            "Eggitarian",
+            "Non-Vegetarian"
+        ]
+    },
+    {
+        "id": "food_412",
+        "name": "Kidney Beans (Rajma)",
+        "region": "Global",
+        "category": "Vegan",
+        "nutrition_per": "per 100g",
+        "calories": 127,
+        "protein_g": 8.7,
+        "carbs_g": 22.8,
+        "fats_g": 0.5,
+        "sugar_g": 2.1,
+        "benefits": "High protein and iron.",
+        "drawbacks": "Heavy to digest.",
+        "suitable_for": [
+            "Vegan",
+            "Vegetarian",
+            "Eggitarian",
+            "Non-Vegetarian"
+        ]
+    },
+    {
+        "id": "food_413",
+        "name": "Boiled Eggs",
+        "region": "Global",
+        "category": "Egg",
+        "nutrition_per": "per 100g",
+        "calories": 155,
+        "protein_g": 13.0,
+        "carbs_g": 1.1,
+        "fats_g": 11.0,
+        "sugar_g": 1.1,
+        "benefits": "Complete protein source.",
+        "drawbacks": "High cholesterol.",
+        "suitable_for": [
+            "Eggitarian",
+            "Non-Vegetarian"
+        ]
+    },
+    {
+        "id": "food_414",
+        "name": "Egg Omelette",
+        "region": "Global",
+        "category": "Egg",
+        "nutrition_per": "per 100g",
+        "calories": 154,
+        "protein_g": 11.0,
+        "carbs_g": 2.0,
+        "fats_g": 11.0,
+        "sugar_g": 1.5,
+        "benefits": "High protein breakfast.",
+        "drawbacks": "Oil increases calories.",
+        "suitable_for": [
+            "Eggitarian",
+            "Non-Vegetarian"
+        ]
+    },
+    {
+        "id": "food_415",
+        "name": "Grilled Chicken Breast",
+        "region": "Global",
+        "category": "Non-Veg",
+        "nutrition_per": "per 100g",
+        "calories": 165,
+        "protein_g": 31.0,
+        "carbs_g": 0.0,
+        "fats_g": 3.6,
+        "sugar_g": 0.0,
+        "benefits": "Lean high-quality protein.",
+        "drawbacks": "Can be dry if overcooked.",
+        "suitable_for": [
+            "Non-Vegetarian"
+        ]
+    },
+    {
+        "id": "food_416",
+        "name": "Chicken Curry",
+        "region": "Indian",
+        "category": "Non-Veg",
+        "nutrition_per": "per 100g",
+        "calories": 240,
+        "protein_g": 18.0,
+        "carbs_g": 6.0,
+        "fats_g": 16.0,
+        "sugar_g": 2.5,
+        "benefits": "Protein rich hearty meal.",
+        "drawbacks": "High oil content.",
+        "suitable_for": [
+            "Non-Vegetarian"
+        ]
+    },
+    {
+        "id": "food_417",
+        "name": "Fish Curry",
+        "region": "Indian",
+        "category": "Non-Veg",
+        "nutrition_per": "per 100g",
+        "calories": 210,
+        "protein_g": 20.0,
+        "carbs_g": 5.0,
+        "fats_g": 13.0,
+        "sugar_g": 2.0,
+        "benefits": "Omega-3 rich protein.",
+        "drawbacks": "Oil based gravy increases fat.",
+        "suitable_for": [
+            "Non-Vegetarian"
+        ]
+    },
+    {
+        "id": "food_418",
+        "name": "Grilled Salmon",
+        "region": "Global",
+        "category": "Non-Veg",
+        "nutrition_per": "per 100g",
+        "calories": 208,
+        "protein_g": 22.0,
+        "carbs_g": 0.0,
+        "fats_g": 13.0,
+        "sugar_g": 0.0,
+        "benefits": "Excellent omega-3 source.",
+        "drawbacks": "Expensive.",
+        "suitable_for": [
+            "Non-Vegetarian"
+        ]
+    },
+    {
+        "id": "food_419",
+        "name": "Paneer Tikka",
+        "region": "Indian",
+        "category": "Vegetarian",
+        "nutrition_per": "per 100g",
+        "calories": 265,
+        "protein_g": 18.0,
+        "carbs_g": 6.0,
+        "fats_g": 20.0,
+        "sugar_g": 3.0,
+        "benefits": "High protein vegetarian option.",
+        "drawbacks": "High saturated fat.",
+        "suitable_for": [
+            "Vegetarian",
+            "Eggitarian",
+            "Non-Vegetarian"
+        ]
+    },
+    {
+        "id": "food_420",
+        "name": "Tofu Stir Fry",
+        "region": "Asian",
+        "category": "Vegan",
+        "nutrition_per": "per 100g",
+        "calories": 90,
+        "protein_g": 10.0,
+        "carbs_g": 3.0,
+        "fats_g": 4.5,
+        "sugar_g": 1.0,
+        "benefits": "Plant-based protein rich dish.",
+        "drawbacks": "Soy sensitivity in some.",
+        "suitable_for": [
+            "Vegan",
+            "Vegetarian",
+            "Eggitarian",
+            "Non-Vegetarian"
+        ]
+    },
+    {
+        "id": "food_421",
+        "name": "Plain Curd (Dahi)",
+        "region": "Indian",
+        "category": "Vegetarian",
+        "nutrition_per": "per 100g",
+        "calories": 98,
+        "protein_g": 11.0,
+        "carbs_g": 3.4,
+        "fats_g": 4.3,
+        "sugar_g": 3.2,
+        "benefits": "Probiotic and protein rich.",
+        "drawbacks": "Contains lactose.",
+        "suitable_for": [
+            "Vegetarian",
+            "Eggitarian",
+            "Non-Vegetarian"
+        ]
+    },
+    {
+        "id": "food_422",
+        "name": "Greek Yogurt (Low Fat)",
+        "region": "European",
+        "category": "Vegetarian",
+        "nutrition_per": "per 100g",
+        "calories": 59,
+        "protein_g": 10.0,
+        "carbs_g": 3.6,
+        "fats_g": 0.4,
+        "sugar_g": 3.2,
+        "benefits": "High protein and gut friendly.",
+        "drawbacks": "Sour taste for some.",
+        "suitable_for": [
+            "Vegetarian",
+            "Eggitarian",
+            "Non-Vegetarian"
+        ]
+    },
+    {
+        "id": "food_423",
+        "name": "Buttermilk",
+        "region": "Indian",
+        "category": "Vegetarian",
+        "nutrition_per": "per 100ml",
+        "calories": 40,
+        "protein_g": 3.3,
+        "carbs_g": 4.8,
+        "fats_g": 1.0,
+        "sugar_g": 4.8,
+        "benefits": "Cooling probiotic drink.",
+        "drawbacks": "Low calorie and protein.",
+        "suitable_for": [
+            "Vegetarian",
+            "Eggitarian",
+            "Non-Vegetarian"
+        ]
+    },
+    {
+        "id": "food_424",
+        "name": "Cheddar Cheese",
+        "region": "American",
+        "category": "Vegetarian",
+        "nutrition_per": "per 100g",
+        "calories": 403,
+        "protein_g": 25.0,
+        "carbs_g": 1.3,
+        "fats_g": 33.0,
+        "sugar_g": 0.5,
+        "benefits": "High calcium and protein.",
+        "drawbacks": "Very high saturated fat.",
+        "suitable_for": [
+            "Vegetarian",
+            "Eggitarian",
+            "Non-Vegetarian"
+        ]
+    },
+    {
+        "id": "food_425",
+        "name": "Mozzarella Cheese",
+        "region": "Italian",
+        "category": "Vegetarian",
+        "nutrition_per": "per 100g",
+        "calories": 280,
+        "protein_g": 28.0,
+        "carbs_g": 3.1,
+        "fats_g": 17.0,
+        "sugar_g": 1.0,
+        "benefits": "High protein cheese option.",
+        "drawbacks": "High sodium.",
+        "suitable_for": [
+            "Vegetarian",
+            "Eggitarian",
+            "Non-Vegetarian"
+        ]
+    },
+    {
+        "id": "food_426",
+        "name": "Paneer (Low Fat)",
+        "region": "Indian",
+        "category": "Vegetarian",
+        "nutrition_per": "per 100g",
+        "calories": 145,
+        "protein_g": 20.0,
+        "carbs_g": 3.0,
+        "fats_g": 6.0,
+        "sugar_g": 2.0,
+        "benefits": "Lean vegetarian protein.",
+        "drawbacks": "Lower fat reduces taste.",
+        "suitable_for": [
+            "Vegetarian",
+            "Eggitarian",
+            "Non-Vegetarian"
+        ]
+    },
+    {
+        "id": "food_427",
+        "name": "Soy Milk (Unsweetened)",
+        "region": "Global",
+        "category": "Vegan",
+        "nutrition_per": "per 100ml",
+        "calories": 33,
+        "protein_g": 3.3,
+        "carbs_g": 1.5,
+        "fats_g": 1.6,
+        "sugar_g": 0.5,
+        "benefits": "Plant-based milk with protein.",
+        "drawbacks": "Soy allergy in some.",
+        "suitable_for": [
+            "Vegan",
+            "Vegetarian",
+            "Eggitarian",
+            "Non-Vegetarian"
+        ]
+    },
+    {
+        "id": "food_428",
+        "name": "Almond Milk (Unsweetened)",
+        "region": "Global",
+        "category": "Vegan",
+        "nutrition_per": "per 100ml",
+        "calories": 13,
+        "protein_g": 0.6,
+        "carbs_g": 0.3,
+        "fats_g": 1.2,
+        "sugar_g": 0.0,
+        "benefits": "Low calorie dairy alternative.",
+        "drawbacks": "Very low protein.",
+        "suitable_for": [
+            "Vegan",
+            "Vegetarian",
+            "Eggitarian",
+            "Non-Vegetarian"
+        ]
+    },
+    {
+        "id": "food_429",
+        "name": "Peanut Butter",
+        "region": "Global",
+        "category": "Vegan",
+        "nutrition_per": "per 100g",
+        "calories": 588,
+        "protein_g": 25.0,
+        "carbs_g": 20.0,
+        "fats_g": 50.0,
+        "sugar_g": 9.0,
+        "benefits": "Healthy fats and protein.",
+        "drawbacks": "Very calorie dense.",
+        "suitable_for": [
+            "Vegan",
+            "Vegetarian",
+            "Eggitarian",
+            "Non-Vegetarian"
+        ]
+    },
+    {
+        "id": "food_430",
+        "name": "Almond Butter",
+        "region": "Global",
+        "category": "Vegan",
+        "nutrition_per": "per 100g",
+        "calories": 614,
+        "protein_g": 21.0,
+        "carbs_g": 19.0,
+        "fats_g": 56.0,
+        "sugar_g": 4.0,
+        "benefits": "Rich in vitamin E and healthy fats.",
+        "drawbacks": "Expensive and calorie dense.",
+        "suitable_for": [
+            "Vegan",
+            "Vegetarian",
+            "Eggitarian",
+            "Non-Vegetarian"
+        ]
+    },
+    {
+        "id": "food_431",
+        "name": "Cashew Nuts",
+        "region": "Global",
+        "category": "Vegan",
+        "nutrition_per": "per 100g",
+        "calories": 553,
+        "protein_g": 18.0,
+        "carbs_g": 30.0,
+        "fats_g": 44.0,
+        "sugar_g": 6.0,
+        "benefits": "Good source of minerals.",
+        "drawbacks": "High calories.",
+        "suitable_for": [
+            "Vegan",
+            "Vegetarian",
+            "Eggitarian",
+            "Non-Vegetarian"
+        ]
+    },
+    {
+        "id": "food_432",
+        "name": "Walnuts",
+        "region": "Global",
+        "category": "Vegan",
+        "nutrition_per": "per 100g",
+        "calories": 654,
+        "protein_g": 15.0,
+        "carbs_g": 14.0,
+        "fats_g": 65.0,
+        "sugar_g": 2.6,
+        "benefits": "Rich in omega-3 fats.",
+        "drawbacks": "Very calorie dense.",
+        "suitable_for": [
+            "Vegan",
+            "Vegetarian",
+            "Eggitarian",
+            "Non-Vegetarian"
+        ]
+    },
+    {
+        "id": "food_433",
+        "name": "Chia Seeds",
+        "region": "South American",
+        "category": "Vegan",
+        "nutrition_per": "per 100g",
+        "calories": 486,
+        "protein_g": 17.0,
+        "carbs_g": 41.0,
+        "fats_g": 31.0,
+        "sugar_g": 0.0,
+        "benefits": "High fiber and omega-3.",
+        "drawbacks": "Must soak before eating.",
+        "suitable_for": [
+            "Vegan",
+            "Vegetarian",
+            "Eggitarian",
+            "Non-Vegetarian"
+        ]
+    },
+    {
+        "id": "food_434",
+        "name": "Flax Seeds",
+        "region": "Global",
+        "category": "Vegan",
+        "nutrition_per": "per 100g",
+        "calories": 534,
+        "protein_g": 18.0,
+        "carbs_g": 29.0,
+        "fats_g": 42.0,
+        "sugar_g": 1.6,
+        "benefits": "Good for digestion and heart.",
+        "drawbacks": "Needs grinding for absorption.",
+        "suitable_for": [
+            "Vegan",
+            "Vegetarian",
+            "Eggitarian",
+            "Non-Vegetarian"
+        ]
+    },
+    {
+        "id": "food_435",
+        "name": "Pumpkin Seeds",
+        "region": "Global",
+        "category": "Vegan",
+        "nutrition_per": "per 100g",
+        "calories": 559,
+        "protein_g": 30.0,
+        "carbs_g": 11.0,
+        "fats_g": 49.0,
+        "sugar_g": 1.4,
+        "benefits": "High protein seed.",
+        "drawbacks": "High fat content.",
+        "suitable_for": [
+            "Vegan",
+            "Vegetarian",
+            "Eggitarian",
+            "Non-Vegetarian"
+        ]
+    },
+    {
+        "id": "food_436",
+        "name": "Whey Protein Powder",
+        "region": "Global",
+        "category": "Supplement",
+        "nutrition_per": "per 100g",
+        "calories": 412,
+        "protein_g": 80.0,
+        "carbs_g": 7.0,
+        "fats_g": 6.0,
+        "sugar_g": 4.0,
+        "benefits": "High quality fast-digesting protein.",
+        "drawbacks": "Not suitable for lactose intolerant.",
+        "suitable_for": [
+            "Vegetarian",
+            "Eggitarian",
+            "Non-Vegetarian"
+        ]
+    },
+    {
+        "id": "food_437",
+        "name": "Plant Protein Powder",
+        "region": "Global",
+        "category": "Supplement",
+        "nutrition_per": "per 100g",
+        "calories": 390,
+        "protein_g": 75.0,
+        "carbs_g": 10.0,
+        "fats_g": 6.0,
+        "sugar_g": 2.0,
+        "benefits": "Vegan protein blend.",
+        "drawbacks": "Lower leucine than whey.",
+        "suitable_for": [
+            "Vegan",
+            "Vegetarian",
+            "Eggitarian",
+            "Non-Vegetarian"
+        ]
+    },
+    {
+        "id": "food_438",
+        "name": "Protein Shake (Milk Based)",
+        "region": "Global",
+        "category": "Beverage",
+        "nutrition_per": "per 100ml",
+        "calories": 75,
+        "protein_g": 6.0,
+        "carbs_g": 6.0,
+        "fats_g": 2.5,
+        "sugar_g": 5.0,
+        "benefits": "Convenient protein intake.",
+        "drawbacks": "Added sugar in commercial versions.",
+        "suitable_for": [
+            "Vegetarian",
+            "Eggitarian",
+            "Non-Vegetarian"
+        ]
+    },
+    {
+        "id": "food_439",
+        "name": "Protein Shake (Plant Based)",
+        "region": "Global",
+        "category": "Beverage",
+        "nutrition_per": "per 100ml",
+        "calories": 65,
+        "protein_g": 5.0,
+        "carbs_g": 5.0,
+        "fats_g": 2.0,
+        "sugar_g": 2.5,
+        "benefits": "Dairy-free protein drink.",
+        "drawbacks": "Lower protein density.",
+        "suitable_for": [
+            "Vegan",
+            "Vegetarian",
+            "Eggitarian",
+            "Non-Vegetarian"
+        ]
+    },
+    {
+        "id": "food_440",
+        "name": "Dark Chocolate (70%)",
+        "region": "Global",
+        "category": "Dessert",
+        "nutrition_per": "per 100g",
+        "calories": 598,
+        "protein_g": 7.8,
+        "carbs_g": 45.0,
+        "fats_g": 43.0,
+        "sugar_g": 24.0,
+        "benefits": "Rich in antioxidants.",
+        "drawbacks": "High calorie and fat.",
+        "suitable_for": [
+            "Vegan",
+            "Vegetarian",
+            "Eggitarian",
+            "Non-Vegetarian"
+        ]
+    },
+    {
+        "id": "food_441",
+        "name": "White Bread (Slice)",
+        "region": "Global",
+        "category": "Vegetarian",
+        "nutrition_per": "per 100g",
+        "calories": 265,
+        "protein_g": 9.0,
+        "carbs_g": 49.0,
+        "fats_g": 3.2,
+        "sugar_g": 5.0,
+        "benefits": "Quick energy source.",
+        "drawbacks": "Low fiber and refined carbs.",
+        "suitable_for": [
+            "Vegetarian",
+            "Eggitarian",
+            "Non-Vegetarian"
+        ]
+    },
+    {
+        "id": "food_442",
+        "name": "Whole Wheat Bread",
+        "region": "Global",
+        "category": "Vegan",
+        "nutrition_per": "per 100g",
+        "calories": 247,
+        "protein_g": 13.0,
+        "carbs_g": 41.0,
+        "fats_g": 4.2,
+        "sugar_g": 6.0,
+        "benefits": "Higher fiber and micronutrients.",
+        "drawbacks": "Contains gluten.",
+        "suitable_for": [
+            "Vegan",
+            "Vegetarian",
+            "Eggitarian",
+            "Non-Vegetarian"
+        ]
+    },
+    {
+        "id": "food_443",
+        "name": "Multigrain Bread",
+        "region": "Global",
+        "category": "Vegan",
+        "nutrition_per": "per 100g",
+        "calories": 252,
+        "protein_g": 12.0,
+        "carbs_g": 43.0,
+        "fats_g": 4.5,
+        "sugar_g": 5.5,
+        "benefits": "Combination of grains for better nutrition.",
+        "drawbacks": "May still contain refined flour.",
+        "suitable_for": [
+            "Vegan",
+            "Vegetarian",
+            "Eggitarian",
+            "Non-Vegetarian"
+        ]
+    },
+    {
+        "id": "food_444",
+        "name": "Croissant",
+        "region": "French",
+        "category": "Vegetarian",
+        "nutrition_per": "per 100g",
+        "calories": 406,
+        "protein_g": 8.2,
+        "carbs_g": 45.0,
+        "fats_g": 21.0,
+        "sugar_g": 11.0,
+        "benefits": "Energy-dense bakery item.",
+        "drawbacks": "Very high saturated fat.",
+        "suitable_for": [
+            "Vegetarian",
+            "Eggitarian",
+            "Non-Vegetarian"
+        ]
+    },
+    {
+        "id": "food_445",
+        "name": "Bagel",
+        "region": "American",
+        "category": "Vegan",
+        "nutrition_per": "per 100g",
+        "calories": 270,
+        "protein_g": 10.0,
+        "carbs_g": 53.0,
+        "fats_g": 1.5,
+        "sugar_g": 5.0,
+        "benefits": "Filling carbohydrate source.",
+        "drawbacks": "Refined flour.",
+        "suitable_for": [
+            "Vegan",
+            "Vegetarian",
+            "Eggitarian",
+            "Non-Vegetarian"
+        ]
+    },
+    {
+        "id": "food_446",
+        "name": "Plain Dosa",
+        "region": "Indian",
+        "category": "Vegan",
+        "nutrition_per": "per 100g",
+        "calories": 168,
+        "protein_g": 4.0,
+        "carbs_g": 28.0,
+        "fats_g": 3.7,
+        "sugar_g": 0.5,
+        "benefits": "Fermented food, easy to digest.",
+        "drawbacks": "Low protein.",
+        "suitable_for": [
+            "Vegan",
+            "Vegetarian",
+            "Eggitarian",
+            "Non-Vegetarian"
+        ]
+    },
+    {
+        "id": "food_447",
+        "name": "Idli",
+        "region": "Indian",
+        "category": "Vegan",
+        "nutrition_per": "per 100g",
+        "calories": 146,
+        "protein_g": 4.5,
+        "carbs_g": 31.0,
+        "fats_g": 0.4,
+        "sugar_g": 0.5,
+        "benefits": "Low fat fermented breakfast.",
+        "drawbacks": "Low fiber.",
+        "suitable_for": [
+            "Vegan",
+            "Vegetarian",
+            "Eggitarian",
+            "Non-Vegetarian"
+        ]
+    },
+    {
+        "id": "food_448",
+        "name": "Upma",
+        "region": "Indian",
+        "category": "Vegetarian",
+        "nutrition_per": "per 100g",
+        "calories": 120,
+        "protein_g": 3.5,
+        "carbs_g": 18.0,
+        "fats_g": 4.0,
+        "sugar_g": 1.2,
+        "benefits": "Light and filling breakfast.",
+        "drawbacks": "Low protein.",
+        "suitable_for": [
+            "Vegetarian",
+            "Eggitarian",
+            "Non-Vegetarian"
+        ]
+    },
+    {
+        "id": "food_449",
+        "name": "Poha",
+        "region": "Indian",
+        "category": "Vegan",
+        "nutrition_per": "per 100g",
+        "calories": 110,
+        "protein_g": 2.5,
+        "carbs_g": 20.0,
+        "fats_g": 2.5,
+        "sugar_g": 1.0,
+        "benefits": "Easy to digest and iron rich.",
+        "drawbacks": "Low protein.",
+        "suitable_for": [
+            "Vegan",
+            "Vegetarian",
+            "Eggitarian",
+            "Non-Vegetarian"
+        ]
+    },
+    {
+        "id": "food_450",
+        "name": "Vegetable Sandwich",
+        "region": "Global",
+        "category": "Vegetarian",
+        "nutrition_per": "per 100g",
+        "calories": 215,
+        "protein_g": 6.0,
+        "carbs_g": 30.0,
+        "fats_g": 8.0,
+        "sugar_g": 4.0,
+        "benefits": "Balanced snack with veggies.",
+        "drawbacks": "Bread increases refined carbs.",
+        "suitable_for": [
+            "Vegetarian",
+            "Eggitarian",
+            "Non-Vegetarian"
+        ]
+    },
+    {
+        "id": "food_451",
+        "name": "Veg Burger Patty",
+        "region": "Global",
+        "category": "Vegetarian",
+        "nutrition_per": "per 100g",
+        "calories": 240,
+        "protein_g": 7.0,
+        "carbs_g": 28.0,
+        "fats_g": 10.0,
+        "sugar_g": 3.0,
+        "benefits": "Convenient vegetarian snack.",
+        "drawbacks": "Often processed.",
+        "suitable_for": [
+            "Vegetarian",
+            "Eggitarian",
+            "Non-Vegetarian"
+        ]
+    },
+    {
+        "id": "food_452",
+        "name": "Chicken Burger Patty",
+        "region": "Global",
+        "category": "Non-Veg",
+        "nutrition_per": "per 100g",
+        "calories": 250,
+        "protein_g": 18.0,
+        "carbs_g": 12.0,
+        "fats_g": 15.0,
+        "sugar_g": 2.0,
+        "benefits": "High protein convenience food.",
+        "drawbacks": "High fat and sodium.",
+        "suitable_for": [
+            "Non-Vegetarian"
+        ]
+    },
+    {
+        "id": "food_453",
+        "name": "French Fries",
+        "region": "American",
+        "category": "Vegan",
+        "nutrition_per": "per 100g",
+        "calories": 312,
+        "protein_g": 3.4,
+        "carbs_g": 41.0,
+        "fats_g": 15.0,
+        "sugar_g": 0.3,
+        "benefits": "Quick energy snack.",
+        "drawbacks": "Deep fried and high fat.",
+        "suitable_for": [
+            "Vegan",
+            "Vegetarian",
+            "Eggitarian",
+            "Non-Vegetarian"
+        ]
+    },
+    {
+        "id": "food_454",
+        "name": "Pizza (Cheese)",
+        "region": "Italian",
+        "category": "Vegetarian",
+        "nutrition_per": "per 100g",
+        "calories": 266,
+        "protein_g": 11.0,
+        "carbs_g": 33.0,
+        "fats_g": 10.0,
+        "sugar_g": 4.0,
+        "benefits": "Good calcium and carbs.",
+        "drawbacks": "High sodium and fat.",
+        "suitable_for": [
+            "Vegetarian",
+            "Eggitarian",
+            "Non-Vegetarian"
+        ]
+    },
+    {
+        "id": "food_455",
+        "name": "Pizza (Chicken Topping)",
+        "region": "Italian",
+        "category": "Non-Veg",
+        "nutrition_per": "per 100g",
+        "calories": 285,
+        "protein_g": 14.0,
+        "carbs_g": 32.0,
+        "fats_g": 12.0,
+        "sugar_g": 3.8,
+        "benefits": "Protein enriched pizza.",
+        "drawbacks": "High calories.",
+        "suitable_for": [
+            "Non-Vegetarian"
+        ]
+    },
+    {
+        "id": "food_456",
+        "name": "Ice Cream (Vanilla)",
+        "region": "Global",
+        "category": "Dessert",
+        "nutrition_per": "per 100g",
+        "calories": 207,
+        "protein_g": 3.5,
+        "carbs_g": 24.0,
+        "fats_g": 11.0,
+        "sugar_g": 21.0,
+        "benefits": "Calcium rich dessert.",
+        "drawbacks": "Very high sugar.",
+        "suitable_for": [
+            "Vegetarian",
+            "Eggitarian",
+            "Non-Vegetarian"
+        ]
+    },
+    {
+        "id": "food_457",
+        "name": "Ice Cream (Chocolate)",
+        "region": "Global",
+        "category": "Dessert",
+        "nutrition_per": "per 100g",
+        "calories": 216,
+        "protein_g": 3.8,
+        "carbs_g": 25.0,
+        "fats_g": 12.0,
+        "sugar_g": 22.0,
+        "benefits": "Energy dense dessert.",
+        "drawbacks": "High sugar and fat.",
+        "suitable_for": [
+            "Vegetarian",
+            "Eggitarian",
+            "Non-Vegetarian"
+        ]
+    },
+    {
+        "id": "food_458",
+        "name": "Fruit Salad",
+        "region": "Global",
+        "category": "Vegan",
+        "nutrition_per": "per 100g",
+        "calories": 60,
+        "protein_g": 0.8,
+        "carbs_g": 15.0,
+        "fats_g": 0.2,
+        "sugar_g": 12.0,
+        "benefits": "Vitamin and antioxidant rich.",
+        "drawbacks": "High natural sugar.",
+        "suitable_for": [
+            "Vegan",
+            "Vegetarian",
+            "Eggitarian",
+            "Non-Vegetarian"
+        ]
+    },
+    {
+        "id": "food_459",
+        "name": "Protein Bar",
+        "region": "Global",
+        "category": "Supplement",
+        "nutrition_per": "per 100g",
+        "calories": 350,
+        "protein_g": 25.0,
+        "carbs_g": 35.0,
+        "fats_g": 10.0,
+        "sugar_g": 18.0,
+        "benefits": "Convenient protein intake.",
+        "drawbacks": "Often high sugar.",
+        "suitable_for": [
+            "Vegetarian",
+            "Eggitarian",
+            "Non-Vegetarian"
+        ]
+    },
+    {
+        "id": "food_460",
+        "name": "Energy Bar",
+        "region": "Global",
+        "category": "Supplement",
+        "nutrition_per": "per 100g",
+        "calories": 420,
+        "protein_g": 12.0,
+        "carbs_g": 60.0,
+        "fats_g": 15.0,
+        "sugar_g": 30.0,
+        "benefits": "Quick energy during workouts.",
+        "drawbacks": "High sugar content.",
+        "suitable_for": [
+            "Vegan",
+            "Vegetarian",
+            "Eggitarian",
+            "Non-Vegetarian"
+        ]
+    },
+    {
+        "id": "food_461",
+        "name": "Potato Chips (Salted)",
+        "region": "Global",
+        "category": "Packaged Snack",
+        "nutrition_per": "per 100g",
+        "calories": 536,
+        "protein_g": 7.0,
+        "carbs_g": 52.0,
+        "fats_g": 35.0,
+        "sugar_g": 0.5,
+        "benefits": "Quick energy and convenient snack.",
+        "drawbacks": "High fat, sodium, and calories.",
+        "suitable_for": [
+            "Vegetarian",
+            "Eggitarian",
+            "Non-Vegetarian"
+        ]
+    },
+    {
+        "id": "food_462",
+        "name": "Flavored Wafers",
+        "region": "Global",
+        "category": "Packaged Snack",
+        "nutrition_per": "per 100g",
+        "calories": 520,
+        "protein_g": 6.0,
+        "carbs_g": 65.0,
+        "fats_g": 26.0,
+        "sugar_g": 32.0,
+        "benefits": "Quick energy snack.",
+        "drawbacks": "High sugar and refined carbs.",
+        "suitable_for": [
+            "Vegetarian",
+            "Eggitarian",
+            "Non-Vegetarian"
+        ]
+    },
+    {
+        "id": "food_463",
+        "name": "Corn Chips",
+        "region": "American",
+        "category": "Packaged Snack",
+        "nutrition_per": "per 100g",
+        "calories": 498,
+        "protein_g": 7.0,
+        "carbs_g": 62.0,
+        "fats_g": 24.0,
+        "sugar_g": 1.2,
+        "benefits": "Crunchy carb source.",
+        "drawbacks": "High fat and sodium.",
+        "suitable_for": [
+            "Vegan",
+            "Vegetarian",
+            "Eggitarian",
+            "Non-Vegetarian"
+        ]
+    },
+    {
+        "id": "food_464",
+        "name": "Nacho Chips",
+        "region": "Mexican",
+        "category": "Packaged Snack",
+        "nutrition_per": "per 100g",
+        "calories": 505,
+        "protein_g": 8.0,
+        "carbs_g": 60.0,
+        "fats_g": 26.0,
+        "sugar_g": 2.0,
+        "benefits": "Energy dense snack.",
+        "drawbacks": "High calories and salt.",
+        "suitable_for": [
+            "Vegetarian",
+            "Eggitarian",
+            "Non-Vegetarian"
+        ]
+    },
+    {
+        "id": "food_465",
+        "name": "Protein Chips",
+        "region": "Global",
+        "category": "Protein Snack",
+        "nutrition_per": "per 100g",
+        "calories": 420,
+        "protein_g": 30.0,
+        "carbs_g": 35.0,
+        "fats_g": 15.0,
+        "sugar_g": 4.0,
+        "benefits": "Higher protein alternative to chips.",
+        "drawbacks": "Still processed food.",
+        "suitable_for": [
+            "Vegetarian",
+            "Eggitarian",
+            "Non-Vegetarian"
+        ]
+    },
+    {
+        "id": "food_466",
+        "name": "Soy Protein Crisps",
+        "region": "Global",
+        "category": "Protein Snack",
+        "nutrition_per": "per 100g",
+        "calories": 390,
+        "protein_g": 50.0,
+        "carbs_g": 30.0,
+        "fats_g": 8.0,
+        "sugar_g": 2.0,
+        "benefits": "Very high protein content.",
+        "drawbacks": "Highly processed.",
+        "suitable_for": [
+            "Vegan",
+            "Vegetarian",
+            "Eggitarian",
+            "Non-Vegetarian"
+        ]
+    },
+    {
+        "id": "food_467",
+        "name": "Protein Bar (Chocolate)",
+        "region": "Global",
+        "category": "Protein Supplement",
+        "nutrition_per": "per 100g",
+        "calories": 360,
+        "protein_g": 28.0,
+        "carbs_g": 35.0,
+        "fats_g": 12.0,
+        "sugar_g": 15.0,
+        "benefits": "Convenient post-workout protein.",
+        "drawbacks": "Often contains added sugar.",
+        "suitable_for": [
+            "Vegetarian",
+            "Eggitarian",
+            "Non-Vegetarian"
+        ]
+    },
+    {
+        "id": "food_468",
+        "name": "Protein Bar (Low Sugar)",
+        "region": "Global",
+        "category": "Protein Supplement",
+        "nutrition_per": "per 100g",
+        "calories": 320,
+        "protein_g": 30.0,
+        "carbs_g": 25.0,
+        "fats_g": 10.0,
+        "sugar_g": 3.0,
+        "benefits": "Better macro balance.",
+        "drawbacks": "Artificial sweeteners.",
+        "suitable_for": [
+            "Vegetarian",
+            "Eggitarian",
+            "Non-Vegetarian"
+        ]
+    },
+    {
+        "id": "food_469",
+        "name": "Energy Bar (Oats & Honey)",
+        "region": "Global",
+        "category": "Packaged Snack",
+        "nutrition_per": "per 100g",
+        "calories": 410,
+        "protein_g": 10.0,
+        "carbs_g": 65.0,
+        "fats_g": 12.0,
+        "sugar_g": 28.0,
+        "benefits": "Quick carb energy.",
+        "drawbacks": "High sugar.",
+        "suitable_for": [
+            "Vegetarian",
+            "Eggitarian",
+            "Non-Vegetarian"
+        ]
+    },
+    {
+        "id": "food_470",
+        "name": "Granola Bar",
+        "region": "Global",
+        "category": "Packaged Snack",
+        "nutrition_per": "per 100g",
+        "calories": 430,
+        "protein_g": 9.0,
+        "carbs_g": 65.0,
+        "fats_g": 15.0,
+        "sugar_g": 25.0,
+        "benefits": "Fiber and carb source.",
+        "drawbacks": "Often high in sugar.",
+        "suitable_for": [
+            "Vegetarian",
+            "Eggitarian",
+            "Non-Vegetarian"
+        ]
+    },
+    {
+        "id": "food_471",
+        "name": "Ready-to-Drink Protein Shake",
+        "region": "Global",
+        "category": "Protein Beverage",
+        "nutrition_per": "per 100ml",
+        "calories": 75,
+        "protein_g": 6.5,
+        "carbs_g": 6.0,
+        "fats_g": 2.0,
+        "sugar_g": 4.5,
+        "benefits": "Convenient liquid protein.",
+        "drawbacks": "Added stabilizers and sugar.",
+        "suitable_for": [
+            "Vegetarian",
+            "Eggitarian",
+            "Non-Vegetarian"
+        ]
+    },
+    {
+        "id": "food_472",
+        "name": "Plant-Based Protein Shake",
+        "region": "Global",
+        "category": "Protein Beverage",
+        "nutrition_per": "per 100ml",
+        "calories": 68,
+        "protein_g": 5.5,
+        "carbs_g": 5.5,
+        "fats_g": 2.2,
+        "sugar_g": 2.0,
+        "benefits": "Dairy-free protein option.",
+        "drawbacks": "Lower protein density.",
+        "suitable_for": [
+            "Vegan",
+            "Vegetarian",
+            "Eggitarian",
+            "Non-Vegetarian"
+        ]
+    },
+    {
+        "id": "food_473",
+        "name": "Mass Gainer Shake",
+        "region": "Global",
+        "category": "Supplement",
+        "nutrition_per": "per 100g",
+        "calories": 400,
+        "protein_g": 20.0,
+        "carbs_g": 65.0,
+        "fats_g": 7.0,
+        "sugar_g": 20.0,
+        "benefits": "Supports weight gain.",
+        "drawbacks": "High sugar content.",
+        "suitable_for": [
+            "Vegetarian",
+            "Eggitarian",
+            "Non-Vegetarian"
+        ]
+    },
+    {
+        "id": "food_474",
+        "name": "Meal Replacement Shake",
+        "region": "Global",
+        "category": "Supplement",
+        "nutrition_per": "per 100ml",
+        "calories": 90,
+        "protein_g": 5.0,
+        "carbs_g": 10.0,
+        "fats_g": 3.0,
+        "sugar_g": 5.0,
+        "benefits": "Balanced macro drink.",
+        "drawbacks": "Not a whole food replacement.",
+        "suitable_for": [
+            "Vegetarian",
+            "Eggitarian",
+            "Non-Vegetarian"
+        ]
+    },
+    {
+        "id": "food_475",
+        "name": "Protein Cookies",
+        "region": "Global",
+        "category": "Protein Snack",
+        "nutrition_per": "per 100g",
+        "calories": 380,
+        "protein_g": 20.0,
+        "carbs_g": 45.0,
+        "fats_g": 14.0,
+        "sugar_g": 18.0,
+        "benefits": "Protein enriched dessert.",
+        "drawbacks": "Still high sugar.",
+        "suitable_for": [
+            "Vegetarian",
+            "Eggitarian",
+            "Non-Vegetarian"
+        ]
+    },
+    {
+        "id": "food_476",
+        "name": "Protein Brownie",
+        "region": "Global",
+        "category": "Protein Snack",
+        "nutrition_per": "per 100g",
+        "calories": 360,
+        "protein_g": 22.0,
+        "carbs_g": 40.0,
+        "fats_g": 12.0,
+        "sugar_g": 16.0,
+        "benefits": "Protein alternative to sweets.",
+        "drawbacks": "Processed.",
+        "suitable_for": [
+            "Vegetarian",
+            "Eggitarian",
+            "Non-Vegetarian"
+        ]
+    },
+    {
+        "id": "food_477",
+        "name": "Roasted Chickpea Snack",
+        "region": "Global",
+        "category": "Packaged Snack",
+        "nutrition_per": "per 100g",
+        "calories": 380,
+        "protein_g": 21.0,
+        "carbs_g": 45.0,
+        "fats_g": 10.0,
+        "sugar_g": 4.0,
+        "benefits": "High protein crunchy snack.",
+        "drawbacks": "May be hard to digest.",
+        "suitable_for": [
+            "Vegan",
+            "Vegetarian",
+            "Eggitarian",
+            "Non-Vegetarian"
+        ]
+    },
+    {
+        "id": "food_478",
+        "name": "Roasted Soy Nuts",
+        "region": "Global",
+        "category": "Protein Snack",
+        "nutrition_per": "per 100g",
+        "calories": 446,
+        "protein_g": 36.0,
+        "carbs_g": 30.0,
+        "fats_g": 20.0,
+        "sugar_g": 7.0,
+        "benefits": "Very high protein snack.",
+        "drawbacks": "Soy sensitivity.",
+        "suitable_for": [
+            "Vegan",
+            "Vegetarian",
+            "Eggitarian",
+            "Non-Vegetarian"
+        ]
+    },
+    {
+        "id": "food_479",
+        "name": "Popcorn (Salted, Packaged)",
+        "region": "Global",
+        "category": "Packaged Snack",
+        "nutrition_per": "per 100g",
+        "calories": 387,
+        "protein_g": 12.0,
+        "carbs_g": 78.0,
+        "fats_g": 4.5,
+        "sugar_g": 0.9,
+        "benefits": "Whole grain snack.",
+        "drawbacks": "Salt and oil in packaged versions.",
+        "suitable_for": [
+            "Vegan",
+            "Vegetarian",
+            "Eggitarian",
+            "Non-Vegetarian"
+        ]
+    },
+    {
+        "id": "food_480",
+        "name": "Protein Ice Cream",
+        "region": "Global",
+        "category": "Protein Dessert",
+        "nutrition_per": "per 100g",
+        "calories": 140,
+        "protein_g": 8.0,
+        "carbs_g": 18.0,
+        "fats_g": 4.0,
+        "sugar_g": 7.0,
+        "benefits": "Lower calorie dessert with protein.",
+        "drawbacks": "Artificial sweeteners.",
+        "suitable_for": [
+            "Vegetarian",
+            "Eggitarian",
+            "Non-Vegetarian"
+        ]
     }
 ]

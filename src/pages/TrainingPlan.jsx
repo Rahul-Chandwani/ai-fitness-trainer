@@ -18,7 +18,8 @@ import {
     Target,
     RefreshCw,
     Lock,
-    Flame
+    Flame,
+    Trash2
 } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 import { analyzeProgress, generateComprehensiveTrainingPlan } from "../services/trainingPlanGenerator";
@@ -31,6 +32,7 @@ export default function TrainingPlan() {
     const [selectedWorkout, setSelectedWorkout] = useState(null);
     const [isGenerating, setIsGenerating] = useState(false);
     const [showGenModal, setShowGenModal] = useState(false);
+    const [showResetConfirm, setShowResetConfirm] = useState(false);
     const [aiInsights, setAiInsights] = useState(null);
     const [loadingInsights, setLoadingInsights] = useState(false);
     const [activeTab, setActiveTab] = useState("overview"); // overview, schedule, progress
@@ -89,6 +91,16 @@ export default function TrainingPlan() {
         }
     };
 
+    const handleResetPlan = async () => {
+        try {
+            await updateTrainingPlan(null);
+            addToast("TRAINING PLAN PURGED", "success");
+            setShowResetConfirm(false);
+        } catch (error) {
+            addToast("RESET FAILED", "error");
+        }
+    };
+
     const handleTaskComplete = async (dayOfWeek, taskType, taskIndex) => {
         try {
             await updateDailyTask(trainingPlan.currentWeek, dayOfWeek, taskType, taskIndex);
@@ -140,7 +152,7 @@ export default function TrainingPlan() {
 
     if (!trainingPlan) {
         return (
-            <DashboardLayout>
+            <DashboardLayout hideHeader={showGenModal}>
                 <PageTransition>
                     <div className="max-w-7xl mx-auto px-4">
                         <Link to="/dashboard" className="inline-flex items-center gap-2 text-sm font-bold text-muted hover:text-accent transition-colors group mb-6">
@@ -198,7 +210,7 @@ export default function TrainingPlan() {
     })) || [];
 
     return (
-        <DashboardLayout>
+        <DashboardLayout hideHeader={showGenModal}>
             <PageTransition>
                 <div className="max-w-7xl mx-auto space-y-8 pb-32 px-4">
                     {/* Header */}
@@ -224,6 +236,13 @@ export default function TrainingPlan() {
                                 className="p-4 bg-accent/10 hover:bg-accent/20 rounded-2xl border border-accent/20 transition-all flex-shrink-0"
                             >
                                 <RefreshCw className={`w-5 h-5 text-accent ${loadingInsights ? 'animate-spin' : ''}`} />
+                            </button>
+                            <button
+                                onClick={() => setShowResetConfirm(true)}
+                                className="p-4 bg-red-500/10 hover:bg-red-500/20 rounded-2xl border border-red-500/20 transition-all flex-shrink-0 group"
+                                title="Reset Training Plan"
+                            >
+                                <Trash2 className="w-5 h-5 text-red-500 group-hover:scale-110 transition-transform" />
                             </button>
                         </div>
                     </div>
@@ -383,18 +402,66 @@ export default function TrainingPlan() {
                 </div>
             </PageTransition>
 
-            {selectedWorkout && (
-                <WorkoutProtocolModal
-                    workout={selectedWorkout}
-                    onClose={() => setSelectedWorkout(null)}
-                />
-            )}
-
             <PlanGenerationModal
                 isOpen={showGenModal}
                 onClose={() => setShowGenModal(false)}
                 onGenerate={handleGeneratePlan}
                 userProfile={userProfile}
+            />
+
+            {/* Reset Confirmation Modal */}
+            <AnimatePresence>
+                {showResetConfirm && (
+                    <motion.div
+                        initial={{ opacity: 0 }}
+                        animate={{ opacity: 1 }}
+                        exit={{ opacity: 0 }}
+                        className="fixed inset-0 bg-black/80 backdrop-blur-sm z-50 flex items-center justify-center p-4"
+                        onClick={() => setShowResetConfirm(false)}
+                    >
+                        <motion.div
+                            initial={{ scale: 0.9, opacity: 0 }}
+                            animate={{ scale: 1, opacity: 1 }}
+                            exit={{ scale: 0.9, opacity: 0 }}
+                            onClick={(e) => e.stopPropagation()}
+                            className="bg-dark border border-red-500/20 rounded-[2rem] p-8 max-w-md w-full space-y-6"
+                        >
+                            <div className="w-16 h-16 bg-red-500/10 rounded-2xl flex items-center justify-center mx-auto border border-red-500/20">
+                                <Trash2 className="w-8 h-8 text-red-500" />
+                            </div>
+
+                            <div className="text-center space-y-2">
+                                <h3 className="text-2xl font-extrabold text-white uppercase italic">
+                                    Delete Training Plan?
+                                </h3>
+                                <p className="text-sm text-muted font-bold uppercase tracking-wide">
+                                    This action will permanently remove your current {trainingPlan.duration}-week training protocol. All progress data will be preserved.
+                                </p>
+                            </div>
+
+                            <div className="flex gap-3">
+                                <button
+                                    onClick={() => setShowResetConfirm(false)}
+                                    className="flex-1 px-6 py-4 bg-white/5 hover:bg-white/10 text-white font-bold uppercase text-xs rounded-2xl border border-white/10 transition-all"
+                                >
+                                    Cancel
+                                </button>
+                                <button
+                                    onClick={handleResetPlan}
+                                    className="flex-1 px-6 py-4 bg-red-500 hover:bg-red-600 text-white font-bold uppercase text-xs rounded-2xl transition-all active:scale-95 shadow-lg shadow-red-500/20"
+                                >
+                                    Delete Plan
+                                </button>
+                            </div>
+                        </motion.div>
+                    </motion.div>
+                )}
+            </AnimatePresence>
+
+            <WorkoutProtocolModal
+                isOpen={!!selectedWorkout}
+                onClose={() => setSelectedWorkout(null)}
+                workout={selectedWorkout}
             />
         </DashboardLayout>
     );

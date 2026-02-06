@@ -15,7 +15,8 @@ export default function Navbar() {
         location.pathname.startsWith('/diet') ||
         location.pathname.startsWith('/ai-coach') ||
         location.pathname.startsWith('/profile') ||
-        location.pathname.startsWith('/settings');
+        location.pathname.startsWith('/settings') ||
+        location.pathname.startsWith('/training-plan');
 
     useEffect(() => {
         const handleScroll = () => setScrolled(window.scrollY > 20);
@@ -58,6 +59,7 @@ export default function Navbar() {
                             <Link to="/workouts" className="text-[10px] font-bold text-muted hover:text-white uppercase tracking-widest transition-colors">Workouts</Link>
                             <Link to="/diet" className="text-[10px] font-bold text-muted hover:text-white uppercase tracking-widest transition-colors">Diet</Link>
                             <Link to="/ai-coach" className="text-[10px] font-bold text-muted hover:text-white uppercase tracking-widest transition-colors">AI Coach</Link>
+                            <Link to="/training-plan" className="text-[10px] font-bold text-muted hover:text-white uppercase tracking-widest transition-colors">Plan</Link>
                             <Link to="/profile" className="text-[10px] font-black text-muted hover:text-white uppercase tracking-[0.3em] transition-colors">Profile</Link>
                             <div className="h-4 w-[1px] bg-white/10"></div>
                             <button
@@ -105,6 +107,7 @@ export default function Navbar() {
                                     <Link onClick={() => setMobileMenu(false)} to="/workouts" className="text-[10px] font-black text-muted uppercase tracking-[0.4em]">Workouts</Link>
                                     <Link onClick={() => setMobileMenu(false)} to="/diet" className="text-[10px] font-black text-muted uppercase tracking-[0.4em]">Diet</Link>
                                     <Link onClick={() => setMobileMenu(false)} to="/ai-coach" className="text-[10px] font-black text-muted uppercase tracking-[0.4em]">AI Trainer</Link>
+                                    <Link onClick={() => setMobileMenu(false)} to="/training-plan" className="text-[10px] font-black text-muted uppercase tracking-[0.4em]">Training Plan</Link>
                                     <Link onClick={() => setMobileMenu(false)} to="/profile" className="text-[10px] font-black text-muted uppercase tracking-[0.4em]">Profile</Link>
                                     <Link onClick={() => setMobileMenu(false)} to="/settings" className="text-[10px] font-black text-muted uppercase tracking-[0.4em]">Settings</Link>
                                     <div className="h-[1px] w-full bg-white/5"></div>

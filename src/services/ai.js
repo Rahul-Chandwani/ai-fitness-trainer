@@ -4,6 +4,8 @@
  * Puter.js provides stable, keyless AI access.
  */
 
+import EXERCISE_DATABASE from '../data/exercises.json';
+
 const PUTER_MODEL = 'openai'; // or 'gpt-4o', etc.
 
 const DEFAULT_SYSTEM_PROMPT = `You are a professional AI Fitness Coach. Your goal is to provide highly accurate, science-based fitness, nutrition, and workout advice. 
@@ -129,19 +131,71 @@ export async function generateWorkoutRoutine(preferences = {}) {
         experienceLevel = "intermediate"
     } = preferences;
 
+    // Sample relevant exercises from database
+    const relevantExercises = EXERCISE_DATABASE.filter(ex => {
+        const matchesMuscle = muscles.some(m =>
+            ex.muscles.some(em => em.toLowerCase().includes(m.toLowerCase()) || m.toLowerCase().includes(em.toLowerCase()))
+        );
+        const matchesLocation = ex.location === location || ex.location === 'home'; // home exercises work anywhere
+        const matchesLevel = ex.level === level || ex.level === 'beginner'; // beginners can do beginner exercises
+        return matchesMuscle && matchesLocation;
+    });
+
+    // Take a random sample of 15 exercises to keep prompt manageable
+    const sampleSize = Math.min(15, relevantExercises.length);
+    const sampledExercises = [];
+    const usedIndices = new Set();
+
+    while (sampledExercises.length < sampleSize && usedIndices.size < relevantExercises.length) {
+        const randomIndex = Math.floor(Math.random() * relevantExercises.length);
+        if (!usedIndices.has(randomIndex)) {
+            usedIndices.add(randomIndex);
+            sampledExercises.push(relevantExercises[randomIndex]);
+        }
+    }
+
+    const exerciseContext = sampledExercises.map(ex =>
+        `${ex.name} (${ex.id}): ${ex.tutorial} | Muscles: ${ex.muscles.join(', ')} | Level: ${ex.level} | Unit: ${ex.unit} | Cal/unit: ${ex.calories_per_min || 'N/A'}`
+    ).join('\n');
+
     const prompt = `Generate a highly effective workout routine targeting ${muscles.join(", ")}. 
     Duration: ${duration} minutes. Target Calories: ${calorieTarget} kcal. 
     Level: ${level}. Location: ${location}.
-    Return ONLY JSON: 
+    
+    AVAILABLE EXERCISES FROM DATABASE:
+    ${exerciseContext}
+    
+    Return ONLY a valid JSON object with this EXACT structure:
     {
       "id": "ai_workout_${Date.now()}", 
       "name": "Targeted ${muscles.join("/")} Session", 
       "duration": "${duration} min", 
       "totalCalories": ${calorieTarget},
       "exercises": [
-        {"name": "Exercise Name", "sets": 3, "reps": "12", "duration": "N/A"}
+        {
+          "id": "ex_XXX",
+          "name": "Exercise Name from database",
+          "sets": 3,
+          "reps": "12",
+          "duration": "5 min",
+          "unit": "reps or min",
+          "calories": 50,
+          "tutorial": "Brief instruction",
+          "form_tips": ["tip1", "tip2"],
+          "level": "beginner/intermediate/advanced"
+        }
       ]
-    }`;
+    }
+    
+    CRITICAL RULES:
+    1. Use ONLY exercises from the provided database above
+    2. Include the exercise ID (ex_XXX) for each exercise
+    3. Set "unit" to match the database entry ("min" or "reps")
+    4. If unit is "min", provide duration and calculate calories from calories_per_min
+    5. If unit is "reps", provide sets and reps
+    6. Include tutorial and form_tips from the database
+    7. Total workout duration should be approximately ${duration} minutes
+    8. Total calories should sum to approximately ${calorieTarget} kcal`;
 
     try {
         if (window.puter) {

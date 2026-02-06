@@ -39,9 +39,18 @@ export default function Diet() {
   const todayTasks = getTodayTasks();
 
   const meals = (() => {
-    let list = activeTab === "ai"
-      ? [...(isAdvanced && todayTasks?.meals ? todayTasks.meals : []), ...aiMeals]
-      : manualMeals;
+    let list = [];
+    if (activeTab === "ai") {
+      // If AI Meals (ad-hoc) exist, show only them. 
+      // Otherwise fallback to Training Plan meals.
+      if (aiMeals.length > 0) {
+        list = aiMeals;
+      } else if (isAdvanced && todayTasks?.meals) {
+        list = todayTasks.meals;
+      }
+    } else {
+      list = manualMeals;
+    }
 
     if (searchQuery) {
       return list.filter(m => m.name.toLowerCase().includes(searchQuery.toLowerCase()));
@@ -61,7 +70,7 @@ export default function Diet() {
         experienceLevel: userProfile?.experienceLevel || "intermediate"
       });
       if (newPlan) {
-        updateAIMeals([...newPlan, ...aiMeals]);
+        updateAIMeals(newPlan); // REPLACE instead of append
         addToast("Nutritional profile optimized", "success");
       } else {
         addToast("Synthesis failed", "error");
@@ -70,6 +79,16 @@ export default function Diet() {
       addToast("Uplink unstable", "error");
     } finally {
       setLoading(false);
+    }
+  };
+
+  const handleRemoveMeal = (mealId) => {
+    if (activeTab === "manual") {
+      updateManualMeals(manualMeals.filter(m => m.id !== mealId));
+      addToast("MEAL REMOVED FROM LOG", "success");
+    } else {
+      updateAIMeals(aiMeals.filter(m => m.id !== mealId));
+      addToast("AI PROTOCOL DELETED", "success");
     }
   };
 
@@ -247,7 +266,11 @@ export default function Diet() {
                 transition={{ delay: i * 0.05 }}
                 key={i}
               >
-                <MealCard meal={meal} onViewDetails={setSelectedFood} />
+                <MealCard
+                  meal={meal}
+                  onViewDetails={setSelectedFood}
+                  onRemove={activeTab === "manual" ? () => handleRemoveMeal(meal.id) : null}
+                />
               </motion.div>
             ))}
             {meals.length === 0 && (

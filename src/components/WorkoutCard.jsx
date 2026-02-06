@@ -1,12 +1,24 @@
-import { Timer, Layers, ChevronRight, Activity } from "lucide-react";
+import { Timer, Layers, ChevronRight, Activity, Plus } from "lucide-react";
 import { motion } from "framer-motion";
 
-export default function WorkoutCard({ workout, onView }) {
+export default function WorkoutCard({ workout, onView, onRemove }) {
   return (
     <motion.div
       whileHover={{ y: -5 }}
       className="card-premium p-4 md:p-6 rounded-2xl md:rounded-3xl border border-white/5 relative overflow-hidden group h-full flex flex-col"
     >
+      {/* Removal Button */}
+      {onRemove && (
+        <button
+          onClick={(e) => {
+            e.stopPropagation();
+            onRemove();
+          }}
+          className="absolute top-4 right-4 z-20 w-8 h-8 bg-red-500/10 hover:bg-red-500 text-red-500 hover:text-white rounded-xl border border-red-500/20 flex items-center justify-center transition-all active:scale-95 group/remove"
+        >
+          <Plus className="w-4 h-4 rotate-45" />
+        </button>
+      )}
       <div className="absolute top-0 right-0 p-8 opacity-5 -rotate-12 group-hover:rotate-0 transition-transform duration-700">
         <Activity className="w-24 h-24 text-accent" />
       </div>

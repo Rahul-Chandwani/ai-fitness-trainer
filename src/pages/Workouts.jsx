@@ -45,14 +45,16 @@ export default function Workouts() {
   const workouts = (() => {
     let list = [];
     if (activeTab === "ai") {
-      const dailyProtocol = [];
-      if (isAdvanced && trainingPlan?.weeks) {
+      // If AI Workouts (ad-hoc) exist, show only them.
+      // Otherwise fallback to Training Plan workout.
+      if (aiWorkouts.length > 0) {
+        list = aiWorkouts;
+      } else if (isAdvanced && trainingPlan?.weeks) {
         const today = new Date().toLocaleDateString('en-US', { weekday: 'long' });
         const currentWeek = trainingPlan.weeks[trainingPlan.currentWeek - 1];
         const day = currentWeek?.days?.find(d => d.dayOfWeek === today);
-        if (day?.workout) dailyProtocol.push(day.workout);
+        if (day?.workout) list.push(day.workout);
       }
-      list = [...dailyProtocol, ...aiWorkouts];
     } else {
       list = manualWorkouts;
     }
@@ -80,7 +82,7 @@ export default function Workouts() {
         experienceLevel: userProfile?.experienceLevel || level
       });
       if (newWorkout) {
-        updateAIWorkouts([newWorkout, ...aiWorkouts]);
+        updateAIWorkouts([newWorkout]); // REPLACE instead of append
         addToast("Workout plan synchronized", "success");
       } else {
         addToast("Transmission failed", "error");
@@ -89,6 +91,16 @@ export default function Workouts() {
       addToast("Network error", "error");
     } finally {
       setLoading(false);
+    }
+  };
+
+  const handleRemoveWorkout = (workoutId) => {
+    if (activeTab === "manual") {
+      updateManualWorkouts(manualWorkouts.filter(w => w.id !== workoutId));
+      addToast("ROUTINE PURGED FROM REPOSITORY", "success");
+    } else {
+      updateAIWorkouts(aiWorkouts.filter(w => w.id !== workoutId));
+      addToast("AI PROTOCOL DELETED", "success");
     }
   };
 
@@ -267,6 +279,7 @@ export default function Workouts() {
                       <WorkoutCard
                         workout={w}
                         onView={(workout) => setSelectedWorkout(workout)}
+                        onRemove={activeTab === "manual" ? () => handleRemoveWorkout(w.id) : null}
                       />
                     </motion.div>
                   ))}
@@ -319,6 +332,7 @@ export default function Workouts() {
                       <WorkoutCard
                         workout={w}
                         onView={(workout) => setSelectedWorkout(workout)}
+                        onRemove={activeTab === "manual" ? () => handleRemoveWorkout(w.id) : null}
                       />
                     </motion.div>
                   ))}

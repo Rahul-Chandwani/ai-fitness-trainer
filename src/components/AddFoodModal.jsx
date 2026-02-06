@@ -80,7 +80,7 @@ export default function AddFoodModal({ onClose }) {
       <motion.div
         initial={{ opacity: 0, scale: 0.95, y: 30 }}
         animate={{ opacity: 1, scale: 1, y: 0 }}
-        className="bg-card/90 border border-white/5 w-full max-w-7xl rounded-[2.5rem] md:rounded-[3.5rem] shadow-2xl relative overflow-hidden flex flex-col xl:flex-row h-full max-h-[90vh]"
+        className="bg-card/90 border border-white/5 w-full max-w-7xl rounded-[2.5rem] md:rounded-[3.5rem] shadow-2xl relative overflow-hidden flex flex-col xl:flex-row h-[90vh] md:h-auto md:max-h-[90vh]"
       >
         {/* Left Panel: Food Browser */}
         <div className="w-full xl:w-[450px] border-b xl:border-b-0 xl:border-r border-white/5 p-6 md:p-10 flex flex-col bg-black/40 relative overflow-hidden h-1/2 xl:h-full">

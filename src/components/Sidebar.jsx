@@ -15,7 +15,7 @@ export default function Sidebar() {
     }`;
 
   return (
-    <aside className="w-72 flex-shrink-0 p-4 hidden lg:block h-screen sticky top-0">
+    <aside className="w-72 flex-shrink-0 p-4 pt-6 hidden lg:block h-screen sticky top-0">
       <div className="bg-card/40 backdrop-blur-2xl border border-white/5 h-full rounded-[2.5rem] flex flex-col p-4 relative overflow-hidden">
         {/* Background Glow */}
         <div className="absolute -top-24 -left-24 w-48 h-48 bg-accent/5 rounded-full blur-[100px]"></div>

@@ -133,7 +133,7 @@ export function FitnessProvider({ children }) {
         if (!user) return;
         try {
             const userRef = doc(db, "users", user.uid);
-            await setDoc(userRef, { manualMeals: newMeals }, { merge: true });
+            await updateDoc(userRef, { manualMeals: newMeals });
         } catch (err) {
             console.error("Error updating manual meals:", err);
         }
@@ -143,7 +143,7 @@ export function FitnessProvider({ children }) {
         if (!user) return;
         try {
             const userRef = doc(db, "users", user.uid);
-            await setDoc(userRef, { aiMeals: newMeals }, { merge: true });
+            await updateDoc(userRef, { aiMeals: newMeals });
         } catch (err) {
             console.error("Error updating AI meals:", err);
         }
@@ -153,7 +153,7 @@ export function FitnessProvider({ children }) {
         if (!user) return;
         try {
             const userRef = doc(db, "users", user.uid);
-            await setDoc(userRef, { manualWorkouts: newWorkouts }, { merge: true });
+            await updateDoc(userRef, { manualWorkouts: newWorkouts });
         } catch (err) {
             console.error("Error updating manual workouts:", err);
         }
@@ -163,7 +163,7 @@ export function FitnessProvider({ children }) {
         if (!user) return;
         try {
             const userRef = doc(db, "users", user.uid);
-            await setDoc(userRef, { aiWorkouts: newWorkouts }, { merge: true });
+            await updateDoc(userRef, { aiWorkouts: newWorkouts });
         } catch (err) {
             console.error("Error updating AI workouts:", err);
         }
