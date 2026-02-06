@@ -1,3 +1,4 @@
+import React from "react";
 import { motion } from "framer-motion";
 import { CheckCircle2 } from "lucide-react";
 
@@ -26,7 +27,7 @@ export default function PlanCard({
       <div className="mb-4 flex items-center gap-3">
         <div className={`w-10 h-10 rounded-lg flex items-center justify-center border transition-colors ${active ? 'bg-accent/20 border-accent/20' : 'bg-white/5 border-white/10 group-hover:bg-accent/10'}`}>
           <div className={active ? 'text-accent' : 'text-muted group-hover:text-accent'}>
-            {icon ? Object.cloneElement(icon, { size: 20 }) : null}
+            {icon ? React.cloneElement(icon, { size: 20 }) : null}
           </div>
         </div>
         <div>

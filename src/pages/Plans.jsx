@@ -25,13 +25,13 @@ export default function Plans() {
   const currentTier = userProfile?.subscriptionTier || "free";
 
   return (
-    <div className="min-h-screen bg-bg relative overflow-hidden flex flex-col pt-32 pb-20">
+    <div className="min-h-screen bg-bg relative overflow-hidden flex flex-col pt-10 pb-10">
       <Navbar />
       <div className="absolute inset-0 bg-grid opacity-50 -z-10"></div>
       <div className="orbital-glow top-0 right-0 opacity-20 bg-accent/10 pointer-events-none"></div>
 
       <PageTransition>
-        <div className="max-w-7xl mx-auto px-6 pt-32 pb-32">
+        <div className="max-w-7xl mx-auto px-6 pt-5 pb-5">
           <div className="text-center mb-24 space-y-6">
             <motion.div
               initial={{ opacity: 0, scale: 0.9 }}

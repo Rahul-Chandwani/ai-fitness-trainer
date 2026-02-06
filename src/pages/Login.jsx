@@ -64,8 +64,8 @@ export default function Login() {
                 <div className="relative group">
                   <Mail className="absolute left-6 top-1/2 -translate-y-1/2 w-4.5 h-4.5 text-muted group-focus-within:text-accent transition-colors" />
                   <input
-                    className="w-full bg-white/5 border border-white/10 py-5 pr-6 pl-16 rounded-2xl outline-none focus:border-accent/40 focus:bg-white/[0.08] transition-all text-white font-bold"
-                    placeholder="         YOUR@EMAIL.COM"
+                    className="w-full bg-white/5 border border-white/10 py-5 pr-6 !pl-16 rounded-2xl outline-none focus:border-accent/40 focus:bg-white/[0.08] transition-all text-white font-bold"
+                    placeholder="YOUR@EMAIL.COM"
                     type="email"
                     value={email}
                     onChange={(e) => setEmail(e.target.value)}
@@ -78,8 +78,8 @@ export default function Login() {
                 <div className="relative group">
                   <Lock className="absolute left-6 top-1/2 -translate-y-1/2 w-4.5 h-4.5 text-muted group-focus-within:text-accent transition-colors" />
                   <input
-                    className="w-full bg-white/5 border border-white/10 py-5 pr-6 pl-16 rounded-2xl outline-none focus:border-accent/40 focus:bg-white/[0.08] transition-all text-white font-bold"
-                    placeholder="         ••••••••"
+                    className="w-full bg-white/5 border border-white/10 py-5 pr-6 !pl-16 rounded-2xl outline-none focus:border-accent/40 focus:bg-white/[0.08] transition-all text-white font-bold"
+                    placeholder="••••••••"
                     type="password"
                     value={password}
                     onChange={(e) => setPassword(e.target.value)}
