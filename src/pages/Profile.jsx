@@ -24,7 +24,7 @@ export default function Profile() {
                 <div className="max-w-6xl mx-auto space-y-6 md:space-y-10 pb-20 relative px-4 md:px-6">
                     <Link to="/dashboard" className="inline-flex items-center gap-2 text-[0.6rem] font-black text-muted hover:text-accent transition-colors group uppercase tracking-[0.3em] opacity-60">
                         <ChevronLeft className="w-3.5 h-3.5 group-hover:-translate-x-1 transition-transform" />
-                        BACK_TO_HUB
+                        BACK TO DASHBOARD
                     </Link>
 
                     {/* Hero / Header */}
@@ -50,7 +50,7 @@ export default function Profile() {
                             <div className="space-y-2 w-full min-w-0 flex-1">
                                 <div className="inline-flex items-center gap-1.5 px-3 py-1 bg-accent/10 rounded-full border border-accent/20 mx-auto md:mx-0">
                                     <span className="w-1 h-1 bg-accent rounded-full animate-pulse"></span>
-                                    <p className="text-[0.55rem] md:text-[0.6rem] font-black text-accent uppercase tracking-[0.3em]">ACTIVE PROBE</p>
+                                    <p className="text-[0.55rem] md:text-[0.6rem] font-black text-accent uppercase tracking-[0.3em]">ACTIVE USER</p>
                                 </div>
                                 <h1 className="text-2xl md:text-4xl lg:text-5xl font-black text-text tracking-tighter italic leading-none truncate uppercase">
                                     {userProfile?.name || "FITNESS_USER"}
@@ -73,7 +73,7 @@ export default function Profile() {
                                     to="/settings"
                                     className="px-6 py-3 md:px-8 md:py-3.5 bg-text text-bg rounded-[1rem] shadow-xl hover:bg-accent hover:text-bg transition-all text-[0.6rem] md:text-[0.65rem] block text-center font-black uppercase tracking-[0.2em] italic active:scale-95"
                                 >
-                                    GLOBAL_CONFIG
+                                    SETTINGS
                                 </Link>
                             </div>
                         </div>
@@ -83,10 +83,10 @@ export default function Profile() {
                             <div className="flex justify-between items-end mb-2 md:mb-3">
                                 <div>
                                     <p className="text-[0.55rem] md:text-[0.6rem] font-black text-muted uppercase tracking-[0.3em] mb-1.5 opacity-60">LEVEL_SYSTEM</p>
-                                    <p className="text-xl md:text-3xl font-black text-text italic tracking-tighter leading-none uppercase">RANK_{level}</p>
+                                    <p className="text-xl md:text-3xl font-black text-text italic tracking-tighter leading-none uppercase">LEVEL_{level}</p>
                                 </div>
                                 <div className="text-right">
-                                    <p className="text-[0.55rem] md:text-[0.6rem] font-black text-muted uppercase tracking-[0.3em] mb-1.5 opacity-60">NEURAL_XP</p>
+                                    <p className="text-[0.55rem] md:text-[0.6rem] font-black text-muted uppercase tracking-[0.3em] mb-1.5 opacity-60">XP POINTS</p>
                                     <p className="text-xl md:text-3xl font-black text-accent italic tracking-tighter leading-none">{neuralXP || 0} <span className="text-[0.55rem] text-muted/40 not-italic tracking-[0.2em]">PTS</span></p>
                                 </div>
                             </div>
@@ -110,12 +110,12 @@ export default function Profile() {
                                 <div className="w-10 h-10 bg-accent/10 rounded-xl flex items-center justify-center border border-accent/20 group-hover:bg-accent/20 transition-all shadow-sm">
                                     <Target className="w-5 h-5 text-accent" />
                                 </div>
-                                <h3 className="text-[0.55rem] md:text-[0.6rem] font-black text-text uppercase italic tracking-[0.3em] opacity-80">PRIMARY_GOAL</h3>
+                                <h3 className="text-[0.55rem] md:text-[0.6rem] font-black text-text uppercase italic tracking-[0.3em] opacity-80">CURRENT GOAL</h3>
                             </div>
                             <p className="text-2xl lg:text-3xl font-black text-text mb-3 uppercase italic tracking-tighter leading-none line-clamp-1">
                                 {userProfile?.goal || "EVOLUTION"}
                             </p>
-                            <p className="text-[0.55rem] md:text-[0.6rem] text-accent font-black uppercase tracking-[0.3em] opacity-60">SYSTEM_DIRECTIVE</p>
+                            <p className="text-[0.55rem] md:text-[0.6rem] text-accent font-black uppercase tracking-[0.3em] opacity-60">PERSONAL GOAL</p>
                         </motion.div>
 
                         {/* Performance Stats */}
@@ -127,12 +127,12 @@ export default function Profile() {
                                 <div className="w-10 h-10 bg-accent/10 rounded-xl flex items-center justify-center border border-accent/20 group-hover:bg-accent/20 transition-all shadow-sm">
                                     <Zap className="w-5 h-5 text-accent" />
                                 </div>
-                                <h3 className="text-[0.55rem] md:text-[0.6rem] font-black text-text uppercase italic tracking-[0.3em] opacity-80">PROFILE_TIER</h3>
+                                <h3 className="text-[0.55rem] md:text-[0.6rem] font-black text-text uppercase italic tracking-[0.3em] opacity-80">ACCOUNT TYPE</h3>
                             </div>
                             <p className="text-2xl lg:text-3xl font-black text-accent mb-3 uppercase italic tracking-tighter leading-none line-clamp-1">
                                 {userProfile?.subscriptionTier || "ACTIVE"}
                             </p>
-                            <p className="text-[0.55rem] md:text-[0.6rem] text-muted font-black uppercase tracking-[0.3em] opacity-60">SYNCHRONIZATION_LVL</p>
+                            <p className="text-[0.55rem] md:text-[0.6rem] text-muted font-black uppercase tracking-[0.3em] opacity-60">SYNC LEVEL</p>
                         </motion.div>
 
                         {/* Activity Hub */}
@@ -144,7 +144,7 @@ export default function Profile() {
                                 <div className="w-10 h-10 bg-accent/10 rounded-xl flex items-center justify-center border border-accent/20 group-hover:bg-accent/20 transition-all shadow-sm">
                                     <ActivityIcon className="w-5 h-5 text-accent" />
                                 </div>
-                                <h3 className="text-[0.55rem] md:text-[0.6rem] font-black text-text uppercase italic tracking-[0.3em] opacity-80">ACTIVITY_LOG</h3>
+                                <h3 className="text-[0.55rem] md:text-[0.6rem] font-black text-text uppercase italic tracking-[0.3em] opacity-80">YOUR ACTIVITY</h3>
                             </div>
                             <div className="flex items-center gap-5 md:gap-8">
                                 <div>
@@ -170,8 +170,8 @@ export default function Profile() {
 
                         <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 relative z-10 text-center md:text-left">
                             <div>
-                                <h2 className="text-2xl md:text-4xl font-black text-text uppercase tracking-tighter italic leading-none">METADATA</h2>
-                                <p className="text-[0.55rem] md:text-[0.6rem] text-accent font-black uppercase tracking-[0.4em] mt-2 opacity-80">BIOMETRIC_REPOSITORY</p>
+                                <h2 className="text-2xl md:text-4xl font-black text-text uppercase tracking-tighter italic leading-none">BODY STATS</h2>
+                                <p className="text-[0.55rem] md:text-[0.6rem] text-accent font-black uppercase tracking-[0.4em] mt-2 opacity-80">BIOMETRICS</p>
                             </div>
                             <div className="px-5 py-2.5 bg-accent/10 rounded-xl border border-accent/20 shadow-xl shadow-accent/5 self-center md:self-auto">
                                 <p className="text-[0.55rem] md:text-[0.6rem] font-black text-accent uppercase tracking-[0.5em]">SYNC_ACTIVE</p>

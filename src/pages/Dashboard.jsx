@@ -51,7 +51,7 @@ export default function Dashboard() {
           {/* Background Decor */}
           <div className="absolute top-0 right-0 w-[300px] md:w-[600px] h-[300px] md:h-[600px] bg-accent/5 rounded-full blur-[80px] md:blur-[140px] -z-10 -translate-y-1/2 translate-x-1/2 pointer-events-none"></div>
 
-          {/* Header with Gamification Meta */}
+          {/* Header with Your Stats */}
           <div className="flex flex-col gap-4">
             <Link to="/" className="inline-flex items-center gap-2 text-sm font-bold text-muted hover:text-accent transition-colors group w-fit">
               <ChevronLeft className="w-4 h-4 group-hover:-translate-x-1 transition-transform" />
@@ -62,7 +62,7 @@ export default function Dashboard() {
                 <div className="w-1 h-8 bg-accent rounded-full"></div>
                 <div>
                   <h1 className="text-2xl md:text-3xl font-black tracking-tighter text-text uppercase italic leading-none">Dashboard</h1>
-                  <p className="text-[0.6rem] text-accent font-black uppercase tracking-[0.4em] mt-1.5 opacity-80">CONTROL CENTER</p>
+                  <p className="text-[0.6rem] text-accent font-black uppercase tracking-[0.4em] mt-1.5 opacity-80">OVERVIEW</p>
                 </div>
               </div>
 
@@ -70,7 +70,7 @@ export default function Dashboard() {
                 <div className="flex items-center gap-3 px-3 border-r border-white/10 relative z-10">
                   <Trophy className="w-5 h-5 text-accent" />
                   <div className="text-left">
-                    <p className="text-[0.6rem] font-black text-muted uppercase tracking-[0.2em] opacity-60">Neural XP</p>
+                    <p className="text-[0.6rem] font-black text-muted uppercase tracking-[0.2em] opacity-60">XP Points</p>
                     <p className="text-lg font-black text-text tabular-nums leading-none">{neuralXP || 0}</p>
                   </div>
                 </div>
@@ -107,7 +107,7 @@ export default function Dashboard() {
 
           {/* Core Stats Grid */}
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
-            {/* Primary Metabolic Controller */}
+            {/* Daily Calories */}
             <motion.div
               whileHover={{ y: -2 }}
               className="md:col-span-2 card-premium p-5 md:p-6 rounded-2xl border border-border relative overflow-hidden group shadow-xl bg-card/40"
@@ -119,7 +119,7 @@ export default function Dashboard() {
               <div className="relative z-10">
                 <div className="flex items-center gap-2.5 mb-6">
                   <Cpu className="w-4 h-4 text-accent" />
-                  <p className="text-muted text-[0.6rem] font-black uppercase tracking-[0.4em] opacity-60">Metabolic Hub</p>
+                  <p className="text-muted text-[0.6rem] font-black uppercase tracking-[0.4em] opacity-60">Daily Stats</p>
                 </div>
 
                 <div className="flex flex-col sm:flex-row items-end gap-6">
@@ -150,7 +150,7 @@ export default function Dashboard() {
               </div>
             </motion.div>
 
-            {/* Reliability Widget */}
+            {/* Consistency Widget */}
             <div className="card-premium p-5 md:p-6 rounded-2xl border border-border bg-card/40 hover:border-accent/30 transition-all flex flex-col justify-between group">
               <div className="flex items-center justify-between mb-6">
                 <p className="text-muted text-[0.6rem] font-black uppercase tracking-[0.3em] opacity-60">Consistency</p>
@@ -176,18 +176,18 @@ export default function Dashboard() {
                   </svg>
                   <div className="absolute inset-0 flex flex-col items-center justify-center">
                     <span className="text-2xl font-black text-text italic tracking-tighter leading-none">{consistencyScore}%</span>
-                    <span className="text-[0.6rem] font-black text-muted uppercase mt-1 opacity-60 tracking-widest">SYNC</span>
+                    <span className="text-[0.6rem] font-black text-muted uppercase mt-1 opacity-60 tracking-widest">SCORE</span>
                   </div>
                 </div>
                 <p className="text-[0.6rem] text-muted text-center font-black uppercase tracking-[0.15em] leading-relaxed px-2 opacity-60">
-                  Reliability <span className="text-accent underline decoration-accent/30 underline-offset-4">Sync</span> 7d
+                  Consistency <span className="text-accent underline decoration-accent/30 underline-offset-4">Score</span> 7d
                 </p>
               </div>
             </div>
 
           </div>
 
-          {/* Strategic Hubs Navigation */}
+          {/* Navigation Hub */}
           <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
             <Link to="/workouts" className="card-premium p-4 rounded-2xl border border-border bg-card/40 hover:border-accent/30 transition-all flex items-center gap-4 group relative overflow-hidden">
               <div className="absolute inset-0 bg-accent/5 opacity-0 group-hover:opacity-100 transition-opacity blur-3xl"></div>
@@ -196,7 +196,7 @@ export default function Dashboard() {
               </div>
               <div className="relative z-10">
                 <h3 className="text-base font-black text-text uppercase italic tracking-tighter group-hover:text-accent transition-colors leading-none">Workouts</h3>
-                <p className="text-[0.6rem] text-muted font-black uppercase tracking-[0.3em] mt-2 opacity-60">TACTICAL</p>
+                <p className="text-[0.6rem] text-muted font-black uppercase tracking-[0.3em] mt-2 opacity-60">TRAINING</p>
               </div>
               <ChevronRight className="ml-auto w-5 h-5 text-muted group-hover:text-accent group-hover:translate-x-1 transition-all" />
             </Link>
@@ -208,7 +208,7 @@ export default function Dashboard() {
               </div>
               <div className="relative z-10">
                 <h3 className="text-base font-black text-text uppercase italic tracking-tighter group-hover:text-blue-400 transition-colors leading-none">Diet</h3>
-                <p className="text-[0.6rem] text-muted font-black uppercase tracking-[0.3em] mt-2 opacity-60">BIO-FUEL</p>
+                <p className="text-[0.6rem] text-muted font-black uppercase tracking-[0.3em] mt-2 opacity-60">NUTRITION</p>
               </div>
               <ChevronRight className="ml-auto w-5 h-5 text-muted group-hover:text-blue-400 group-hover:translate-x-1 transition-all" />
             </Link>
@@ -219,20 +219,20 @@ export default function Dashboard() {
                 <Bot className="w-6 h-6 text-purple-400" />
               </div>
               <div className="relative z-10">
-                <h3 className="text-base font-black text-text uppercase italic tracking-tighter group-hover:text-purple-400 transition-colors leading-none">AI Coach</h3>
-                <p className="text-[0.6rem] text-muted font-black uppercase tracking-[0.3em] mt-2 opacity-60">NEURAL</p>
+                <h3 className="text-base font-black text-text uppercase italic tracking-tighter group-hover:text-purple-400 transition-colors leading-none">AI Trainer</h3>
+                <p className="text-[0.6rem] text-muted font-black uppercase tracking-[0.3em] mt-2 opacity-60">AI ASSISTANT</p>
               </div>
               <ChevronRight className="ml-auto w-5 h-5 text-muted group-hover:text-purple-400 group-hover:translate-x-1 transition-all" />
             </Link>
           </div>
 
-          {/* Secondary Data Matrix */}
+          {/* Nutrition Summary */}
           <div className="grid grid-cols-1 lg:grid-cols-3 gap-4">
             <div className="card-premium p-6 rounded-2xl border border-border bg-card/40 relative overflow-hidden group">
               <div className="flex justify-between items-center mb-6 relative z-10">
                 <div>
                   <h3 className="text-[0.65rem] font-black uppercase tracking-[0.3em] text-text italic">Macros</h3>
-                  <p className="text-[0.6rem] text-muted font-black uppercase tracking-[0.3em] mt-1.5 opacity-60">DAILY SPLIT</p>
+                  <p className="text-[0.6rem] text-muted font-black uppercase tracking-[0.3em] mt-1.5 opacity-60">NUTRITION</p>
                 </div>
                 <div className="flex gap-2.5">
                   <div className="w-2.5 h-2.5 rounded-full bg-emerald-500 shadow-[0_0_8px_rgba(16,185,129,0.5)]"></div>
@@ -250,7 +250,7 @@ export default function Dashboard() {
             </div>
           </div>
 
-          {/* Longitudinal Trajectory Matrix */}
+          {/* Progress Charts */}
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">
             <div className="card-premium p-5 md:p-6 rounded-2xl border border-border bg-card/40 group relative overflow-hidden">
               <div className="absolute top-0 right-0 p-6 opacity-5 pointer-events-none group-hover:opacity-10 transition-opacity">
@@ -258,7 +258,7 @@ export default function Dashboard() {
               </div>
               <div className="mb-6 relative z-10">
                 <h3 className="text-[0.65rem] font-black uppercase tracking-[0.3em] text-text italic">Body Weight</h3>
-                <p className="text-[0.6rem] text-muted font-black uppercase tracking-[0.3em] mt-1.5 opacity-60">TRAJECTORY</p>
+                <p className="text-[0.6rem] text-muted font-black uppercase tracking-[0.4em] mt-1.5 opacity-80">YOUR PROGRESS</p>
               </div>
               <div className="relative z-10">
                 <WeightChart />
@@ -271,7 +271,7 @@ export default function Dashboard() {
               </div>
               <div className="mb-6 relative z-10">
                 <h3 className="text-[0.65rem] font-black uppercase tracking-[0.3em] text-text italic">Energy Flux</h3>
-                <p className="text-[0.6rem] text-muted font-black uppercase tracking-[0.3em] mt-1.5 opacity-60">FUEL BALANCE</p>
+                <p className="text-[0.6rem] text-muted font-black uppercase tracking-[0.4em] mt-1.5 opacity-80">DAILY BALANCE</p>
               </div>
               <div className="relative z-10">
                 <CaloriesChart />

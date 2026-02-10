@@ -23,7 +23,7 @@ export default function Home() {
           className="inline-flex items-center gap-3 px-5 py-2 glass rounded-full text-[10px] font-black tracking-[0.3em] uppercase mb-12 border border-accent/15 animate-glow"
         >
           <Cpu className="w-3.5 h-3.5 text-accent" />
-          AI Fitness Sync Active
+          AI Assistant Active
         </motion.div>
 
         <motion.h1
@@ -63,7 +63,7 @@ export default function Home() {
         </motion.div>
       </section>
 
-      {/* Trust Continuum */}
+      {/* Partners */}
       <section className="py-20 border-y border-white/5 bg-white/[0.01]">
         <div className="max-w-8xl mx-auto px-6 overflow-hidden">
           <motion.div
@@ -80,7 +80,7 @@ export default function Home() {
         </div>
       </section>
 
-      {/* Strategic Advantages */}
+      {/* Why Choose Us */}
       <section className="py-40 relative px-6">
         <div className="max-w-7xl mx-auto">
           <div className="text-center mb-32">
@@ -94,12 +94,12 @@ export default function Home() {
           <div className="grid lg:grid-cols-3 gap-10">
             <BenefitCard
               icon={<Activity className="w-10 h-10 text-accent" />}
-              title="Performance Tracking"
+              title="Track Progress"
               desc="Our AI analyzes your progress and adjusts your workouts to help you reach your goals faster."
             />
             <BenefitCard
               icon={<Zap className="w-10 h-10 text-accent" />}
-              title="Real-time Adjustments"
+              title="Live Updates"
               desc="Get instant diet and workout updates based on your daily activity and recovery levels."
             />
             <BenefitCard
@@ -111,7 +111,7 @@ export default function Home() {
         </div>
       </section>
 
-      {/* Intelligence Uplink Preview */}
+      {/* AI Features Preview */}
       <section className="py-40 px-6 bg-card/10 border-y border-white/5 relative">
         <div className="orbital-glow top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 opacity-10"></div>
         <div className="max-w-7xl mx-auto">
@@ -138,7 +138,7 @@ export default function Home() {
                 />
                 <FeatureItem
                   icon={<Bot className="w-6 h-6 text-accent" />}
-                  title="AI Personal Trainer"
+                  title="AI Trainer"
                   desc="A 24/7 assistant powered by advanced AI. It knows your history to help you improve."
                 />
               </div>
@@ -156,13 +156,13 @@ export default function Home() {
                   </div>
                   <div>
                     <h3 className="font-black text-2xl text-white uppercase italic tracking-tighter">Daily Goal</h3>
-                    <p className="text-xs text-accent uppercase tracking-[0.4em] font-black">AI Status: Active</p>
+                    <p className="text-xs text-accent uppercase tracking-[0.4em] font-black">AI Active</p>
                   </div>
                 </div>
                 <div className="space-y-10">
                   <div className="space-y-4">
                     <div className="flex justify-between text-[10px] font-black uppercase tracking-[0.2em]">
-                      <span className="text-muted italic">AI Accuracy</span>
+                      <span className="text-muted italic">AI Precision</span>
                       <span className="text-accent">98.4%</span>
                     </div>
                     <div className="h-2.5 bg-white/5 rounded-full w-full overflow-hidden border border-white/5">
@@ -174,7 +174,7 @@ export default function Home() {
                     </div>
                   </div>
                   <div className="p-6 glass border border-white/5 rounded-3xl italic font-bold">
-                    <p className="text-sm text-muted">"AI Recommendation: Your recovery is at its peak. Increase training intensity by 12% for best results today."</p>
+                    <p className="text-sm text-muted">"AI Suggestion: Your recovery is at its peak. Increase training intensity by 12% for best results today."</p>
                   </div>
                 </div>
               </div>

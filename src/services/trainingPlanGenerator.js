@@ -1,4 +1,5 @@
-import { generateDietPlan, generateWorkoutRoutine, getAIResponseStream } from './ai';
+import { generateDietPlan, generateWorkoutRoutine, getAIResponseStream, callUnifiedAI } from './ai';
+
 import EXERCISE_JSON_DB from '../data/exercises.json';
 import { EXERCISE_DATABASE as EXERCISE_JS_DB } from '../data/exercises.js';
 import FOOD_DATABASE from '../data/foodItems.json';
@@ -69,9 +70,8 @@ export async function generateComprehensiveTrainingPlan(userProfile, preferences
   const targetLocation = locationMap[equipment] || "gym";
   relevantExercises = relevantExercises.filter(ex => ex.location === targetLocation || ex.location === 'home');
 
-  // Sample 25 exercises to ensure variety (if we send too many, the AI context is static)
-  // By sending a smaller random subset, we force the AI to choose from different options each time
-  const sampleSize = Math.min(25, relevantExercises.length);
+  // Sample 8-10 exercises to ensure stable URL lengths
+  const sampleSize = Math.min(10, relevantExercises.length);
   const sampledExercises = [];
   const usedIndices = new Set();
 
@@ -84,8 +84,8 @@ export async function generateComprehensiveTrainingPlan(userProfile, preferences
   }
 
   const exerciseContext = sampledExercises.map(ex =>
-    `${ex.name} (${ex.id}): ${ex.tutorial} | Muscles: ${ex.muscles.join(', ')} | Level: ${ex.level} | Unit: ${ex.unit} | Cal/unit: ${ex.calories_per_min || 'N/A'}`
-  ).join('\n');
+    `${ex.name} (${ex.id}): ${ex.unit}, ${ex.calories_per_min || 'N/A'}cal/min`
+  ).join('|');
 
   // Sample food items based on dietary preference
   const dietMap = {
@@ -108,8 +108,8 @@ export async function generateComprehensiveTrainingPlan(userProfile, preferences
     );
   }
 
-  // Sample 50 food items
-  const foodSampleSize = Math.min(50, relevantFoods.length);
+  // Sample 12 food items
+  const foodSampleSize = Math.min(12, relevantFoods.length);
   const sampledFoods = [];
   const usedFoodIndices = new Set();
 
@@ -122,95 +122,23 @@ export async function generateComprehensiveTrainingPlan(userProfile, preferences
   }
 
   const foodContext = sampledFoods.map(food =>
-    `${food.name}: ${food.calories}kcal | P:${food.protein}g C:${food.carbs}g F:${food.fats}g | Serving: ${food.serving}`
-  ).join('\n');
+    `${food.name}: ${food.protein}P, ${food.carbs}C, ${food.calories}cal`
+  ).join('|');
 
-  const prompt = `
-You are an ELITE AI Fitness Coach. Generate a comprehensive ${duration}-week training and nutrition protocol.
-User: ${userProfile.name}, Goal: ${goal}, Experience: ${experience}.
-
-SYSTEM CONTEXT:
-- Workout Intensity: ${workoutIntensity}
-- Muscle Focus: ${muscleFocus.length > 0 ? muscleFocus.join(', ') : 'Full Body balance'}
-- Frequency: ${daysPerWeek} training cycles per week
-- Equipment: ${equipment}
-- Target: ${dailyCalories} kcal /day
-- Structure: ${mealsPerDay} meals /day
-- Preference: ${dietaryPreference}
-
-EXERCISE REGISTRY (Use ONLY these exact names and IDs):
-${exerciseContext}
-
-NUTRITION REGISTRY (Use ONLY these items):
-${foodContext}
-
-EXERCISE SELECTION RULES (STRICT):
-1. COMPOUND FIRST: Every session MUST start with 2 major compound movements (Bench, Squat, Deadlift variations).
-2. VARIETY MATRIX: Do NOT repeat the same exercise within a 3-day window.
-3. LOAD BALANCE: Balance pushing, pulling, and leg movements throughout the week.
-4. METADATA: Ensure every exercise has sets, reps (or duration), unit, tutorial, and form_tips.
-
-NUTRITION RULES (STRICT):
-1. CALORIC PRECISION: All meals MUST sum to EXACTLY ~${dailyCalories} kcal (+/- 50).
-2. ROTATION: Rotate through the registry. Monday's breakfast must be different from Tuesday's.
-3. MACRO BALANCE: Align with ${dietaryPreference} goals.
-
-JSON ARCHITECTURE (STRICT):
-Generate ONLY a valid JSON object. No prose.
-{
-  "planId": "plan_${Date.now()}",
-  "duration": ${duration},
-  "currentWeek": 1,
-  "goal": "${goal}",
-  "weeks": [
-    {
-      "weekNumber": 1,
-      "focus": "Protocol Initialization",
-      "milestone": "Establishing neural pathways",
-      "days": [
-        {
-          "dayOfWeek": "Monday",
-          "type": "workout",
-          "workout": { 
-            "name": "Phase 1: Dynamic Strength", 
-            "duration": "60m", 
-            "exercises": [
-              {
-                "id": "ex_XXX",
-                "name": "Exercise Name", 
-                "sets": 4, 
-                "reps": "10-12",
-                "unit": "reps",
-                "tutorial": "...",
-                "form_tips": ["...", "..."]
-              }
-            ] 
-          },
-          "meals": [
-            {"type": "Meal 1", "name": "...", "food": "...", "calories": 500, "protein": 30, "carbs": 50, "fats": 15}
-          ],
-          "hydration": 3500,
-          "sleepTarget": 8
-        }
-      ]
-    }
-  ]
-}
-
-REQUIRED: Provide a complete ${duration}-week plan. Ensure ${daysPerWeek} training days and ${7 - daysPerWeek} rest days per cycle.`;
+  const prompt = `ELITE Coach: 4-week plan for ${userProfile.name}, Goal: ${goal}.
+  Context: ${workoutIntensity}, ${daysPerWeek} training days/wk, ${dailyCalories}kcal/day, ${dietaryPreference}.
+  DB_EX: ${exerciseContext}.
+  DB_FOOD: ${foodContext}.
+  Rules: 1. Use DB IDs. 2. 2 Compound moves/session. 3. Target ${dailyCalories}kcal.
+  Return JSON: { "planId": "plan_${Date.now()}", "duration": ${duration}, "weeks": [{ "weekNumber": 1, "days": [{ "dayOfWeek": "Monday", "type": "workout/rest", "workout": { "name": "...", "exercises": [{ "id": "ex_XXX", "name": "...", "sets": 3, "reps": "12", "unit": "reps", "tutorial": "...", "form_tips": ["..."] }] }, "meals": [{ "type": "Meal 1", "name": "...", "calories": 500, "protein": 30 }] }] }] }`;
 
   try {
-    let responseText;
-    if (window.puter) {
-      responseText = await window.puter.ai.chat(prompt);
-      responseText = responseText.message.content;
-    } else {
-      // Fallback to fetch style if Puter not ready
-      const res = await fetch(`https://text.pollinations.ai/${encodeURIComponent(prompt)}?json=true`);
-      responseText = await res.text();
+    const plan = await callUnifiedAI(prompt, true);
+
+    if (!plan) {
+      throw new Error("AI failed to generate a training plan.");
     }
 
-    const plan = JSON.parse(responseText.replace(/```json/g, "").replace(/```/g, "").trim());
 
     // Add metadata
     plan.createdAt = new Date().toISOString();
@@ -228,18 +156,18 @@ REQUIRED: Provide a complete ${duration}-week plan. Ensure ${daysPerWeek} traini
 
 export async function generateWeeklySchedule(weekNumber, userProfile) {
   const prompt = `Generate Week ${weekNumber} for ${userProfile.goal}. Return JSON week object.`;
-  // Simplified for now, uses same logic as above
-  const res = await getAIResponseStream(prompt, () => { });
-  return JSON.parse(res.replace(/```json/g, "").replace(/```/g, "").trim());
+  return await callUnifiedAI(prompt, true);
 }
+
 
 export async function analyzeProgress(progressData, trainingPlan) {
   const prompt = `Analyze progress: ${JSON.stringify(progressData)}. Return JSON { "overallScore": 80, "assessment": "...", "recommendations": [], "motivation": "...", "adjustments": {} }`;
-  const res = await getAIResponseStream(prompt, () => { });
-  return JSON.parse(res.replace(/```json/g, "").replace(/```/g, "").trim());
+  return await callUnifiedAI(prompt, true);
 }
+
 
 export async function generateDailyMotivation(userProfile, todayTasks) {
   const prompt = `Short motivation (10 words) for ${userProfile.name} doing ${todayTasks?.workout?.name || 'Rest'}.`;
-  return await getAIResponseStream(prompt, () => { });
+  return await callUnifiedAI(prompt, false);
 }
+

@@ -71,12 +71,12 @@ export default function Diet() {
       });
       if (newPlan) {
         updateAIMeals(newPlan); // REPLACE instead of append
-        addToast("Nutritional profile optimized", "success");
+        addToast("Diet plan updated", "success");
       } else {
-        addToast("Synthesis failed", "error");
+        addToast("Failed to generate", "error");
       }
     } catch (err) {
-      addToast("Uplink unstable", "error");
+      addToast("Connection error", "error");
     } finally {
       setLoading(false);
     }
@@ -85,10 +85,10 @@ export default function Diet() {
   const handleRemoveMeal = (mealId) => {
     if (activeTab === "manual") {
       updateManualMeals(manualMeals.filter(m => m.id !== mealId));
-      addToast("MEAL REMOVED FROM LOG", "success");
+      addToast("MEAL REMOVED", "success");
     } else {
       updateAIMeals(aiMeals.filter(m => m.id !== mealId));
-      addToast("AI PROTOCOL DELETED", "success");
+      addToast("Meal plan deleted", "success");
     }
   };
 
@@ -107,7 +107,7 @@ export default function Diet() {
               <div className="w-1 h-6 bg-blue-500 rounded-full mb-0.5" />
               <div>
                 <h1 className="text-xl md:text-2xl font-black text-text italic tracking-tighter uppercase leading-none">Nutrition</h1>
-                <p className="text-[0.6rem] text-muted font-bold uppercase tracking-[0.4em] mt-1.5 opacity-60">AI SYNC & ENGINE</p>
+                <p className="text-[0.6rem] text-muted font-bold uppercase tracking-[0.4em] mt-1.5 opacity-60">DIET PLANNER</p>
               </div>
             </div>
 
@@ -197,7 +197,7 @@ export default function Diet() {
                     <input
                       value={searchQuery}
                       onChange={(e) => setSearchQuery(e.target.value)}
-                      placeholder="FILTER AI PROTOCOLS..."
+                      placeholder="SEARCH MEAL PLANS..."
                       className="w-full bg-card/40 border border-border rounded-xl py-3.5 pl-12 pr-4 text-xs font-black text-text outline-none focus:border-accent/40 shadow-sm placeholder:opacity-20"
                     />
                   </div>
@@ -210,10 +210,10 @@ export default function Diet() {
                       <Activity className="w-6 h-6 text-blue-400" />
                     </div>
                     <div>
-                      <p className="text-[0.65rem] font-black text-muted uppercase tracking-[0.4em] mb-1.5 opacity-60">ENERGY MATRIX</p>
+                      <p className="text-[0.65rem] font-black text-muted uppercase tracking-[0.4em] mb-1.5 opacity-60">DAILY SUMMARY</p>
                       <div className="flex items-baseline gap-2.5 justify-center sm:justify-start">
                         <h3 className="text-2xl font-black text-text italic tracking-tighter leading-none">{totalCalories}</h3>
-                        <span className="text-[0.65rem] font-black text-muted uppercase tracking-widest opacity-60">KCAL SYNC</span>
+                        <span className="text-[0.65rem] font-black text-muted uppercase tracking-widest opacity-60">CALORIES</span>
                       </div>
                     </div>
                   </div>
@@ -278,7 +278,7 @@ export default function Diet() {
             {meals.length === 0 && (
               <div className="col-span-full py-32 text-center border-2 border-dashed border-border rounded-[2rem] bg-card/10">
                 <p className="text-xs font-black text-muted uppercase tracking-[0.5em] opacity-40 px-10">
-                  {activeTab === 'ai' ? 'No AI Protocols Active' : 'No Manual Meals Documented'}
+                  {activeTab === 'ai' ? 'No Meal Plans Found' : 'No Manual Meals Found'}
                 </p>
               </div>
             )}

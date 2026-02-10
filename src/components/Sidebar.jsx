@@ -88,7 +88,7 @@ export default function Sidebar() {
         <div className="mt-2 mb-2 p-2 bg-white/5 rounded-xl border border-white/5 relative group cursor-pointer hover:border-accent/20 transition-all">
           <div className="flex items-center justify-between mb-1">
             <Trophy className="w-3 h-3 text-accent" />
-            <span className="text-[9px] font-black text-muted uppercase tracking-widest">AI Sync</span>
+            <span className="text-[9px] font-black text-muted uppercase tracking-widest">Progress</span>
           </div>
           <div className="space-y-1">
             <p className="text-lg font-black text-white italic tracking-tighter">{neuralXP || 0}<span className="text-[9px] text-muted ml-1">XP</span></p>
@@ -108,7 +108,7 @@ export default function Sidebar() {
 
           <div className="px-4 py-1 bg-accent/5 rounded-xl text-center border border-accent/10">
             <p className="text-[7px] uppercase tracking-widest text-[#a1a1aa] font-black">
-              Access Tier
+              Subscription
             </p>
             <p className="text-[10px] font-black text-accent uppercase tracking-tighter">
               {userProfile?.subscriptionTier || "Generic"}

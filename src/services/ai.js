@@ -1,18 +1,70 @@
 
-/**
- * AI Service using Puter.js with Pollinations AI as a fallback.
- * Puter.js provides stable, keyless AI access.
- */
-
+import { GoogleGenerativeAI } from "@google/generative-ai";
 import EXERCISE_DATABASE from '../data/exercises.json';
 
-const PUTER_MODEL = 'openai'; // or 'gpt-4o', etc.
+const PUTER_MODEL = 'openai';
 
 const DEFAULT_SYSTEM_PROMPT = `You are a professional AI Fitness Coach. Your goal is to provide highly accurate, science-based fitness, nutrition, and workout advice. 
 You MUST strictly follow the user's dietary preferences (e.g., Vegan, Non-Veg) and fitness aims. 
 For workouts, ensure exercises are appropriate for the specified location (Gym vs Home) and experience level. 
 Keep your responses properly formatted as valid JSON when requested.`;
 
+/**
+ * AI PROVIDER MANAGEMENT
+ */
+export const AI_PROVIDERS = {
+    POLLINATIONS: 'pollinations', // Free, Unlimited, No Key Required
+    GEMINI: 'gemini',             // High Quality, Requires Key
+    PUTER: 'puter'                // Stable, Browser-based
+};
+
+export const getAIPreference = () => {
+    const hasGeminiKey = !!(localStorage.getItem('GEMINI_API_KEY') || import.meta.env.VITE_GEMINI_API_KEY);
+    const defaultProvider = hasGeminiKey ? AI_PROVIDERS.GEMINI : AI_PROVIDERS.POLLINATIONS;
+
+    const pref = localStorage.getItem('AI_PROVIDER') || defaultProvider;
+    const key = localStorage.getItem('GEMINI_API_KEY') || import.meta.env.VITE_GEMINI_API_KEY || "";
+    return { provider: pref, geminiKey: key };
+};
+
+export const setAIPreference = (provider, key = null) => {
+    localStorage.setItem('AI_PROVIDER', provider);
+    if (key !== null) localStorage.setItem('GEMINI_API_KEY', key);
+};
+
+/**
+ * GOOGLE GEMINI SERVICE
+ */
+async function callGeminiAI(prompt, jsonMode = true) {
+    const { geminiKey } = getAIPreference();
+    if (!geminiKey) throw new Error("Gemini API Key missing");
+
+    const genAI = new GoogleGenerativeAI(geminiKey);
+    const model = genAI.getGenerativeModel({
+        model: "gemini-1.5-flash",
+        generationConfig: jsonMode ? { responseMimeType: "application/json" } : {}
+    });
+
+    const fullPrompt = `${DEFAULT_SYSTEM_PROMPT}\n\nUser: ${prompt}`;
+    const result = await model.generateContent(fullPrompt);
+    const text = result.response.text();
+
+    if (jsonMode) {
+        try {
+            return JSON.parse(text);
+        } catch (e) {
+            // Fallback for malformed JSON
+            const match = text.match(/\{[\s\S]*\}/);
+            if (match) return JSON.parse(match[0]);
+            throw e;
+        }
+    }
+    return text;
+}
+
+/**
+ * PUTER.JS SERVICE
+ */
 async function callPuterAI(prompt, stream = false, onChunk = null) {
     if (!window.puter) {
         throw new Error("Puter.js not loaded");
@@ -35,41 +87,172 @@ async function callPuterAI(prompt, stream = false, onChunk = null) {
 }
 
 /**
- * Fallback to Pollinations AI if Puter fails
+ * POLLINATIONS AI SERVICE (Free & Unlimited)
  */
 async function callPollinationsAI(prompt, jsonMode = true) {
-    const fullPrompt = `${DEFAULT_SYSTEM_PROMPT}\n\nUser: ${prompt}`;
-    const url = `https://text.pollinations.ai/${encodeURIComponent(fullPrompt)}?model=openai${jsonMode ? '&json=true' : ''}`;
-    const response = await fetch(url);
-    if (!response.ok) throw new Error(`Pollinations error: ${response.status}`);
-    const text = await response.text();
-    if (jsonMode) {
-        return JSON.parse(text.replace(/```json/g, "").replace(/```/g, "").trim());
+    const models = ['mistral', 'qwen-coder', 'llama', 'unity', 'p1', 'openai'];
+    const shuffledModels = [...models].sort(() => Math.random() - 0.5);
+
+    // Safety truncation for very long prompts
+    const maxLen = 1500;
+    const cleanPrompt = prompt.length > maxLen ? prompt.substring(0, maxLen) + "..." : prompt;
+
+    for (const model of shuffledModels) {
+        for (let attempt = 0; attempt < 2; attempt++) {
+            try {
+                // 1. Try OpenAI-compatible POST endpoint
+                const url = `https://text.pollinations.ai/openai/chat/completions`;
+
+                let text = "";
+                try {
+                    const response = await fetch(url, {
+                        method: 'POST',
+                        headers: { 'Content-Type': 'application/json' },
+                        body: JSON.stringify({
+                            messages: [
+                                { role: 'system', content: DEFAULT_SYSTEM_PROMPT },
+                                { role: 'user', content: cleanPrompt }
+                            ],
+                            model: model,
+                            seed: Math.floor(Math.random() * 1000000),
+                            jsonMode: jsonMode
+                        }),
+                        credentials: 'omit',
+                        mode: 'cors'
+                    });
+
+                    if (response.ok) {
+                        const data = await response.json();
+                        text = data.choices[0]?.message?.content || "";
+                    }
+                } catch (postErr) {
+                    console.warn(`POST to ${model} failed, trying GET...`);
+                }
+
+                // 2. Fallback to GET if POST failed or returned empty
+                if (!text) {
+                    const getUrl = `https://text.pollinations.ai/${encodeURIComponent(cleanPrompt.substring(0, 400))}?model=${model}&json=${jsonMode}&seed=${Math.floor(Math.random() * 1000)}`;
+                    const getRes = await fetch(getUrl, { mode: 'cors', credentials: 'omit' });
+                    if (getRes.ok) {
+                        text = await getRes.text();
+                    }
+                }
+
+                if (!text) continue;
+
+                // 3. Filter out service errors
+                const tl = text.toLowerCase();
+                if (tl.includes("deprecated") || tl.includes("unavailable") || tl.includes("busy") ||
+                    tl.includes("try again") || tl.includes("error") || tl.includes("limit")) {
+                    console.warn(`Pollinations ${model} returned service error string. Retrying...`);
+                    continue;
+                }
+
+                if (jsonMode) {
+                    try {
+                        let cleaned = text.replace(/```json/gi, "").replace(/```/gi, "").trim();
+                        const match = cleaned.match(/\{[\s\S]*\}|\[[\s\S]*\]/);
+                        return JSON.parse(match ? match[0] : cleaned);
+                    } catch (e) { continue; }
+                }
+                return text.trim();
+            } catch (err) {
+                console.warn(`Pollinations ${model} attempt failed:`, err);
+                continue;
+            }
+        }
     }
-    return text.trim();
+    return null;
 }
 
+/**
+ * UNIFIED AI DISPATCHER
+ */
 export async function getAIResponseStream(prompt, onChunk) {
-    try {
-        if (window.puter) {
-            return await callPuterAI(prompt, true, onChunk);
-        }
-        throw new Error("Puter unavailable");
-    } catch (error) {
-        console.warn("Puter AI failed, falling back to Pollinations:", error);
-        // Basic fallback for streaming (not perfectly streaming but works)
+    const { provider } = getAIPreference();
+    const providersToTry = [provider];
+
+    // Build fallback list based on availability
+    if (provider !== AI_PROVIDERS.GEMINI && import.meta.env.VITE_GEMINI_API_KEY) {
+        providersToTry.push(AI_PROVIDERS.GEMINI);
+    }
+    if (provider !== AI_PROVIDERS.PUTER && window.puter) {
+        providersToTry.push(AI_PROVIDERS.PUTER);
+    }
+    if (provider !== AI_PROVIDERS.POLLINATIONS) {
+        providersToTry.push(AI_PROVIDERS.POLLINATIONS);
+    }
+
+    for (const p of providersToTry) {
         try {
-            const response = await callPollinationsAI(prompt, false);
-            onChunk(response);
-            return response;
-        } catch (fallError) {
-            const msg = "AI services are currently unavailable. Please try again later.";
-            onChunk(msg);
-            return msg;
+            if (p === AI_PROVIDERS.GEMINI) {
+                const res = await callGeminiAI(prompt, false);
+                if (res) { onChunk(res); return res; }
+            }
+            if (p === AI_PROVIDERS.PUTER && window.puter) {
+                const res = await callPuterAI(prompt, true, onChunk);
+                if (res) return res;
+            }
+            if (p === AI_PROVIDERS.POLLINATIONS || (p === provider && !window.puter && !import.meta.env.VITE_GEMINI_API_KEY)) {
+                const res = await callPollinationsAI(prompt, false);
+                if (res) { onChunk(res); return res; }
+            }
+        } catch (err) {
+            console.warn(`Provider ${p} failed, trying next...`, err);
         }
     }
-}
 
+    const fallbackMsg = "AI services are currently under heavy load. Please wait a moment or try a different fitness query. Your progress is still being saved locally!";
+    onChunk(fallbackMsg);
+    return fallbackMsg;
+}
+/**
+ * UNIFIED AI DISPATCHER - Static (Non-Streaming)
+ */
+export async function callUnifiedAI(prompt, jsonMode = true) {
+    const { provider } = getAIPreference();
+    const providersToTry = [provider];
+
+    if (provider !== AI_PROVIDERS.GEMINI && import.meta.env.VITE_GEMINI_API_KEY) {
+        providersToTry.push(AI_PROVIDERS.GEMINI);
+    }
+    if (provider !== AI_PROVIDERS.PUTER && window.puter) {
+        providersToTry.push(AI_PROVIDERS.PUTER);
+    }
+    if (provider !== AI_PROVIDERS.POLLINATIONS) {
+        providersToTry.push(AI_PROVIDERS.POLLINATIONS);
+    }
+
+    for (const p of providersToTry) {
+        try {
+            if (p === AI_PROVIDERS.GEMINI) {
+                const res = await callGeminiAI(prompt, jsonMode);
+                if (res) return res;
+            }
+            if (p === AI_PROVIDERS.PUTER && window.puter) {
+                const res = await callPuterAI(prompt);
+                if (res) {
+                    if (jsonMode) {
+                        try {
+                            const cleaned = res.replace(/```json/gi, "").replace(/```/gi, "").trim();
+                            const match = cleaned.match(/\{[\s\S]*\}|\[[\s\S]*\]/);
+                            return JSON.parse(match ? match[0] : cleaned);
+                        } catch (e) { console.warn("Puter JSON parse failed, trying next..."); continue; }
+                    }
+                    return res;
+                }
+            }
+            if (p === AI_PROVIDERS.POLLINATIONS || (p === provider && !window.puter)) {
+                const res = await callPollinationsAI(prompt, jsonMode);
+                if (res) return res;
+            }
+        } catch (err) {
+            console.warn(`Static Provider ${p} failed, trying next...`, err);
+        }
+    }
+
+    return null;
+}
 export async function generateDietPlan(preferences = {}) {
     const {
         dietPreference = "Balanced",
@@ -77,6 +260,7 @@ export async function generateDietPlan(preferences = {}) {
         calories = "2000",
         experienceLevel = "intermediate"
     } = preferences;
+
 
     const foodSamples = {
         "Vegetarian": "Paneer, Greek Yogurt, Moong Dal, Dal Makhani, Palak Paneer, Oats, Brown Rice, Chapati, Milk, Almonds",
@@ -87,39 +271,31 @@ export async function generateDietPlan(preferences = {}) {
 
     const preferredFoods = foodSamples[dietPreference] || foodSamples["Vegetarian"];
 
-    const prompt = `Generate a comprehensive daily diet plan for a ${dietPreference} preference with a focus on ${dietAim}. Target: ~${calories} kcal. 
-    Experience Level: ${experienceLevel}.
-    
-    REFERENCE INGREDIENTS (Use these or similar): ${preferredFoods}.
-
-    Return ONLY a JSON array of 4-5 objects, each representing a meal (Breakfast, Lunch, Dinner, Snack, etc.).
-    Each object MUST have:
-    - "name": The meal title (e.g. "Early Morning Fuel", "Muscle Recovery Lunch")
-    - "type": The category (Breakfast, Lunch, Dinner, or Snack)
-    - "food": A detailed description of literal food items and portions (e.g. "200g Grilled Chicken with 100g Brown Rice")
-    - "calories": Estimated total calories for this meal (number)
-    - "protein": Protein in grams (number)
-    - "carbs": Carbohydrates in grams (number)
-    - "fats": Fats in grams (number)
-
-    Ensure the total daily calories across all objects sum up to approximately ${calories}.
-    Strictly adhere to the ${dietPreference} dietary restriction.`;
+    const prompt = `Daily diet for ${dietPreference} aimed at ${dietAim}. Target: ${calories} kcal.
+    Items: ${preferredFoods}. 
+    Return JSON array: [{ name, type, food, calories, protein, carbs, fats }]. 
+    Sum to ${calories} kcal.`;
 
     try {
-        if (window.puter) {
-            const res = await callPuterAI(prompt);
-            const meals = JSON.parse(res.replace(/```json/g, "").replace(/```/g, "").trim());
+        const meals = await callUnifiedAI(prompt, true);
+        if (meals && Array.isArray(meals)) {
             return meals.map((m, i) => ({ ...m, id: `ai_meal_${Date.now()}_${i}`, isAI: true }));
         }
     } catch (e) {
-        console.warn("Puter diet generation failed:", e);
+        console.warn("AI failed for diet, using deterministic generator.");
     }
-    const result = await callPollinationsAI(prompt).catch(() => null);
-    if (result && Array.isArray(result)) {
-        return result.map((m, i) => ({ ...m, id: `ai_meal_${Date.now()}_${i}`, isAI: true }));
-    }
-    return result;
+
+    // Deterministic High-Quality Fallback
+    const fallbackMeals = [
+        { name: "Breakfast Fuel", type: "Breakfast", calories: 500, protein: 30, carbs: 60, fats: 15, food: dietPreference === "Vegan" ? "Oatmeal with Almond Milk, Chia Seeds, and Berries" : "Scrambled Eggs (3) with Whole Wheat Toast and Spinach" },
+        { name: "Lunch Powerhouse", type: "Lunch", calories: 700, protein: 45, carbs: 80, fats: 20, food: dietPreference === "Vegan" ? "Quinoa Salad with Chickpeas, Avocado, and Tahini" : "Grilled Chicken Breast (200g) with Brown Rice and Broccoli" },
+        { name: "Dinner Recovery", type: "Dinner", calories: 600, protein: 40, carbs: 50, fats: 25, food: dietPreference === "Vegan" ? "Lentil Soup with Roasted Sweet Potato and Kale" : "Baked Salmon with Lemon, Asparagus, and New Potatoes" },
+        { name: "Focus Snack", type: "Snack", calories: 200, protein: 10, carbs: 20, fats: 10, food: dietPreference === "Vegan" ? "Mixed Nuts and an Apple" : "Greek Yogurt with Honey and Walnuts" }
+    ];
+
+    return fallbackMeals.map((m, i) => ({ ...m, id: `fallback_meal_${Date.now()}_${i}`, isAI: true }));
 }
+
 
 export async function generateWorkoutRoutine(preferences = {}) {
     const {
@@ -130,18 +306,15 @@ export async function generateWorkoutRoutine(preferences = {}) {
         location = "gym"
     } = preferences;
 
-    // Sample relevant exercises from database
     const relevantExercises = EXERCISE_DATABASE.filter(ex => {
         const matchesMuscle = muscles.some(m =>
             ex.muscles.some(em => em.toLowerCase().includes(m.toLowerCase()) || m.toLowerCase().includes(em.toLowerCase()))
         );
-        const matchesLocation = ex.location === location || ex.location === 'home'; // home exercises work anywhere
-        const matchesLevel = ex.level === level || ex.level === 'beginner'; // beginners can do beginner exercises
+        const matchesLocation = ex.location === location || ex.location === 'home';
         return matchesMuscle && matchesLocation;
     });
 
-    // Take a random sample of 15 exercises to keep prompt manageable
-    const sampleSize = Math.min(15, relevantExercises.length);
+    const sampleSize = Math.min(8, relevantExercises.length);
     const sampledExercises = [];
     const usedIndices = new Set();
 
@@ -154,55 +327,40 @@ export async function generateWorkoutRoutine(preferences = {}) {
     }
 
     const exerciseContext = sampledExercises.map(ex =>
-        `${ex.name} (${ex.id}): ${ex.tutorial} | Muscles: ${ex.muscles.join(', ')} | Level: ${ex.level} | Unit: ${ex.unit} | Cal/unit: ${ex.calories_per_min || 'N/A'}`
-    ).join('\n');
+        `${ex.name}(${ex.id}): ${ex.unit}, ${ex.calories_per_min || 0}cpm`
+    ).join('|');
 
-    const prompt = `Generate a highly effective workout routine targeting ${muscles.join(", ")}. 
-    Duration: ${duration} minutes. Target Calories: ${calorieTarget} kcal. 
-    Level: ${level}. Location: ${location}.
-    
-    AVAILABLE EXERCISES FROM DATABASE:
-    ${exerciseContext}
-    
-    Return ONLY a valid JSON object with this EXACT structure:
-    {
-      "id": "ai_workout_${Date.now()}", 
-      "name": "Targeted ${muscles.join("/")} Session", 
-      "duration": "${duration} min", 
-      "totalCalories": ${calorieTarget},
-      "exercises": [
-        {
-          "id": "ex_XXX",
-          "name": "Exercise Name from database",
-          "sets": 3,
-          "reps": "12",
-          "duration": "5 min",
-          "unit": "reps or min",
-          "calories": 50,
-          "tutorial": "Brief instruction",
-          "form_tips": ["tip1", "tip2"],
-          "level": "beginner/intermediate/advanced"
-        }
-      ]
-    }
-    
-    CRITICAL RULES:
-    1. Use ONLY exercises from the provided database above
-    2. Include the exercise ID (ex_XXX) for each exercise
-    3. Set "unit" to match the database entry ("min" or "reps")
-    4. If unit is "min", provide duration and calculate calories from calories_per_min
-    5. If unit is "reps", provide sets and reps
-    6. Include tutorial and form_tips from the database
-    7. Total workout duration should be approximately ${duration} minutes
-    8. Total calories should sum to approximately ${calorieTarget} kcal`;
+    const prompt = `Routine for ${muscles.join("/")}, ${duration}m, ${calorieTarget}kcal, ${level}. 
+    DB: ${exerciseContext}.
+    Return JSON: { id, name, duration, totalCalories, exercises: [{id, name, sets, reps, duration, unit, calories, tutorial, form_tips, level}] }.`;
 
     try {
-        if (window.puter) {
-            const res = await callPuterAI(prompt);
-            return JSON.parse(res.replace(/```json/g, "").replace(/```/g, "").trim());
-        }
+        const routine = await callUnifiedAI(prompt, true);
+        if (routine && routine.exercises) return routine;
     } catch (e) {
-        console.warn("Puter workout generation failed:", e);
+        console.warn("AI workout generation failed, using database selection.");
     }
-    return await callPollinationsAI(prompt).catch(() => null);
+
+    // High-Quality Database Fallback
+    const workoutId = `fallback_workout_${Date.now()}`;
+    return {
+        id: workoutId,
+        name: `${level.charAt(0).toUpperCase() + level.slice(1)} ${muscles[0]} Power Session`,
+        duration: `${duration} min`,
+        totalCalories: calorieTarget,
+        exercises: sampledExercises.slice(0, 6).map((ex, i) => ({
+            id: ex.id,
+            name: ex.name,
+            sets: level === 'beginner' ? 2 : 3,
+            reps: ex.unit === 'min' ? "5" : "12",
+            duration: ex.unit === 'min' ? "5 min" : "N/A",
+            unit: ex.unit,
+            calories: Math.floor(calorieTarget / 6),
+            tutorial: ex.tutorial,
+            form_tips: ["Focus on breath", "Control the tempo", "Maintain posture"],
+            level: ex.level
+        }))
+    };
 }
+
+

@@ -14,7 +14,7 @@ export default function AICoach() {
   const [messages, setMessages] = useState([
     {
       role: "ai",
-      text: "AI Sync established. I am your AI Personal Trainer. How can I help you with your fitness goals today?",
+      text: "Hello! I am your AI Trainer. How can I help you with your fitness goals today?",
     },
   ]);
   const [input, setInput] = useState("");
@@ -68,7 +68,7 @@ export default function AICoach() {
       console.error(error);
       setMessages((prev) => {
         const newMessages = [...prev];
-        newMessages[newMessages.length - 1] = { role: "ai", text: "Critical System Error. Uplink Failed." };
+        newMessages[newMessages.length - 1] = { role: "ai", text: "Something went wrong. Please try again." };
         return newMessages;
       });
     } finally {
@@ -88,8 +88,8 @@ export default function AICoach() {
             <div className="flex items-center gap-3 min-w-0">
               <div className="w-1 h-6 bg-accent rounded-full mb-0.5 flex-shrink-0"></div>
               <div className="min-w-0">
-                <h1 className="text-lg md:text-2xl font-black tracking-tight text-white uppercase italic truncate">Coach Sync</h1>
-                <p className="text-[7px] text-muted font-bold uppercase tracking-widest mt-0.5 truncate">Uplink Active</p>
+                <h1 className="text-lg md:text-2xl font-black tracking-tight text-white uppercase italic truncate">AI Trainer</h1>
+                <p className="text-[7px] text-muted font-bold uppercase tracking-widest mt-0.5 truncate">Online</p>
               </div>
             </div>
             <div className="flex items-center gap-2 self-center flex-shrink-0">
@@ -135,7 +135,7 @@ export default function AICoach() {
                   className="w-full py-4 bg-text text-bg font-black uppercase tracking-widest rounded-xl flex items-center justify-center gap-3 hover:bg-accent transition-all shadow-xl active:scale-95 italic text-xs mt-6"
                 >
                   <Sparkles className="w-4 h-4" />
-                  Upgrade Protocol
+                  Upgrade Now
                 </Link>
               </div>
             </div>
@@ -169,8 +169,7 @@ export default function AICoach() {
                     className="flex justify-start"
                   >
                     <div className="bg-card/40 border border-border p-3 md:p-4 rounded-2xl text-[0.6rem] font-black text-accent uppercase tracking-[0.3em] flex items-center gap-3 shadow-sm">
-                      <div className="w-4 h-4 border-2 border-accent/20 border-t-accent rounded-full animate-spin"></div>
-                      SYNTHESIZING...
+                      THINKING...
                     </div>
                   </motion.div>
                 )}
@@ -246,7 +245,7 @@ export default function AICoach() {
                     <div className="flex justify-start">
                       <div className="bg-card/40 border border-border p-5 rounded-3xl text-xs font-black text-accent uppercase tracking-widest flex items-center gap-4 w-fit shadow-xl italic">
                         <div className="w-5 h-5 border-2 border-accent/20 border-t-accent rounded-full animate-spin"></div>
-                        PRO ASSISTANT SYNTHESIZING...
+                        AI TRAINER THINKING...
                       </div>
                     </div>
                   )}

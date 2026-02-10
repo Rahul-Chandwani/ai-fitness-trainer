@@ -83,12 +83,12 @@ export default function Workouts() {
       });
       if (newWorkout) {
         updateAIWorkouts([newWorkout]); // REPLACE instead of append
-        addToast("Workout plan synchronized", "success");
+        addToast("Workout plan updated", "success");
       } else {
-        addToast("Transmission failed", "error");
+        addToast("Failed to generate", "error");
       }
     } catch (err) {
-      addToast("Network error", "error");
+      addToast("Connection error", "error");
     } finally {
       setLoading(false);
     }
@@ -97,10 +97,10 @@ export default function Workouts() {
   const handleRemoveWorkout = (workoutId) => {
     if (activeTab === "manual") {
       updateManualWorkouts(manualWorkouts.filter(w => w.id !== workoutId));
-      addToast("ROUTINE PURGED FROM REPOSITORY", "success");
+      addToast("Workout removed", "success");
     } else {
       updateAIWorkouts(aiWorkouts.filter(w => w.id !== workoutId));
-      addToast("AI PROTOCOL DELETED", "success");
+      addToast("Workout plan deleted", "success");
     }
   };
 
@@ -130,7 +130,7 @@ export default function Workouts() {
               <div className="w-1 h-6 bg-accent rounded-full mb-0.5" />
               <div>
                 <h1 className="text-xl md:text-2xl font-black text-text italic tracking-tighter uppercase leading-none">Workouts</h1>
-                <p className="text-[0.6rem] text-accent font-bold uppercase tracking-[0.4em] mt-1.5 opacity-60">AI SYNTHESIS & MANUAL</p>
+                <p className="text-[0.6rem] text-accent font-bold uppercase tracking-[0.4em] mt-1.5 opacity-60">WORKOUT PLANNER</p>
               </div>
             </div>
 
@@ -230,7 +230,7 @@ export default function Workouts() {
                           ) : (
                             <Sparkles className="w-3.5 h-3.5" />
                           )}
-                          {loading ? 'SYNCING...' : isPro ? 'Generate Protocol' : 'Pro Required'}
+                          {loading ? 'CREATING...' : isPro ? 'Create Workout' : 'Pro Required'}
                         </button>
                         <Link
                           to="/training-plan"
@@ -252,7 +252,7 @@ export default function Workouts() {
                         <Zap className="w-5 h-5" />
                       </div>
                       <div>
-                        <h4 className="text-[0.65rem] font-black text-text uppercase tracking-widest opacity-80">ACTIVE ALPHA</h4>
+                        <h4 className="text-[0.65rem] font-black text-text uppercase tracking-widest opacity-80">ACTIVE PLAN</h4>
                         <p className="text-[0.6rem] text-accent font-black uppercase truncate max-w-[200px] tracking-widest mt-1 italic">{workouts[0].name}</p>
                       </div>
                     </div>
@@ -260,7 +260,7 @@ export default function Workouts() {
                       onClick={() => setSelectedWorkout(workouts[0])}
                       className="w-full sm:w-auto px-6 py-2.5 bg-text text-bg rounded-xl font-black uppercase text-[0.65rem] tracking-widest hover:bg-accent hover:text-bg transition-all active:scale-95 shadow-lg"
                     >
-                      Protocol
+                      Workout Details
                     </button>
                   </div>
                 )}
@@ -283,7 +283,7 @@ export default function Workouts() {
                   ))}
                   {workouts.length === 0 && (
                     <div className="col-span-full py-32 text-center border-2 border-dashed border-border rounded-[2rem] bg-card/10">
-                      <p className="text-xs font-black text-muted uppercase tracking-[0.5em] opacity-40 px-10">No AI Protocols for Today</p>
+                      <p className="text-xs font-black text-muted uppercase tracking-[0.5em] opacity-40 px-10">No Workouts for Today</p>
                     </div>
                   )}
                 </div>
@@ -303,7 +303,7 @@ export default function Workouts() {
                     <input
                       value={searchQuery}
                       onChange={(e) => setSearchQuery(e.target.value)}
-                      placeholder="SEARCH REPOSITORY..."
+                      placeholder="SEARCH WORKOUTS..."
                       className="w-full bg-card/40 border border-border rounded-xl py-3.5 pl-12 pr-4 text-xs font-black text-text outline-none focus:border-accent/40 shadow-sm placeholder:opacity-20"
                     />
                   </div>
@@ -338,7 +338,7 @@ export default function Workouts() {
                   ))}
                   {workouts.length === 0 && (
                     <div className="col-span-full py-32 text-center border-2 border-dashed border-border rounded-[2rem] bg-card/10">
-                      <p className="text-xs font-black text-muted uppercase tracking-[0.5em] opacity-40 px-10">Repository Empty</p>
+                      <p className="text-xs font-black text-muted uppercase tracking-[0.5em] opacity-40 px-10">Workout history empty</p>
                     </div>
                   )}
                 </div>

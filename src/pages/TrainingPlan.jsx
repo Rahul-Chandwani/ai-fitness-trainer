@@ -81,11 +81,11 @@ export default function TrainingPlan() {
             const plan = await generateComprehensiveTrainingPlan(userProfile, preferences);
             if (plan) {
                 await updateTrainingPlan(plan);
-                addToast("PREMIUM TRAINING PLAN SYNCHRONIZED", "success");
+                addToast("PREMIUM PLAN SAVED", "success");
                 setShowGenModal(false);
             }
         } catch (err) {
-            addToast("UPLINK FAILED: AI OVERLOAD", "error");
+            addToast("FAILED TO GENERATE", "error");
         } finally {
             setIsGenerating(false);
         }
@@ -94,7 +94,7 @@ export default function TrainingPlan() {
     const handleResetPlan = async () => {
         try {
             await updateTrainingPlan(null);
-            addToast("TRAINING PLAN PURGED", "success");
+            addToast("TRAINING PLAN DELETED", "success");
             setShowResetConfirm(false);
         } catch (error) {
             addToast("RESET FAILED", "error");
@@ -117,7 +117,7 @@ export default function TrainingPlan() {
                     <div className="max-w-7xl mx-auto px-4 sm:px-6">
                         <Link to="/dashboard" className="inline-flex items-center gap-2 text-[0.65rem] font-black text-muted hover:text-accent transition-colors group mb-8 uppercase tracking-[0.2em] opacity-60">
                             <ChevronLeft className="w-4 h-4 group-hover:-translate-x-1 transition-transform" />
-                            Back to Hub
+                            Back to Dashboard
                         </Link>
 
                         <div className="flex items-center justify-center min-h-[60vh]">
@@ -139,7 +139,7 @@ export default function TrainingPlan() {
                                     className="inline-flex items-center gap-2.5 px-8 py-4 bg-text text-bg font-black uppercase tracking-widest rounded-xl hover:bg-accent transition-all shadow-xl active:scale-95 text-[0.65rem] italic"
                                 >
                                     <Sparkles className="w-4 h-4" />
-                                    Upgrade Protocol
+                                    Upgrade Now
                                 </Link>
                             </div>
                         </div>
@@ -226,8 +226,8 @@ export default function TrainingPlan() {
 
                         <div className="flex items-center gap-3 w-full xl:w-auto">
                             <div className="px-5 py-2.5 bg-card/60 rounded-xl border border-border flex-grow xl:flex-grow-0 min-w-[140px] shadow-inner">
-                                <p className="font-mono text-[0.55rem] text-muted font-black uppercase tracking-[0.3em] mb-1 opacity-50">SYNC STATUS</p>
-                                <p className="text-xl font-black text-text italic tracking-tighter leading-none">{weeklyCompletion}% ACTIVE</p>
+                                <p className="font-mono text-[0.55rem] text-muted font-black uppercase tracking-[0.3em] mb-1 opacity-50">COMPLETION</p>
+                                <p className="text-xl font-black text-text italic tracking-tighter leading-none">{weeklyCompletion}% DONE</p>
                             </div>
                             <button
                                 onClick={loadAIInsights}
@@ -281,7 +281,7 @@ export default function TrainingPlan() {
                                     <div className="lg:col-span-2 space-y-4">
                                         <div className="flex items-center gap-3 px-2">
                                             <div className="w-1 h-5 bg-accent rounded-full"></div>
-                                            <h2 className="text-sm font-black text-text uppercase italic tracking-[0.2em]">CURRENT PROTOCOL</h2>
+                                            <h2 className="text-sm font-black text-text uppercase italic tracking-[0.2em]">TODAY'S PLAN</h2>
                                         </div>
                                         {todayData ? (
                                             <DailyTaskCard
@@ -300,7 +300,7 @@ export default function TrainingPlan() {
                                     <div className="space-y-4">
                                         <div className="flex items-center gap-3 px-2">
                                             <div className="w-1 h-5 bg-accent rounded-full"></div>
-                                            <h2 className="text-sm font-black text-text uppercase italic tracking-[0.2em]">AI INTELLIGENCE</h2>
+                                            <h2 className="text-sm font-black text-text uppercase italic tracking-[0.2em]">AI COACH</h2>
                                         </div>
                                         <AIInsightsWidget insights={aiInsights} loading={loadingInsights} />
 
@@ -364,7 +364,7 @@ export default function TrainingPlan() {
                                         <div className="w-10 h-10 bg-accent/10 rounded-xl flex items-center justify-center border border-accent/20 shadow-sm">
                                             <TrendingUp className="w-5 h-5 text-accent" />
                                         </div>
-                                        <h3 className="text-sm font-black text-text uppercase italic tracking-[0.2em]">WEIGHT EVOLUTION</h3>
+                                        <h3 className="text-sm font-black text-text uppercase italic tracking-[0.2em]">WEIGHT HISTORY</h3>
                                     </div>
                                     <div className="h-[200px]">
                                         <ProgressChart data={weightChartData} type="weight" title="Weight (kg)" />
@@ -395,7 +395,7 @@ export default function TrainingPlan() {
                                         className="w-full mt-4 p-8 rounded-[2rem] border border-dashed border-accent/20 hover:border-accent/40 text-muted hover:text-accent transition-all uppercase font-black tracking-[0.4em] text-[0.6rem] flex flex-col items-center gap-4 bg-accent/5 hover:bg-accent/10 group shadow-sm active:scale-95"
                                     >
                                         <Sparkles className="w-6 h-6 group-hover:scale-110 transition-transform" />
-                                        Refactor Architecture
+                                        Update Plan
                                     </button>
                                 </div>
                             </motion.div>
@@ -434,10 +434,10 @@ export default function TrainingPlan() {
 
                             <div className="text-center space-y-3">
                                 <h3 className="text-3xl font-black text-text uppercase italic tracking-tighter leading-none">
-                                    PURGE PROTOCOL?
+                                    DELETE PLAN?
                                 </h3>
                                 <p className="text-xs text-muted font-black uppercase tracking-[0.2em] leading-relaxed opacity-60">
-                                    This action will permanently remove your current {trainingPlan.duration}-week training protocol. All progress data will be preserved.
+                                    This action will permanently remove your current {trainingPlan.duration}-week training plan. All history will be preserved.
                                 </p>
                             </div>
 
@@ -452,7 +452,7 @@ export default function TrainingPlan() {
                                     onClick={handleResetPlan}
                                     className="flex-1 px-8 py-5 bg-red-500 hover:bg-red-600 text-white font-black uppercase text-[0.65rem] tracking-widest rounded-2xl transition-all active:scale-95 shadow-xl shadow-red-500/20"
                                 >
-                                    Confirm Purge
+                                    Confirm Delete
                                 </button>
                             </div>
                         </motion.div>
