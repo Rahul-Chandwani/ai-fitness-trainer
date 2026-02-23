@@ -5,7 +5,7 @@ import { EXERCISE_DATABASE as EXERCISE_JS_DB } from '../data/exercises.js';
 import FOOD_DATABASE from '../data/foodItems.json';
 
 /**
- * Generate a comprehensive training plan using Puter AI
+ * Generate a comprehensive training plan using Gemini AI
  */
 export async function generateComprehensiveTrainingPlan(userProfile, preferences = {}) {
   const {

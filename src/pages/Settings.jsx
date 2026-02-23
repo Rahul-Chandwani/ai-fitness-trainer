@@ -17,7 +17,7 @@ export default function Settings() {
         targetCalories: userProfile?.targetCalories || 2000,
     });
     const [aiSettings, setAiSettings] = useState({
-        provider: AI_PROVIDERS.POLLINATIONS,
+        provider: AI_PROVIDERS.GEMINI,
         geminiKey: ""
     });
     const [loading, setLoading] = useState(false);
@@ -136,47 +136,25 @@ export default function Settings() {
                                 </div>
 
                                 <div className="space-y-8 relative z-10">
-                                    <div className="space-y-4">
-                                        <label className="text-[0.65rem] uppercase font-black text-muted tracking-[0.2em] px-2 opacity-60">AI Service</label>
-                                        <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
-                                            {Object.values(AI_PROVIDERS).map((p) => (
-                                                <button
-                                                    key={p}
-                                                    onClick={() => setAiSettings({ ...aiSettings, provider: p })}
-                                                    className={`p-4 rounded-2xl border font-black uppercase text-[0.65rem] tracking-widest transition-all ${aiSettings.provider === p
-                                                        ? "bg-accent border-accent text-bg shadow-lg shadow-accent/20"
-                                                        : "bg-card/60 border-border text-muted hover:border-accent/40"
-                                                        }`}
-                                                >
-                                                    {p}
-                                                </button>
-                                            ))}
+                                    <div className="space-y-4 animate-in fade-in slide-in-from-top-2 duration-300">
+                                        <div className="flex items-center justify-between px-2">
+                                            <label className="text-[0.65rem] uppercase font-black text-muted tracking-[0.2em] opacity-60">Gemini API Key</label>
+                                            <a href="https://aistudio.google.com/app/apikey" target="_blank" rel="noreferrer" className="text-[0.6rem] font-black text-accent hover:underline uppercase tracking-widest">Get Key</a>
+                                        </div>
+                                        <div className="relative">
+                                            <Key className="absolute left-6 top-1/2 -translate-y-1/2 w-4 h-4 text-muted opacity-30" />
+                                            <input
+                                                type="password"
+                                                value={aiSettings.geminiKey}
+                                                onChange={(e) => setAiSettings({ ...aiSettings, geminiKey: e.target.value })}
+                                                className="w-full p-6 pl-14 rounded-3xl bg-card/60 border border-border focus:border-accent/40 focus:bg-card/80 outline-none transition-all text-text font-black text-sm tracking-tight shadow-inner placeholder:opacity-20"
+                                                placeholder="AIzaSy... (Leave empty to use default)"
+                                            />
                                         </div>
                                         <p className="text-[0.6rem] text-muted font-black uppercase tracking-wider opacity-60 px-2 mt-2">
-                                            {aiSettings.provider === 'pollinations' && "FREE & UNLIMITED. No API key required. Stable performance."}
-                                            {aiSettings.provider === 'gemini' && "HIGH PERFORMANCE. Best for complex training plans. Requires Google AI Key."}
-                                            {aiSettings.provider === 'puter' && "BROWSER NATIVE. Stable access using Puter.js infrastructure."}
+                                            Powered by Google Gemini. Key is optional if configured in environment.
                                         </p>
                                     </div>
-
-                                    {aiSettings.provider === AI_PROVIDERS.GEMINI && (
-                                        <div className="space-y-4 animate-in fade-in slide-in-from-top-2 duration-300">
-                                            <div className="flex items-center justify-between px-2">
-                                                <label className="text-[0.65rem] uppercase font-black text-muted tracking-[0.2em] opacity-60">API Key</label>
-                                                <a href="https://aistudio.google.com/app/apikey" target="_blank" rel="noreferrer" className="text-[0.6rem] font-black text-accent hover:underline uppercase tracking-widest">Get Key</a>
-                                            </div>
-                                            <div className="relative">
-                                                <Key className="absolute left-6 top-1/2 -translate-y-1/2 w-4 h-4 text-muted opacity-30" />
-                                                <input
-                                                    type="password"
-                                                    value={aiSettings.geminiKey}
-                                                    onChange={(e) => setAiSettings({ ...aiSettings, geminiKey: e.target.value })}
-                                                    className="w-full p-6 pl-14 rounded-3xl bg-card/60 border border-border focus:border-accent/40 focus:bg-card/80 outline-none transition-all text-text font-black text-sm tracking-tight shadow-inner placeholder:opacity-20"
-                                                    placeholder="AIzaSy..."
-                                                />
-                                            </div>
-                                        </div>
-                                    )}
                                 </div>
                             </div>
 

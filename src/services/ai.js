@@ -2,7 +2,7 @@
 import { GoogleGenerativeAI } from "@google/generative-ai";
 import EXERCISE_DATABASE from '../data/exercises.json';
 
-const PUTER_MODEL = 'openai';
+
 
 const DEFAULT_SYSTEM_PROMPT = `You are a professional AI Fitness Coach. Your goal is to provide highly accurate, science-based fitness, nutrition, and workout advice. 
 You MUST strictly follow the user's dietary preferences (e.g., Vegan, Non-Veg) and fitness aims. 
@@ -12,23 +12,20 @@ Keep your responses properly formatted as valid JSON when requested.`;
 /**
  * AI PROVIDER MANAGEMENT
  */
+/**
+ * AI PROVIDER MANAGEMENT
+ */
 export const AI_PROVIDERS = {
-    POLLINATIONS: 'pollinations', // Free, Unlimited, No Key Required
-    GEMINI: 'gemini',             // High Quality, Requires Key
-    PUTER: 'puter'                // Stable, Browser-based
+    GEMINI: 'gemini'
 };
 
 export const getAIPreference = () => {
-    const hasGeminiKey = !!(localStorage.getItem('GEMINI_API_KEY') || import.meta.env.VITE_GEMINI_API_KEY);
-    const defaultProvider = hasGeminiKey ? AI_PROVIDERS.GEMINI : AI_PROVIDERS.POLLINATIONS;
-
-    const pref = localStorage.getItem('AI_PROVIDER') || defaultProvider;
     const key = localStorage.getItem('GEMINI_API_KEY') || import.meta.env.VITE_GEMINI_API_KEY || "";
-    return { provider: pref, geminiKey: key };
+    return { provider: AI_PROVIDERS.GEMINI, geminiKey: key };
 };
 
 export const setAIPreference = (provider, key = null) => {
-    localStorage.setItem('AI_PROVIDER', provider);
+    // Provider is always Gemini now, but keeping signature for compatibility if needed
     if (key !== null) localStorage.setItem('GEMINI_API_KEY', key);
 };
 
@@ -54,7 +51,7 @@ async function callGeminiAI(prompt, jsonMode = true) {
             return JSON.parse(text);
         } catch (e) {
             // Fallback for malformed JSON
-            const match = text.match(/\{[\s\S]*\}/);
+            const match = text.match(/\{[\s\S]*\}|\[[\s\S]*\]/);
             if (match) return JSON.parse(match[0]);
             throw e;
         }
@@ -63,195 +60,33 @@ async function callGeminiAI(prompt, jsonMode = true) {
 }
 
 /**
- * PUTER.JS SERVICE
- */
-async function callPuterAI(prompt, stream = false, onChunk = null) {
-    if (!window.puter) {
-        throw new Error("Puter.js not loaded");
-    }
-
-    const fullPrompt = `${DEFAULT_SYSTEM_PROMPT}\n\nUser: ${prompt}`;
-
-    if (stream) {
-        const response = await window.puter.ai.chat(fullPrompt, { stream: true });
-        let fullText = "";
-        for await (const chunk of response) {
-            fullText += chunk?.text || "";
-            if (onChunk) onChunk(fullText);
-        }
-        return fullText;
-    } else {
-        const response = await window.puter.ai.chat(fullPrompt);
-        return response.message.content;
-    }
-}
-
-/**
- * POLLINATIONS AI SERVICE (Free & Unlimited)
- */
-async function callPollinationsAI(prompt, jsonMode = true) {
-    const models = ['mistral', 'qwen-coder', 'llama', 'unity', 'p1', 'openai'];
-    const shuffledModels = [...models].sort(() => Math.random() - 0.5);
-
-    // Safety truncation for very long prompts
-    const maxLen = 1500;
-    const cleanPrompt = prompt.length > maxLen ? prompt.substring(0, maxLen) + "..." : prompt;
-
-    for (const model of shuffledModels) {
-        for (let attempt = 0; attempt < 2; attempt++) {
-            try {
-                // 1. Try OpenAI-compatible POST endpoint
-                const url = `https://text.pollinations.ai/openai/chat/completions`;
-
-                let text = "";
-                try {
-                    const response = await fetch(url, {
-                        method: 'POST',
-                        headers: { 'Content-Type': 'application/json' },
-                        body: JSON.stringify({
-                            messages: [
-                                { role: 'system', content: DEFAULT_SYSTEM_PROMPT },
-                                { role: 'user', content: cleanPrompt }
-                            ],
-                            model: model,
-                            seed: Math.floor(Math.random() * 1000000),
-                            jsonMode: jsonMode
-                        }),
-                        credentials: 'omit',
-                        mode: 'cors'
-                    });
-
-                    if (response.ok) {
-                        const data = await response.json();
-                        text = data.choices[0]?.message?.content || "";
-                    }
-                } catch (postErr) {
-                    console.warn(`POST to ${model} failed, trying GET...`);
-                }
-
-                // 2. Fallback to GET if POST failed or returned empty
-                if (!text) {
-                    const getUrl = `https://text.pollinations.ai/${encodeURIComponent(cleanPrompt.substring(0, 400))}?model=${model}&json=${jsonMode}&seed=${Math.floor(Math.random() * 1000)}`;
-                    const getRes = await fetch(getUrl, { mode: 'cors', credentials: 'omit' });
-                    if (getRes.ok) {
-                        text = await getRes.text();
-                    }
-                }
-
-                if (!text) continue;
-
-                // 3. Filter out service errors
-                const tl = text.toLowerCase();
-                if (tl.includes("deprecated") || tl.includes("unavailable") || tl.includes("busy") ||
-                    tl.includes("try again") || tl.includes("error") || tl.includes("limit")) {
-                    console.warn(`Pollinations ${model} returned service error string. Retrying...`);
-                    continue;
-                }
-
-                if (jsonMode) {
-                    try {
-                        let cleaned = text.replace(/```json/gi, "").replace(/```/gi, "").trim();
-                        const match = cleaned.match(/\{[\s\S]*\}|\[[\s\S]*\]/);
-                        return JSON.parse(match ? match[0] : cleaned);
-                    } catch (e) { continue; }
-                }
-                return text.trim();
-            } catch (err) {
-                console.warn(`Pollinations ${model} attempt failed:`, err);
-                continue;
-            }
-        }
-    }
-    return null;
-}
-
-/**
  * UNIFIED AI DISPATCHER
  */
 export async function getAIResponseStream(prompt, onChunk) {
-    const { provider } = getAIPreference();
-    const providersToTry = [provider];
-
-    // Build fallback list based on availability
-    if (provider !== AI_PROVIDERS.GEMINI && import.meta.env.VITE_GEMINI_API_KEY) {
-        providersToTry.push(AI_PROVIDERS.GEMINI);
-    }
-    if (provider !== AI_PROVIDERS.PUTER && window.puter) {
-        providersToTry.push(AI_PROVIDERS.PUTER);
-    }
-    if (provider !== AI_PROVIDERS.POLLINATIONS) {
-        providersToTry.push(AI_PROVIDERS.POLLINATIONS);
-    }
-
-    for (const p of providersToTry) {
-        try {
-            if (p === AI_PROVIDERS.GEMINI) {
-                const res = await callGeminiAI(prompt, false);
-                if (res) { onChunk(res); return res; }
-            }
-            if (p === AI_PROVIDERS.PUTER && window.puter) {
-                const res = await callPuterAI(prompt, true, onChunk);
-                if (res) return res;
-            }
-            if (p === AI_PROVIDERS.POLLINATIONS || (p === provider && !window.puter && !import.meta.env.VITE_GEMINI_API_KEY)) {
-                const res = await callPollinationsAI(prompt, false);
-                if (res) { onChunk(res); return res; }
-            }
-        } catch (err) {
-            console.warn(`Provider ${p} failed, trying next...`, err);
+    try {
+        const res = await callGeminiAI(prompt, false);
+        if (res) {
+            onChunk(res);
+            return res;
         }
+    } catch (err) {
+        console.error("Gemini AI Stream Error:", err);
+        const fallbackMsg = "AI service is currently unavailable. Please check your API key or connection.";
+        onChunk(fallbackMsg);
+        return fallbackMsg;
     }
-
-    const fallbackMsg = "AI services are currently under heavy load. Please wait a moment or try a different fitness query. Your progress is still being saved locally!";
-    onChunk(fallbackMsg);
-    return fallbackMsg;
 }
+
 /**
  * UNIFIED AI DISPATCHER - Static (Non-Streaming)
  */
 export async function callUnifiedAI(prompt, jsonMode = true) {
-    const { provider } = getAIPreference();
-    const providersToTry = [provider];
-
-    if (provider !== AI_PROVIDERS.GEMINI && import.meta.env.VITE_GEMINI_API_KEY) {
-        providersToTry.push(AI_PROVIDERS.GEMINI);
+    try {
+        return await callGeminiAI(prompt, jsonMode);
+    } catch (err) {
+        console.error("Gemini AI Static Error:", err);
+        return null;
     }
-    if (provider !== AI_PROVIDERS.PUTER && window.puter) {
-        providersToTry.push(AI_PROVIDERS.PUTER);
-    }
-    if (provider !== AI_PROVIDERS.POLLINATIONS) {
-        providersToTry.push(AI_PROVIDERS.POLLINATIONS);
-    }
-
-    for (const p of providersToTry) {
-        try {
-            if (p === AI_PROVIDERS.GEMINI) {
-                const res = await callGeminiAI(prompt, jsonMode);
-                if (res) return res;
-            }
-            if (p === AI_PROVIDERS.PUTER && window.puter) {
-                const res = await callPuterAI(prompt);
-                if (res) {
-                    if (jsonMode) {
-                        try {
-                            const cleaned = res.replace(/```json/gi, "").replace(/```/gi, "").trim();
-                            const match = cleaned.match(/\{[\s\S]*\}|\[[\s\S]*\]/);
-                            return JSON.parse(match ? match[0] : cleaned);
-                        } catch (e) { console.warn("Puter JSON parse failed, trying next..."); continue; }
-                    }
-                    return res;
-                }
-            }
-            if (p === AI_PROVIDERS.POLLINATIONS || (p === provider && !window.puter)) {
-                const res = await callPollinationsAI(prompt, jsonMode);
-                if (res) return res;
-            }
-        } catch (err) {
-            console.warn(`Static Provider ${p} failed, trying next...`, err);
-        }
-    }
-
-    return null;
 }
 export async function generateDietPlan(preferences = {}) {
     const {
