@@ -7,7 +7,7 @@ export default function ChatBubble({ role, text, compact = false }) {
   return (
     <div className={`flex ${isUser ? "justify-end" : "justify-start"} items-end gap-4`}>
       {!isUser && (
-        <div className="w-12 h-12 bg-accent/10 rounded-2xl flex items-center justify-center border border-accent/20 flex-shrink-0 mb-2 shadow-sm">
+        <div className="w-12 h-20 bg-accent/10 rounded-2xl flex items-center justify-center border border-accent/20 flex-shrink-0 mb-2 shadow-sm">
           <Bot className="w-6 h-6 text-accent" />
         </div>
       )}
