@@ -20,13 +20,23 @@ export const AI_PROVIDERS = {
 };
 
 export const getAIPreference = () => {
-    const key = localStorage.getItem('GEMINI_API_KEY') || import.meta.env.VITE_GEMINI_API_KEY || "";
-    return { provider: AI_PROVIDERS.GEMINI, geminiKey: key };
+    const localKey = (localStorage.getItem('GEMINI_API_KEY') || "").trim();
+    const envKey = (import.meta.env.VITE_GEMINI_API_KEY || "").trim();
+
+    // Use local storage override if it's not empty, otherwise use env key
+    const currentKey = localKey || envKey;
+
+    return {
+        provider: AI_PROVIDERS.GEMINI,
+        geminiKey: currentKey,
+        isCustom: !!localKey
+    };
 };
 
 export const setAIPreference = (provider, key = null) => {
-    // Provider is always Gemini now, but keeping signature for compatibility if needed
-    if (key !== null) localStorage.setItem('GEMINI_API_KEY', key);
+    if (key !== null) {
+        localStorage.setItem('GEMINI_API_KEY', key.trim());
+    }
 };
 
 /**
