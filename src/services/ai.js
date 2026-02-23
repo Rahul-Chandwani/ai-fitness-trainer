@@ -38,7 +38,7 @@ async function callGeminiAI(prompt, jsonMode = true) {
 
     const genAI = new GoogleGenerativeAI(geminiKey);
     const model = genAI.getGenerativeModel({
-        model: "gemini-1.5-flash",
+        model: "gemini-2.0-flash", // Updated to latest stable/fast model
         generationConfig: jsonMode ? { responseMimeType: "application/json" } : {}
     });
 
@@ -71,7 +71,7 @@ export async function getAIResponseStream(prompt, onChunk) {
         }
     } catch (err) {
         console.error("Gemini AI Stream Error:", err);
-        const fallbackMsg = "AI service is currently unavailable. Please check your API key or connection.";
+        const fallbackMsg = `AI service error: ${err.message || 'Service unavailable'}. Please verify your API key in Settings.`;
         onChunk(fallbackMsg);
         return fallbackMsg;
     }
@@ -85,7 +85,7 @@ export async function callUnifiedAI(prompt, jsonMode = true) {
         return await callGeminiAI(prompt, jsonMode);
     } catch (err) {
         console.error("Gemini AI Static Error:", err);
-        return null;
+        throw err;
     }
 }
 export async function generateDietPlan(preferences = {}) {
